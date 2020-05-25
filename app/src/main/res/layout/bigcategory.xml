@@ -27,18 +27,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/A"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="건설"/>
         <Button
+            android:id="@+id/B"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="경영.회계.사무"/>
         <Button
+            android:id="@+id/C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="광업자원"/>
         <Button
+            android:id="@+id/D"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="기계"/>
@@ -48,18 +52,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/E"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="농림어업"/>
         <Button
+            android:id="@+id/F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="문화.예술"/>
         <Button
+            android:id="@+id/G"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="보건.의료"/>
         <Button
+            android:id="@+id/H"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사회복지.종교"/>
@@ -69,18 +77,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/I"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="섬유.의복"/>
         <Button
+            android:id="@+id/J"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="식품.가공"/>
         <Button
+            android:id="@+id/K"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="안전관리"/>
         <Button
+            android:id="@+id/L"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="영업.판매"/>
@@ -90,18 +102,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/M"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="운전.운송"/>
         <Button
+            android:id="@+id/N"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="음식서비스"/>
         <Button
+            android:id="@+id/O"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이용.숙박.여행"/>
         <Button
+            android:id="@+id/P"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="가구.공예"/>
@@ -111,18 +127,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/Q"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="재료"/>
         <Button
+            android:id="@+id/R"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="전기.전자"/>
         <Button
+            android:id="@+id/S"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="정보통신"/>
         <Button
+            android:id="@+id/T"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="화학.환경.에너지"/>

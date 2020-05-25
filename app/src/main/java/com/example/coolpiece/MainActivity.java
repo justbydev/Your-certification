@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Button gineong;
@@ -14,11 +15,17 @@ public class MainActivity extends AppCompatActivity {
     Button sanup;
     Button jido;
     Button guitar;
-    Intent intent;
+    TextView mylocation;
+    TextView location_search;
+    private Intent intent;
+    public String mylocate=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mylocation=(TextView)findViewById(R.id.mylocation);
+        location_search=(TextView)findViewById(R.id.location_search);
 
         gineong=(Button)findViewById(R.id.gineong);
         gisa=(Button)findViewById(R.id.gisa);
@@ -26,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         sanup=(Button)findViewById(R.id.sanup);
         jido=(Button)findViewById(R.id.jido);
         guitar=(Button)findViewById(R.id.guitar);
+
+        mylocation.setOnClickListener(buttonClickListener);
+        location_search.setOnClickListener(buttonClickListener);
 
         gineong.setOnClickListener(buttonClickListener);
         gisa.setOnClickListener(buttonClickListener);
@@ -39,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             int id=v.getId();
             switch(id){
+                case R.id.mylocation:
+                    return;
+                case R.id.location_search:
+                    intent=new Intent(MainActivity.this, DaumLocationActivity.class);
+                    startActivity(intent);
+                    return;
                 case R.id.gineong:
                     intent=new Intent(MainActivity.this, Bigcategory.class);
                     intent.putExtra("CA", "기능사");
@@ -74,4 +90,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
 }
