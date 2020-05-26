@@ -1,5 +1,6 @@
 package com.example.coolpiece;
 
+import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,8 +22,6 @@ import org.w3c.dom.Text;
 
 public class DaumLocationActivity extends AppCompatActivity {
     WebView daum_webview;
-    Button locate_ok;
-    Button locate_cancel;
     TextView address_result;
     private Handler handler;
     @Override
@@ -32,19 +31,11 @@ public class DaumLocationActivity extends AppCompatActivity {
 
         address_result=(TextView)findViewById(R.id.address_result);
         daum_webview=(WebView)findViewById(R.id.daum_webview);
-        locate_ok=(Button)findViewById(R.id.locate_ok);
-        locate_cancel=(Button)findViewById(R.id.locate_cancel);
 
         init_webView();
 
         handler=new Handler();
 
-        locate_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     public void init_webView(){
@@ -59,8 +50,9 @@ public class DaumLocationActivity extends AppCompatActivity {
         //daum_webview.setWebViewClient(new SslWebViewConnect());
         daum_webview.setWebViewClient(new WebViewClient());
         daum_webview.setWebChromeClient(new WebChromeClient());
-        daum_webview.loadUrl("http://192.168.43.133/address.php");
-        //daum_webview.getSettings().setDomStorageEnabled(true);
+        //daum_webview.loadUrl("http://www.naver.com");
+        //daum_webview.loadUrl("http://192.168.43.133/address.php");
+        daum_webview.loadUrl("file:///android_asset/address.html");
 
     }
     public class AndroidBridge{
@@ -69,8 +61,16 @@ public class DaumLocationActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    address_result.setText(String.format("현재 주소: (%s) %s %s", arg1, arg2, arg3));
-                    init_webView();
+                    //address_result.setText(String.format("현재 주소: (%s) %s %s", arg1, arg2, arg3));
+                    /*Intent intent=new Intent(DaumLocationActivity.this, MainActivity.class);
+                    intent.putExtra("arg1", arg1);
+                    intent.putExtra("arg2", arg2);
+                    intent.putExtra("arg3", arg3);
+                    startActivity(intent);*/
+                    ((MainActivity)MainActivity.maincontext).arg1=arg1;
+                    ((MainActivity)MainActivity.maincontext).arg2=arg2;
+                    ((MainActivity)MainActivity.maincontext).arg3=arg3;
+                    finish();
                 }
             });
         }

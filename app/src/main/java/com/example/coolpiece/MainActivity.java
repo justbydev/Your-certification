@@ -2,10 +2,13 @@ package com.example.coolpiece;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,13 +21,21 @@ public class MainActivity extends AppCompatActivity {
     TextView mylocation;
     TextView location_search;
     private Intent intent;
-    public String mylocate=null;
+    //LinearLayout locate;
+    String arg1=null;
+    String arg2=null;
+    String arg3=null;
+
+    public static Context maincontext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mylocation=(TextView)findViewById(R.id.mylocation);
+        maincontext=this;
+
+        //locate=(LinearLayout)findViewById(R.id.locate);
+        mylocation=(TextView) findViewById(R.id.mylocation);
         location_search=(TextView)findViewById(R.id.location_search);
 
         gineong=(Button)findViewById(R.id.gineong);
@@ -34,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         jido=(Button)findViewById(R.id.jido);
         guitar=(Button)findViewById(R.id.guitar);
 
+        //locate.setOnClickListener(buttonClickListener);
         mylocation.setOnClickListener(buttonClickListener);
         location_search.setOnClickListener(buttonClickListener);
 
@@ -49,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             int id=v.getId();
             switch(id){
+               // case R.id.locate:
                 case R.id.mylocation:
-                    return;
                 case R.id.location_search:
                     intent=new Intent(MainActivity.this, DaumLocationActivity.class);
                     startActivity(intent);
@@ -91,4 +103,14 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(arg1==null||arg1.length()<=0){
+            mylocation.setText("내 주소찾기 버튼을 눌러주세요");
+        }
+        else{
+            mylocation.setText(String.format("(%s) %s %s", arg1, arg2, arg3));
+        }
+    }
 }
