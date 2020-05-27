@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "865747367320",
+    "firebase_url": "https://pusan-4628a.firebaseio.com",
+    "project_id": "pusan-4628a",
+    "storage_bucket": "pusan-4628a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865747367320:android:f867e43bfbf3dd94b5e7ed",
+        "android_client_info": {
+          "package_name": "com.example.coolpiece"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "865747367320-bamjjk3r9ajd8jlljnki6lai1pepmh9k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coolpiece",
+            "certificate_hash": "d21f4debaa099e233c0164735606e1e6fe63b4e5"
+          }
+        },
+        {
+          "client_id": "865747367320-fdn1mad2ev419fuqulk8o4bco6388h41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc68yqeMfHSQDeMW7tMYw2mfmZTSnUAD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "865747367320-fdn1mad2ev419fuqulk8o4bco6388h41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
