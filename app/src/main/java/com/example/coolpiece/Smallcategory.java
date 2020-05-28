@@ -120,6 +120,7 @@ public class Smallcategory extends AppCompatActivity {
                                     gisul.setPilgi_apply(pilgi_apply);
                                     gisul.setPilgi_test(pilgi_test);
                                     gisul.setPilgi_balpyo(pilgi_balpyo);
+                                    gisul.setPilgi_balpyo_final(pilgi_balpyo_final);
                                     gisul.setSilgi_apply(silgi_apply);
                                     gisul.setSilgi_test(silgi_test);
                                     gisul.setFinal_balpyo(final_balpyo);
@@ -143,23 +144,16 @@ public class Smallcategory extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    /*else if(i==1){
-                        try {
-                            gisa=new Gisa();
-                            jsonObject=new JSONObject(json);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }*/
                 }
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+                System.out.println(gisularray.size());
+                for(int b=0; b<gisularray.size(); b++){
+                    gisularray.get(b).printall();
+                }
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
             }
         }.start();
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(gisularray.size());
-        for(int b=0; b<gisularray.size(); b++){
-            gisularray.get(b).printall();
-        }
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+
     }
 
     private String getjsonHtml(String url){
