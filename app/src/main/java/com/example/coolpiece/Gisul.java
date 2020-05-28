@@ -3,6 +3,7 @@ package com.example.coolpiece;
 import java.util.ArrayList;
 
 public class Gisul {
+    String name;
     String intro;
     String association;
     String major;
@@ -13,12 +14,21 @@ public class Gisul {
     ArrayList<String> pilgi_apply;
     ArrayList<String> pilgi_test;
     ArrayList<String> pilgi_balpyo;
+    ArrayList<String> pilgi_balpyo_final;
     ArrayList<String> silgi_apply;
     ArrayList<String> silgi_test;
     ArrayList<String> final_balpyo;
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getIntro() {
         return intro;
@@ -100,6 +110,14 @@ public class Gisul {
         this.pilgi_balpyo = pilgi_balpyo;
     }
 
+    public ArrayList<String> getPilgi_balpyo_final() {
+        return pilgi_balpyo_final;
+    }
+
+    public void setPilgi_balpyo_final(ArrayList<String> pilgi_balpyo_final) {
+        this.pilgi_balpyo_final = pilgi_balpyo_final;
+    }
+
     public ArrayList<String> getSilgi_apply() {
         return silgi_apply;
     }
@@ -146,5 +164,24 @@ public class Gisul {
 
     public void setAcademy_phone(ArrayList<String> academy_phone) {
         this.academy_phone = academy_phone;
+    }
+    public void printall(){
+        System.out.println(this.name);
+        System.out.println(this.association);
+        System.out.println(this.major);
+        System.out.println(this.training_center);
+        System.out.println(this.test_subject);
+        System.out.println(this.test_method);
+        System.out.println(this.cut_line);
+        for(int i=0; i<pilgi_apply.size(); i++){
+            System.out.println(this.pilgi_apply.get(i));
+            System.out.println(this.pilgi_test.get(i));
+            System.out.println(this.pilgi_balpyo.get(i));
+            System.out.println(this.pilgi_balpyo_final.get(i));
+            System.out.println(this.silgi_apply.get(i));
+            System.out.println(this.silgi_test.get(i));
+            System.out.println(this.final_balpyo.get(i));
+        }
+        System.out.println("=====================================");
     }
 }
