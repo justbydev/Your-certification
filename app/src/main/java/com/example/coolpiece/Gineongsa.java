@@ -3,6 +3,7 @@ package com.example.coolpiece;
 import java.util.ArrayList;
 
 public class Gineongsa {
+    String name;
     String intro;
     String association;
     String major;
@@ -19,6 +20,15 @@ public class Gineongsa {
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+    String online;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getIntro() {
         return intro;
@@ -146,5 +156,13 @@ public class Gineongsa {
 
     public void setAcademy_phone(ArrayList<String> academy_phone) {
         this.academy_phone = academy_phone;
+    }
+
+    public String getOnline() {
+        return online;
+    }
+
+    public void setOnline(String online) {
+        this.online = online;
     }
 }
