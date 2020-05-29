@@ -1,8 +1,11 @@
 package com.example.coolpiece;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Gineongsa {
+public class Gineongsa implements Parcelable {
     String name;
     String intro;
     String association;
@@ -22,6 +25,40 @@ public class Gineongsa {
     ArrayList<String> academy_phone;
     String online;
 
+    protected Gineongsa(Parcel in) {
+        name = in.readString();
+        intro = in.readString();
+        association = in.readString();
+        major = in.readString();
+        training_center = in.readString();
+        test_subject = in.readString();
+        test_method = in.readString();
+        cut_line = in.readString();
+        pilgi_apply = in.createStringArrayList();
+        pilgi_test = in.createStringArrayList();
+        pilgi_balpyo = in.createStringArrayList();
+        silgi_apply = in.createStringArrayList();
+        silgi_test = in.createStringArrayList();
+        final_balpyo = in.createStringArrayList();
+        academy_name = in.createStringArrayList();
+        academy_address = in.createStringArrayList();
+        academy_phone = in.createStringArrayList();
+        online = in.readString();
+    }
+
+    public static final Creator<Gineongsa> CREATOR = new Creator<Gineongsa>() {
+        @Override
+        public Gineongsa createFromParcel(Parcel in) {
+            return new Gineongsa(in);
+        }
+
+        @Override
+        public Gineongsa[] newArray(int size) {
+            return new Gineongsa[size];
+        }
+    };
+
+    public Gineongsa(){}
     public String getName() {
         return name;
     }
@@ -164,5 +201,32 @@ public class Gineongsa {
 
     public void setOnline(String online) {
         this.online = online;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(intro);
+        dest.writeString(association);
+        dest.writeString(major);
+        dest.writeString(training_center);
+        dest.writeString(test_subject);
+        dest.writeString(test_method);
+        dest.writeString(cut_line);
+        dest.writeStringList(pilgi_apply);
+        dest.writeStringList(pilgi_test);
+        dest.writeStringList(pilgi_balpyo);
+        dest.writeStringList(silgi_apply);
+        dest.writeStringList(silgi_test);
+        dest.writeStringList(final_balpyo);
+        dest.writeStringList(academy_name);
+        dest.writeStringList(academy_address);
+        dest.writeStringList(academy_phone);
+        dest.writeString(online);
     }
 }

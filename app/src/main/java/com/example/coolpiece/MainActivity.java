@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,19 +60,15 @@ public class MainActivity extends AppCompatActivity {
     //Gisa gisa;
     Gineongsa gineongsa;
     ArrayList<Gisul> gisularray;
-    ArrayList<ArrayList<Gisul>> gisul_total;
+    ArrayList<ArrayList<Gisul>> gisul_total=null;
     ArrayList<Gisa> gisaarray;
     ArrayList<Gineongsa> gineongarray;
-    ArrayList<ArrayList<Gineongsa>> gineong_total;
+    ArrayList<ArrayList<Gineongsa>> gineong_total=null;
     public static Context maincontext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        System.out.println("========================================================");
-        System.out.println("Here is onCreate");
-        System.out.println("========================================================");
 
         maincontext=this;
 
@@ -260,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.gineong:
                     intent=new Intent(MainActivity.this, Bigcategory.class);
                     intent.putExtra("CA", "기능사");
+                    intent.putExtra("Bigarraylist", gineong_total);
                     startActivity(intent);
                     return;
                 case R.id.gisa:
@@ -270,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.gisulsa:
                     intent=new Intent(MainActivity.this, Bigcategory.class);
                     intent.putExtra("CA", "기술사");
+                    intent.putExtra("Bigarraylist", gisul_total);
                     startActivity(intent);
                     return;
                 case R.id.sanup:

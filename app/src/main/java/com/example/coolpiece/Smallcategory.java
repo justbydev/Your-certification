@@ -43,11 +43,12 @@ public class Smallcategory extends AppCompatActivity {
     private Intent intent;
     String small;
     String big;
-    private FirebaseStorage storage;
-    private StorageReference storageRef;
+    ArrayList<Gisul> gisuls=null;
+    ArrayList<Gineongsa> gineongs=null;
+    ArrayList<Gisa> gisas;
 
-
-    private CertificateAdapter mAdapter;
+    private GisulAdapter gisulAdapter;
+    private GineongAdapter gineongAdapter;
     private RecyclerView.LayoutManager layoutManager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +58,10 @@ public class Smallcategory extends AppCompatActivity {
         smallcategory=(TextView)findViewById(R.id.smallcategory);
         certificate_recycler=(RecyclerView)findViewById(R.id.certificate_recycler);
 
+        gisuls=new ArrayList<Gisul>();
+        gineongs=new ArrayList<Gineongsa>();
+
+        certificate_recycler.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         certificate_recycler.setLayoutManager(layoutManager);
 
@@ -65,13 +70,17 @@ public class Smallcategory extends AppCompatActivity {
         big=intent.getStringExtra("BCA");
         smallcategory.setText(big+'-'+small);
 
-        //gisularray=new ArrayList<>();
-        //gisaarray=new ArrayList<>();
-        //gineongarray= new ArrayList<>();
-
-
-
-
+        if(big.equals("기술사")){
+            //System.out.println("=======================here======================");
+            gisuls=intent.getParcelableArrayListExtra("Smallcategory");
+            gisulAdapter=new GisulAdapter(gisuls);
+            certificate_recycler.setAdapter(gisulAdapter);
+        }
+        else if(big.equals("기능사")){
+            gineongs= intent.getParcelableArrayListExtra("Smallcategory");
+            gineongAdapter=new GineongAdapter(gineongs);
+            certificate_recycler.setAdapter(gineongAdapter);
+        }
 
     }
 

@@ -2,6 +2,7 @@ package com.example.coolpiece;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,11 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class Bigcategory extends AppCompatActivity {
     TextView bigcategory;
     Button A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,r,S,T;
     private Intent intent;
     String big;
+    ArrayList<? extends Parcelable> total;
+    ArrayList<Gisul> gisul_small;
+    ArrayList<Gineongsa> gineong_small;
+    ArrayList<Gisa> gisa_small;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +29,9 @@ public class Bigcategory extends AppCompatActivity {
         bigcategory=(TextView)findViewById(R.id.bigcategory);
         intent=getIntent();
         big=intent.getStringExtra("CA");
+        total= (ArrayList<? extends Parcelable>) intent.getParcelableArrayListExtra("Bigarraylist");
+
+
         bigcategory.setText(big);
         A=(Button)findViewById(R.id.A);
         B=(Button)findViewById(R.id.B);
@@ -138,6 +148,7 @@ public class Bigcategory extends AppCompatActivity {
                     intent=new Intent(Bigcategory.this, Smallcategory.class);
                     intent.putExtra("SCA", "안전관리");
                     intent.putExtra("BCA", big);
+                    select(0);
                     startActivity(intent);
                     return;
                 case R.id.L:
@@ -196,6 +207,26 @@ public class Bigcategory extends AppCompatActivity {
                 default:
                     return;
             }
+        }
+    };
+    public void select(int index){
+        if(big.equals("기술사")){
+            if(total.get(index)==null){
+                gisul_small=null;
+            }
+            else{
+                gisul_small= (ArrayList<Gisul>) total.get(index);
+            }
+            intent.putExtra("Smallcategory", gisul_small);
+        }
+        else if(big.equals("기능사")){
+            if(total.get(index)==null){
+                gineong_small=null;
+            }
+            else{
+                gineong_small=(ArrayList<Gineongsa>)total.get(index);
+            }
+            intent.putExtra("Smallcategory", gineong_small);
         }
     };
 }

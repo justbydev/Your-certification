@@ -1,8 +1,11 @@
 package com.example.coolpiece;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Gisul {
+public class Gisul implements Parcelable {
     String name;
     String intro;
     String association;
@@ -21,6 +24,43 @@ public class Gisul {
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+
+    protected Gisul(Parcel in) {
+        name = in.readString();
+        intro = in.readString();
+        association = in.readString();
+        major = in.readString();
+        training_center = in.readString();
+        test_subject = in.readString();
+        test_method = in.readString();
+        cut_line = in.readString();
+        pilgi_apply = in.createStringArrayList();
+        pilgi_test = in.createStringArrayList();
+        pilgi_balpyo = in.createStringArrayList();
+        pilgi_balpyo_final = in.createStringArrayList();
+        silgi_apply = in.createStringArrayList();
+        silgi_test = in.createStringArrayList();
+        final_balpyo = in.createStringArrayList();
+        academy_name = in.createStringArrayList();
+        academy_address = in.createStringArrayList();
+        academy_phone = in.createStringArrayList();
+    }
+
+    public static final Creator<Gisul> CREATOR = new Creator<Gisul>() {
+        @Override
+        public Gisul createFromParcel(Parcel in) {
+            return new Gisul(in);
+        }
+
+        @Override
+        public Gisul[] newArray(int size) {
+            return new Gisul[size];
+        }
+    };
+
+    public Gisul() {
+
+    }
 
     public String getName() {
         return name;
@@ -166,13 +206,16 @@ public class Gisul {
         this.academy_phone = academy_phone;
     }
     public void printall(){
+        System.out.println("======================================");
         System.out.println(this.name);
+        System.out.println(this.intro);
         System.out.println(this.association);
         System.out.println(this.major);
         System.out.println(this.training_center);
         System.out.println(this.test_subject);
         System.out.println(this.test_method);
         System.out.println(this.cut_line);
+        System.out.println(pilgi_apply.size());
         for(int i=0; i<pilgi_apply.size(); i++){
             System.out.println(this.pilgi_apply.get(i));
             System.out.println(this.pilgi_test.get(i));
@@ -183,5 +226,32 @@ public class Gisul {
             System.out.println(this.final_balpyo.get(i));
         }
         System.out.println("=====================================");
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(intro);
+        dest.writeString(association);
+        dest.writeString(major);
+        dest.writeString(training_center);
+        dest.writeString(test_subject);
+        dest.writeString(test_method);
+        dest.writeString(cut_line);
+        dest.writeStringList(pilgi_apply);
+        dest.writeStringList(pilgi_test);
+        dest.writeStringList(pilgi_balpyo);
+        dest.writeStringList(pilgi_balpyo_final);
+        dest.writeStringList(silgi_apply);
+        dest.writeStringList(silgi_test);
+        dest.writeStringList(final_balpyo);
+        dest.writeStringList(academy_name);
+        dest.writeStringList(academy_address);
+        dest.writeStringList(academy_phone);
     }
 }

@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CertificateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<Gisul> mData=null;
+public class GineongAdapter extends RecyclerView.Adapter {
+    private ArrayList<Gineongsa> mData=null;
 
-    public CertificateAdapter(ArrayList<Gisul> mData){
+    public GineongAdapter(ArrayList<Gineongsa> mData){
         this.mData=mData;
     }
 
