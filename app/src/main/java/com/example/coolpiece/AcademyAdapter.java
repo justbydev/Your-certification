@@ -12,18 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class GineongAdapter extends RecyclerView.Adapter {
-    private ArrayList<Gineongsa> mData=null;
+public class AcademyAdapter extends RecyclerView.Adapter {
+    private ArrayList<String> academy_name=null;
+    private ArrayList<String> academy_address=null;
+    private ArrayList<String> academy_phone=null;
     static Context context;
-    public GineongAdapter(ArrayList<Gineongsa> mData){
-        this.mData=mData;
+    public AcademyAdapter(ArrayList<String> academy_name, ArrayList<String> academy_address, ArrayList<String> academy_phone){
+        this.academy_name=academy_name;
+        this.academy_address=academy_address;
+        this.academy_phone=academy_phone;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView each_certicate;
+        public TextView each_academy;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            each_certicate=itemView.findViewById(R.id.each_certificate);
+            each_academy=itemView.findViewById(R.id.each_academy);
             context=itemView.getContext();
         }
     }
@@ -31,7 +35,7 @@ public class GineongAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.certificate_itemlist, parent, false);
+                .inflate(R.layout.academy_itemlist, parent, false);
         MyViewHolder vh=new MyViewHolder(v);
         return vh;
     }
@@ -39,12 +43,14 @@ public class GineongAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
-        myViewHolder.each_certicate.setText(mData.get(position).getName());
-        myViewHolder.each_certicate.setOnClickListener(new View.OnClickListener() {
+        myViewHolder.each_academy.setText(academy_name.get(position));
+        myViewHolder.each_academy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(context, EachCertificate.class);
-                intent.putExtra("academy", mData.get(position));
+                Intent intent=new Intent(context, EachAcademy.class);
+                intent.putExtra("academy_name", academy_name.get(position));
+                intent.putExtra("academy_address", academy_address.get(position));
+                intent.putExtra("academy_phone", academy_phone.get(position));
                 context.startActivity(intent);
             }
         });
@@ -52,6 +58,6 @@ public class GineongAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mData==null?0:mData.size();
+        return academy_name==null?0:academy_name.size();
     }
 }
