@@ -1,6 +1,8 @@
 package com.example.coolpiece;
 
 import android.content.Intent;
+import android.icu.text.Collator;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -12,6 +14,8 @@ public class EachAcademy extends AppCompatActivity {
     TextView academy_address;
     TextView academy_phone;
     Intent intent;
+    private Collator NaverMapSdk;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,8 @@ public class EachAcademy extends AppCompatActivity {
         academy_name.setText(intent.getStringExtra("academy_name"));
         academy_address.setText(intent.getStringExtra("academy_address"));
         academy_phone.setText(intent.getStringExtra("academy_phone"));
+
+
 
     }
 }
