@@ -29,6 +29,7 @@ public class Bigcategory extends AppCompatActivity {
         bigcategory=(TextView)findViewById(R.id.bigcategory);
         intent=getIntent();
         big=intent.getStringExtra("CA");
+        /****get ArrayList<ArrayList<each big category class>> data****/
         total= (ArrayList<? extends Parcelable>) intent.getParcelableArrayListExtra("Bigarraylist");
 
 
@@ -209,6 +210,7 @@ public class Bigcategory extends AppCompatActivity {
             }
         }
     };
+    /****method that each small 20 categories and seperate each big category like gisulsa, gineongsa, etc****/
     public void select(int index){
         if(big.equals("기술사")){
             if(total.get(index)==null){

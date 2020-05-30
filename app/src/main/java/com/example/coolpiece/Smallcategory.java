@@ -60,7 +60,7 @@ public class Smallcategory extends AppCompatActivity {
 
         gisuls=new ArrayList<Gisul>();
         gineongs=new ArrayList<Gineongsa>();
-
+        /***for certification list recyclerview***/
         certificate_recycler.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
         certificate_recycler.setLayoutManager(layoutManager);

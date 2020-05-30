@@ -69,7 +69,7 @@ public class EachAcademy extends AppCompatActivity implements OnMapReadyCallback
         Geocoder geocoder=new Geocoder(this);
         lat=35.179805;
         lon=129.074969;
-
+        /*use Google's Geocoder to get latitude and longitude from Korean address*/
         try {
             List<Address> list=geocoder.getFromLocationName(address, 1);
             lat=list.get(0).getLatitude();        // 위도
@@ -90,7 +90,7 @@ public class EachAcademy extends AppCompatActivity implements OnMapReadyCallback
         /*move Map to Camera Position*/
         naverMap.setCameraPosition(cameraPosition);
         Marker marker=new Marker();
-        marker.setPosition(new LatLng(lat, lon));
+        marker.setPosition(location);
         marker.setIcon(MarkerIcons.GREEN);
         //marker.setIconTintColor(Color.rgb(231, 138, 138));
         marker.setWidth(Marker.SIZE_AUTO);

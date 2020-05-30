@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
     String arg1=null;
     String arg2=null;
     String arg3=null;
-
+    /****for gisulsa json data from firebase storage****/
     String url0="https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgisulsa.json?alt=media&token=07bd1f1b-4ba3-40fa-8a8a-605a4833076a";
+    /****for gineongsa json data from firebase storage****/
     String url1="https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgineung.json?alt=media&token=7ff66a5c-f596-482c-a691-23f3a8b2eba0";
     String url2=null;
     final int CONN_TIME=5000;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     JSONObject jsonObject=null;
     JSONObject temp=null;
     JSONArray jsonArray=null;
+    /****for 20 categories list****/
     List<String> category= Arrays.asList("안전관리");
     //List<String> category=Arrays.asList("건설", "경영.회계.사무", "광업자원", "기계", "농림어업", "문화.예술.디자인.방송", "보건.의료", "사회복지.종교", "섬유.의복", "식품.가공", "안전관리", "영업.판매", "운전.운송", "음식서비스", "이용.숙박.여행.오락.스포츠", "인쇄.목재.가구.공예", "재료", "전기.전자", "정보통신", "화학", "환경.에너지");
     //List<String> gisullist= Arrays.asList("가스기술사", "건설기계기술사", "건설안전기술사", "건축구조기술사", "건축기계설비기술사", "건축시공기술사", "건축전기설비기술사", "건축품질시험기술사", "공장관리기술사", "공조냉동기계기술사", "교통기술사", "금속가공기술사", "금속재료기술사", "금속제련기술사", "금형기술사", "기계기술사", "기계안전기술사", "기상예보기술사", "농어업토목기술사", "농화학기술사", "대기관리기술사", "도로및공항기술사", "도시계획기술사", "발송배전기술사", "비파괴검사기술사", "산림기술사", "산업계측제어기술사", "산업기계설비기술사", "산업위생관리기술사", "상하수도기술사", "섬유기술사", "세라믹기술사", "소방기술사", "소음진동기술사", "수산양식기술사", "수산제조기술사", "수자원개발기술사", "수질관리기술사", "시설원예기술사", "식품기술사", "어로기술사", "용접기술사", "의류기술사", "인간공학기술사", "자연환경관리기술사", "전기안전기술사", "전기응용기술사", "전기철도기술사", "전자응용기술사", "정보관리기술사", "제품디자인기술사", "조경기술사", "조선기술사", "종자기술사", "지적기술사", "지질및지반기술사", "차량기술사", "철도기술사", "철도신호기술사", "철도차량기술사", "축산기술사", "측량및지형공간정보기술사", "컴퓨터시스템응용기술사", "토목구조기술사", "토목시공기술사", "토목품질시험기술사", "토양환경기술사", "토질및기초기술사", "폐기물처리기술사", "포장기술사", "표면처리기술사", "품질관리기술사", "항공기관기술사", "항공기체기술사", "항만및해안기술사", "해양기술사", "화공기술사", "화공안전기술사", "화약류관리기술사");
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         gisul_total=new ArrayList<>();
         gineong_total=new ArrayList<>();
 
+        /****new thread for get json total datas from firebase storage****/
         new Thread(){
             public void run(){
                 for(int i=0; i<2; i++){
@@ -104,12 +107,13 @@ public class MainActivity extends AppCompatActivity {
                         json=getjsonHtml(url0);
                         try {
                             jsonObject=new JSONObject(json);
-                            for(int j=0; j<category.size(); j++){//각 카테고리별
+                            for(int j=0; j<category.size(); j++){//each small 20 categories
                                 gisularray=new ArrayList<>();
+                                /****in each category, has certification array, so use jsonArray****/
                                 jsonArray=jsonObject.getJSONArray(category.get(j));
                                 //System.out.println(category.get(j));
                                 //System.out.println(jsonArray);
-                                for(int k=0; k<jsonArray.length(); k++){
+                                for(int k=0; k<jsonArray.length(); k++){//for each certification
                                     JSONObject temp=jsonArray.getJSONObject(k);
                                     gisul=new Gisul();
                                     gisul.setName(temp.get("name").toString());
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                                     ArrayList<String> silgi_apply=new ArrayList<>();
                                     ArrayList<String> silgi_test=new ArrayList<>();
                                     ArrayList<String> final_balpyo=new ArrayList<>();
-                                    for(int a=0; a<cal.length(); a++){
+                                    for(int a=0; a<cal.length(); a++){//calander list in jsonArray
                                         JSONObject temp2=cal.getJSONObject(a);
                                         pilgi_apply.add(temp2.get("pilgi_apply(필기 원서접수)").toString());
                                         pilgi_test.add(temp2.get("pilgi_test(필기시험)").toString());
@@ -212,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
                                     ArrayList<String> academy_name=new ArrayList<>();
                                     ArrayList<String> academy_address=new ArrayList<>();
                                     ArrayList<String> academy_phone=new ArrayList<>();
-                                    for(int a=0; a<jsonArray.length(); a++){
+                                    for(int a=0; a<jsonArray.length(); a++){//for each academy jsonArray
                                         JSONObject temp3=aca.getJSONObject(a);
                                         academy_name.add(temp3.get("academy_name").toString());
                                         academy_address.add(temp3.get("academy_address").toString());
@@ -243,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
+    /****butonclicklistener for big category like gisulsa, gineongsa, etc****/
     private View.OnClickListener buttonClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -268,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.gisulsa:
                     intent=new Intent(MainActivity.this, Bigcategory.class);
                     intent.putExtra("CA", "기술사");
+                    /****gisul_total is the ArrayList<ArrayList<Gisul>>****/
                     intent.putExtra("Bigarraylist", gisul_total);
                     startActivity(intent);
                     return;
@@ -291,18 +297,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-
+    /****this is the method for getting json datas of each part by String****/
     private String getjsonHtml(String url){
         String jsonHtml="";
         HttpURLConnection con=null;
         InputStreamReader isr=null;
         BufferedReader br=null;
         try{
+            /****get Url connection****/
             URL Url=new URL(url);
             con=(HttpURLConnection)Url.openConnection();
             con.setConnectTimeout(CONN_TIME);
             con.setReadTimeout(CONN_TIME);
-
+            /****get inputstream****/
             isr=new InputStreamReader(con.getInputStream());
             br=new BufferedReader(isr);
 
