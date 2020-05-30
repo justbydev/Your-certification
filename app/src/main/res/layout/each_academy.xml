@@ -9,11 +9,10 @@
         android:layout_height="wrap_content"
         android:text="학원 이름"
         android:textSize="30sp"/>
-    <fragment
-        android:id="@+id/map_fragment"
+    <com.naver.maps.map.MapView
+        android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="300sp"
-        android:name="com.naver.maps.map.MapFragment" />
+        android:layout_height="300sp" />
     <TextView
         android:id="@+id/academy_address"
         android:layout_width="match_parent"
@@ -26,4 +25,5 @@
         android:layout_height="wrap_content"
         android:text="학원 번호"
         android:textSize="20sp"/>
+
 </LinearLayout>
