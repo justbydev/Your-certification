@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class EachCertificate extends AppCompatActivity {
     TextView name;
-    TextView intro;
     RecyclerView each_academy;
     Gineongsa gineongsa;
     Intent intent;
@@ -28,7 +27,6 @@ public class EachCertificate extends AppCompatActivity {
         setContentView(R.layout.each_certificate);
 
         name=(TextView)findViewById(R.id.name);
-        intro=(TextView)findViewById(R.id.intro);
         each_academy=(RecyclerView)findViewById(R.id.each_academy);
 
         intent=getIntent();
@@ -37,7 +35,6 @@ public class EachCertificate extends AppCompatActivity {
         gineongsa=intent.getParcelableExtra("academy");
 
         name.setText(gineongsa.getName());
-        intro.setText(gineongsa.getIntro());
 
         each_academy.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);

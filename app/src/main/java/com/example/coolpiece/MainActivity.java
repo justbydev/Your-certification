@@ -2,9 +2,12 @@ package com.example.coolpiece;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Gineongsa> gineongarray;
     ArrayList<ArrayList<Gineongsa>> gineong_total=null;
     public static Context maincontext;
+
+    ProgressDialog progressDialog;
+    private Handler handler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }//for문 끝나는 지점
-
+                handler.post(updateResults);
                 /*System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
                 System.out.println(gisularray.size());
                 for(int b=0; b<gisularray.size(); b++){
@@ -246,7 +252,28 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");*/
             }
         }.start();
+        showDialog(0);
     }
+    private Runnable updateResults=new Runnable() {
+        @Override
+        public void run() {
+            progressDialog.dismiss();
+            removeDialog(0);
+        }
+    };
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id){
+            case 0:
+                progressDialog=new ProgressDialog(this);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setMessage("로딩중입니다...");
+                return progressDialog;
+        }
+        return null;
+    };
+
     /****butonclicklistener for big category like gisulsa, gineongsa, etc****/
     private View.OnClickListener buttonClickListener=new View.OnClickListener() {
         @Override

@@ -47,7 +47,7 @@ public class AcademyAdapter extends RecyclerView.Adapter {
         myViewHolder.each_academy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, EachAcademy.class);
+                Intent intent=new Intent(context, CertificateAcademy.class);
                 intent.putExtra("academy_name", academy_name.get(position));
                 intent.putExtra("academy_address", academy_address.get(position));
                 intent.putExtra("academy_phone", academy_phone.get(position));

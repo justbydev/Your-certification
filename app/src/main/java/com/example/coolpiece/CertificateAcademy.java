@@ -1,38 +1,34 @@
 package com.example.coolpiece;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PointF;
-import android.icu.text.Collator;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.MarkerIcons;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
+import java.text.Collator;
 import java.util.List;
 
-public class EachAcademy extends AppCompatActivity implements OnMapReadyCallback {
+public class CertificateAcademy extends AppCompatActivity implements OnMapReadyCallback {
     TextView academy_name;
     TextView academy_address;
     TextView academy_phone;
-    MapView mapView;
     Intent intent;
     String address;
 
@@ -44,16 +40,13 @@ public class EachAcademy extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.each_academy);
+        setContentView(R.layout.certificate_academy);
 
 
         academy_name=(TextView)findViewById(R.id.academy_name);
         academy_address=(TextView)findViewById(R.id.academy_address);
         academy_phone=(TextView)findViewById(R.id.academy_phone);
-        mapView=(MapView)findViewById(R.id.map_view);
 
-
-        mapView.getMapAsync(this);
 
         intent=getIntent();
         address=intent.getStringExtra("academy_address");
@@ -61,7 +54,7 @@ public class EachAcademy extends AppCompatActivity implements OnMapReadyCallback
         academy_address.setText(address);
         academy_phone.setText(intent.getStringExtra("academy_phone"));
 
-
+        initMap();
     }
     @UiThread
     @Override
@@ -90,12 +83,22 @@ public class EachAcademy extends AppCompatActivity implements OnMapReadyCallback
         /*move Map to Camera Position*/
         naverMap.setCameraPosition(cameraPosition);
         Marker marker=new Marker();
-        marker.setPosition(location);
+        marker.setPosition(new LatLng(lat, lon));
         marker.setIcon(MarkerIcons.GREEN);
         //marker.setIconTintColor(Color.rgb(231, 138, 138));
         marker.setWidth(Marker.SIZE_AUTO);
         marker.setHeight(Marker.SIZE_AUTO);
         marker.setMap(naverMap);
 
+    }
+    /***Initialize map fragment***/
+    private void initMap(){
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        MapFragment mapFragment=(MapFragment)fragmentManager.findFragmentById(R.id.map_view);
+        if(mapFragment==null){
+            mapFragment=MapFragment.newInstance();
+            fragmentManager.beginTransaction().add(R.id.map_view, mapFragment).commit();
+        }
+        mapFragment.getMapAsync(this);
     }
 }

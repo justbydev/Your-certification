@@ -31,7 +31,8 @@
         <activity android:name=".Smallcategory"/>
         <activity android:name=".DaumLocationActivity"/>
         <activity android:name=".EachCertificate"/>
-        <activity android:name=".EachAcademy"/>
+        <activity android:name=".CertificateDetail"/>
+        <activity android:name=".CertificateAcademy"/>
     </application>
 
 </manifest>

@@ -1,8 +1,11 @@
 package com.example.coolpiece;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,15 +15,20 @@ import java.util.ArrayList;
 
 public class GisulAdapter extends RecyclerView.Adapter {
     private ArrayList<Gisul> mData=null;
-
+    static Context context;
     public GisulAdapter(ArrayList<Gisul> mData){
         this.mData=mData;
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView each_certicate;
+        public TextView each_certificate;
+        public Button certificate_explain;
+        public Button certificate_academy;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            each_certicate=itemView.findViewById(R.id.each_certificate);
+            each_certificate=(TextView)itemView.findViewById(R.id.each_certificate);
+            certificate_explain=(Button)itemView.findViewById(R.id.certificate_explain);
+            certificate_academy=(Button)itemView.findViewById(R.id.certificate_academy);
+            context=itemView.getContext();
         }
     }
     @NonNull
@@ -33,9 +41,25 @@ public class GisulAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
-        myViewHolder.each_certicate.setText(mData.get(position).getName());
+        myViewHolder.each_certificate.setText(mData.get(position).getName());
+        myViewHolder.certificate_explain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(context, CertificateDetail.class);
+                intent.putExtra("detail", mData.get(position));
+                context.startActivity(intent);
+            }
+        });
+        myViewHolder.certificate_academy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, EachCertificate.class);
+                intent.putExtra("academy", mData.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
