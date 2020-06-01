@@ -7,6 +7,7 @@ import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class EachCertificate extends AppCompatActivity {
     TextView name;
+    TextView back_button;
     RecyclerView each_academy;
     Gisul gisul;
     Gineongsa gineongsa;
@@ -53,7 +55,10 @@ public class EachCertificate extends AppCompatActivity {
         context=this;
 
         name=(TextView)findViewById(R.id.name);
+        back_button=(TextView)findViewById(R.id.back_button);
         each_academy=(RecyclerView)findViewById(R.id.each_academy);
+
+        back_button.setOnClickListener(buttononclicklistener);
 
         intent=getIntent();
 
@@ -104,5 +109,22 @@ public class EachCertificate extends AppCompatActivity {
 
     }
 
+    private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id=v.getId();
+            switch(id){
+                case R.id.back_button:
+                    finish();
+                    return;
+                default:
+                    return;
+            }
+        }
+    };
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

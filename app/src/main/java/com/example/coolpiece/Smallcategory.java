@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -39,6 +40,7 @@ import java.util.List;
 
 public class Smallcategory extends AppCompatActivity {
     TextView smallcategory;
+    TextView back_button;
     RecyclerView certificate_recycler;
     private Intent intent;
     String small;
@@ -57,6 +59,9 @@ public class Smallcategory extends AppCompatActivity {
 
         smallcategory=(TextView)findViewById(R.id.smallcategory);
         certificate_recycler=(RecyclerView)findViewById(R.id.certificate_recycler);
+        back_button=(TextView)findViewById(R.id.back_button);
+
+        back_button.setOnClickListener(buttononclicklistener);
 
         gisuls=new ArrayList<Gisul>();
         gineongs=new ArrayList<Gineongsa>();
@@ -83,6 +88,22 @@ public class Smallcategory extends AppCompatActivity {
         }
 
     }
+    private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id=v.getId();
+            switch(id){
+                case R.id.back_button:
+                    finish();
+                    return;
+                default:
+                    return;
+            }
+        }
+    };
 
-
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

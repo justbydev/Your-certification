@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
 
 public class CertificateAcademy extends AppCompatActivity implements OnMapReadyCallback {
+    TextView back_button;
     TextView academy_name;
     TextView academy_address;
     TextView academy_phone;
@@ -60,14 +62,14 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.certificate_academy);
 
-
-
+        back_button=(TextView)findViewById(R.id.back_button);
 
         academy_name=(TextView)findViewById(R.id.academy_name);
         academy_address=(TextView)findViewById(R.id.academy_address);
         academy_phone=(TextView)findViewById(R.id.academy_phone);
         mapView=(MapView)findViewById(R.id.map_view);
 
+        back_button.setOnClickListener(buttononclicklistener);
 
         intent=getIntent();
         address=intent.getStringExtra("academy_address");
@@ -128,5 +130,22 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
 
 
     }
+    private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id=v.getId();
+            switch(id){
+                case R.id.back_button:
+                    finish();
+                    return;
+                default:
+                    return;
+            }
+        }
+    };
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

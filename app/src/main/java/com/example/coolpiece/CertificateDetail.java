@@ -2,12 +2,14 @@ package com.example.coolpiece;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class CertificateDetail extends AppCompatActivity {
+    TextView back_button;
     TextView name;
     TextView intro;
     TextView association;
@@ -25,6 +27,7 @@ public class CertificateDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.certificate_detail);
 
+        back_button=(TextView)findViewById(R.id.back_button);
         name=(TextView)findViewById(R.id.name);
         intro=(TextView)findViewById(R.id.intro);
         association=(TextView)findViewById(R.id.association);
@@ -34,6 +37,7 @@ public class CertificateDetail extends AppCompatActivity {
         test_method=(TextView)findViewById(R.id.test_method);
         cut_line=(TextView)findViewById(R.id.cut_line);
 
+        back_button.setOnClickListener(buttononclicklistener);
 
         intent=getIntent();
 
@@ -63,5 +67,24 @@ public class CertificateDetail extends AppCompatActivity {
             cut_line.setText(gineongsa.getCut_line());
         }
 
+    }
+
+    private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id=v.getId();
+            switch(id){
+                case R.id.back_button:
+                    finish();
+                    return;
+                default:
+                    return;
+            }
+        }
+    };
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

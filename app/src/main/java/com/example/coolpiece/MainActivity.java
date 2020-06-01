@@ -1,10 +1,12 @@
 package com.example.coolpiece;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -74,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        closeApplication();
+    }
+
     /****butonclicklistener for big category like gisulsa, gineongsa, etc****/
     private View.OnClickListener buttonClickListener=new View.OnClickListener() {
         @Override
@@ -122,6 +129,25 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public void closeApplication(){
+        new AlertDialog.Builder(this)
+                .setTitle("쿨피스")
+                .setMessage("앱을 종료하시겠습니까?")
+                .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ;
+                    }})
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        moveTaskToBack(true);
+                        finish();
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }})
+
+                .show();
+    }
 
     @Override
     protected void onRestart() {

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class Bigcategory extends AppCompatActivity {
     TextView bigcategory;
+    TextView back_button;
     Button A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,r,S,T;
     private Intent intent;
     String big;
@@ -21,6 +22,8 @@ public class Bigcategory extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bigcategory);
+
+        back_button=(TextView)findViewById(R.id.back_button);
 
         bigcategory=(TextView)findViewById(R.id.bigcategory);
         intent=getIntent();
@@ -69,7 +72,7 @@ public class Bigcategory extends AppCompatActivity {
         S.setOnClickListener(buttonOnClickListener);
         T.setOnClickListener(buttonOnClickListener);
 
-
+        back_button.setOnClickListener(buttonOnClickListener);
 
 
     }
@@ -198,6 +201,9 @@ public class Bigcategory extends AppCompatActivity {
                     intent.putExtra("BCA", big);
                     startActivity(intent);
                     return;
+                case R.id.back_button:
+                    finish();
+                    return;
                 default:
                     return;
             }
@@ -212,4 +218,9 @@ public class Bigcategory extends AppCompatActivity {
             intent.putExtra("Smallcategory", ManageGineongData.getInstance().getGineongArrayList(index));
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

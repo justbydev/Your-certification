@@ -4,6 +4,13 @@
     android:layout_width="match_parent"
     android:orientation="vertical">
     <TextView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로가기"
+        android:textSize="20sp"
+        android:clickable="true"/>
+    <TextView
         android:id="@+id/academy_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
