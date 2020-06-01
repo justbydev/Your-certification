@@ -18,6 +18,8 @@ public class CertificateDetail extends AppCompatActivity {
     TextView cut_line;
     Intent intent;
     Gineongsa gineongsa;
+    Gisul gisul;
+    String cat;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,17 +34,34 @@ public class CertificateDetail extends AppCompatActivity {
         test_method=(TextView)findViewById(R.id.test_method);
         cut_line=(TextView)findViewById(R.id.cut_line);
 
-        gineongsa=new Gineongsa();
-        intent=getIntent();
-        gineongsa=intent.getParcelableExtra("detail");
 
-        name.setText(gineongsa.getName());
-        intro.setText(gineongsa.getIntro());
-        association.setText(gineongsa.getAssociation());
-        major.setText(gineongsa.getMajor());
-        training_center.setText(gineongsa.getTraining_center());
-        test_subject.setText(gineongsa.getTest_subject());
-        test_method.setText(gineongsa.getTest_method());
-        cut_line.setText(gineongsa.getCut_line());
+        intent=getIntent();
+
+        cat=intent.getStringExtra("cat");
+        if(cat.equals("gisul")){
+            gisul=new Gisul();
+            gisul=intent.getParcelableExtra("detail");
+            name.setText(gisul.getName());
+            intro.setText(gisul.getIntro());
+            association.setText(gisul.getAssociation());
+            major.setText(gisul.getMajor());
+            training_center.setText(gisul.getTraining_center());
+            test_subject.setText(gisul.getTest_subject());
+            test_method.setText(gisul.getTest_method());
+            cut_line.setText(gisul.getCut_line());
+        }
+        else if(cat.equals("gineong")){
+            gineongsa=new Gineongsa();
+            gineongsa=intent.getParcelableExtra("detail");
+            name.setText(gineongsa.getName());
+            intro.setText(gineongsa.getIntro());
+            association.setText(gineongsa.getAssociation());
+            major.setText(gineongsa.getMajor());
+            training_center.setText(gineongsa.getTraining_center());
+            test_subject.setText(gineongsa.getTest_subject());
+            test_method.setText(gineongsa.getTest_method());
+            cut_line.setText(gineongsa.getCut_line());
+        }
+
     }
 }

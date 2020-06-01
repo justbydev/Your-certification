@@ -23,6 +23,8 @@ public class Gineongsa implements Parcelable {
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+    ArrayList<Double> lat;
+    ArrayList<Double> lon;
     String online;
 
     protected Gineongsa(Parcel in) {
@@ -201,6 +203,22 @@ public class Gineongsa implements Parcelable {
 
     public void setOnline(String online) {
         this.online = online;
+    }
+
+    public ArrayList<Double> getLat() {
+        return lat;
+    }
+
+    public void setLat(ArrayList<Double> lat) {
+        this.lat = lat;
+    }
+
+    public ArrayList<Double> getLon() {
+        return lon;
+    }
+
+    public void setLon(ArrayList<Double> lon) {
+        this.lon = lon;
     }
 
     @Override

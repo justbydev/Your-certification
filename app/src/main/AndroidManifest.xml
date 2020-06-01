@@ -20,13 +20,16 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="zldmnpnv8d" />
-        <activity android:name=".MainActivity">
+        <uses-library android:name="com.google.android.maps"/>
+        <activity android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".Bigcategory"/>
         <activity android:name=".Smallcategory"/>
         <activity android:name=".DaumLocationActivity"/>

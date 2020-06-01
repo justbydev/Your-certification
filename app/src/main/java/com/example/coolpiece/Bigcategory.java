@@ -17,10 +17,6 @@ public class Bigcategory extends AppCompatActivity {
     Button A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,r,S,T;
     private Intent intent;
     String big;
-    ArrayList<? extends Parcelable> total;
-    ArrayList<Gisul> gisul_small;
-    ArrayList<Gineongsa> gineong_small;
-    ArrayList<Gisa> gisa_small;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +25,6 @@ public class Bigcategory extends AppCompatActivity {
         bigcategory=(TextView)findViewById(R.id.bigcategory);
         intent=getIntent();
         big=intent.getStringExtra("CA");
-        /****get ArrayList<ArrayList<each big category class>> data****/
-        total= (ArrayList<? extends Parcelable>) intent.getParcelableArrayListExtra("Bigarraylist");
-
 
         bigcategory.setText(big);
         A=(Button)findViewById(R.id.A);
@@ -213,22 +206,10 @@ public class Bigcategory extends AppCompatActivity {
     /****method that each small 20 categories and seperate each big category like gisulsa, gineongsa, etc****/
     public void select(int index){
         if(big.equals("기술사")){
-            if(total.get(index)==null){
-                gisul_small=null;
-            }
-            else{
-                gisul_small= (ArrayList<Gisul>) total.get(index);
-            }
-            intent.putExtra("Smallcategory", gisul_small);
+            intent.putExtra("Smallcategory", ManageGisulData.getInstance().getGisulArrayList(index));
         }
         else if(big.equals("기능사")){
-            if(total.get(index)==null){
-                gineong_small=null;
-            }
-            else{
-                gineong_small=(ArrayList<Gineongsa>)total.get(index);
-            }
-            intent.putExtra("Smallcategory", gineong_small);
+            intent.putExtra("Smallcategory", ManageGineongData.getInstance().getGineongArrayList(index));
         }
     };
 }

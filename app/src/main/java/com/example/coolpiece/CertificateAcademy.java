@@ -1,8 +1,11 @@
 package com.example.coolpiece;
 
+import android.content.Context;
 import android.content.Intent;
+
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -10,31 +13,46 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
+
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
-import com.naver.maps.map.MapFragment;
+
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.MarkerIcons;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.text.Collator;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Locale;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class CertificateAcademy extends AppCompatActivity implements OnMapReadyCallback {
     TextView academy_name;
     TextView academy_address;
     TextView academy_phone;
     Intent intent;
-    String address;
+    String address=null;
+    MapView mapView;
 
 
     double lat;
     double lon;
+    String x="";
+    String y="";
     //private Collator NaverMapSdk;
 
     @Override
@@ -43,9 +61,12 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
         setContentView(R.layout.certificate_academy);
 
 
+
+
         academy_name=(TextView)findViewById(R.id.academy_name);
         academy_address=(TextView)findViewById(R.id.academy_address);
         academy_phone=(TextView)findViewById(R.id.academy_phone);
+        mapView=(MapView)findViewById(R.id.map_view);
 
 
         intent=getIntent();
@@ -54,19 +75,33 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
         academy_address.setText(address);
         academy_phone.setText(intent.getStringExtra("academy_phone"));
 
-        initMap();
+
+        //new markmap().execute(address);
+
+        mapView.getMapAsync(this);
+
     }
+
+
     @UiThread
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
-        Geocoder geocoder=new Geocoder(this);
-        lat=35.179805;
-        lon=129.074969;
-        /*use Google's Geocoder to get latitude and longitude from Korean address*/
+
+
+        //lat=Double.parseDouble(x);
+        //lon=Double.parseDouble(y);
+        Geocoder geocoder=new Geocoder(CertificateAcademy.this, Locale.KOREAN);
         try {
-            List<Address> list=geocoder.getFromLocationName(address, 1);
-            lat=list.get(0).getLatitude();        // 위도
-            lon=list.get(0).getLongitude();    // 경도
+            List<Address> list=null;
+            while(true){
+                list=geocoder.getFromLocationName(address, 1);
+                if(list!=null){
+                    break;
+                }
+            }
+
+            lat=list.get(0).getLatitude();
+            lon=list.get(0).getLongitude();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,6 +117,7 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
         naverMap.setLayerGroupEnabled(NaverMap.LAYER_GROUP_BUILDING, true);
         /*move Map to Camera Position*/
         naverMap.setCameraPosition(cameraPosition);
+
         Marker marker=new Marker();
         marker.setPosition(new LatLng(lat, lon));
         marker.setIcon(MarkerIcons.GREEN);
@@ -90,15 +126,7 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
         marker.setHeight(Marker.SIZE_AUTO);
         marker.setMap(naverMap);
 
+
     }
-    /***Initialize map fragment***/
-    private void initMap(){
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        MapFragment mapFragment=(MapFragment)fragmentManager.findFragmentById(R.id.map_view);
-        if(mapFragment==null){
-            mapFragment=MapFragment.newInstance();
-            fragmentManager.beginTransaction().add(R.id.map_view, mapFragment).commit();
-        }
-        mapFragment.getMapAsync(this);
-    }
+
 }

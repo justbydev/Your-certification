@@ -49,14 +49,18 @@ public class GisulAdapter extends RecyclerView.Adapter {
             public void onClick(View v) {
                 Intent intent= new Intent(context, CertificateDetail.class);
                 intent.putExtra("detail", mData.get(position));
+                String cat="gisul";
+                intent.putExtra("cat", cat);
                 context.startActivity(intent);
             }
         });
         myViewHolder.certificate_academy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String cat="gisul";
                 Intent intent=new Intent(context, EachCertificate.class);
                 intent.putExtra("academy", mData.get(position));
+                intent.putExtra("cat", cat);
                 context.startActivity(intent);
             }
         });
