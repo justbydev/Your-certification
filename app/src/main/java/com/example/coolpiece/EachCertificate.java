@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,10 +36,13 @@ import javax.net.ssl.HttpsURLConnection;
 public class EachCertificate extends AppCompatActivity {
     TextView name;
     TextView back_button;
+    Button certificate_detail;
+    Button certificate_calender;
     RecyclerView each_academy;
     Gisul gisul;
     Gineongsa gineongsa;
     Intent intent;
+    Intent passdetailintent;
     RecyclerView.LayoutManager layoutManager;
     AcademyAdapter mAdapter;
     ArrayList<String> academy_name;
@@ -57,16 +61,20 @@ public class EachCertificate extends AppCompatActivity {
         name=(TextView)findViewById(R.id.name);
         back_button=(TextView)findViewById(R.id.back_button);
         each_academy=(RecyclerView)findViewById(R.id.each_academy);
+        certificate_detail=(Button)findViewById(R.id.certificate_detail);
+        certificate_calender=(Button)findViewById(R.id.certificate_calender);
 
         back_button.setOnClickListener(buttononclicklistener);
+        certificate_detail.setOnClickListener(buttononclicklistener);
+        certificate_calender.setOnClickListener(buttononclicklistener);
 
         intent=getIntent();
 
 
         cat=intent.getStringExtra("cat");
-        if(cat.equals("gisul")){
+        if(cat.equals("기술사")){
             gisul=new Gisul();
-            gisul=intent.getParcelableExtra("academy");
+            gisul=intent.getParcelableExtra("certification");
             name.setText(gisul.getName());
 
             each_academy.setHasFixedSize(true);
@@ -83,10 +91,15 @@ public class EachCertificate extends AppCompatActivity {
 
             mAdapter=new AcademyAdapter(academy_name, academy_address, academy_phone);
             each_academy.setAdapter(mAdapter);
+
+            passdetailintent=new Intent(EachCertificate.this, CertificateDetail.class);
+            passdetailintent.putExtra("detail", gisul);
+            passdetailintent.putExtra("cat", cat);
         }
-        else if(cat.equals("gineong")){
+        else if(cat.equals("기능사")){
             gineongsa=new Gineongsa();
-            gineongsa=intent.getParcelableExtra("academy");
+            gineongsa=intent.getParcelableExtra("certification");
+            System.out.println(gineongsa.getIntro());
             name.setText(gineongsa.getName());
 
             each_academy.setHasFixedSize(true);
@@ -104,6 +117,9 @@ public class EachCertificate extends AppCompatActivity {
             mAdapter=new AcademyAdapter(academy_name, academy_address, academy_phone);
             each_academy.setAdapter(mAdapter);
 
+            passdetailintent=new Intent(EachCertificate.this, CertificateDetail.class);
+            passdetailintent.putExtra("detail", gineongsa);
+            passdetailintent.putExtra("cat", cat);
         }
 
 
@@ -117,6 +133,8 @@ public class EachCertificate extends AppCompatActivity {
                 case R.id.back_button:
                     finish();
                     return;
+                case R.id.certificate_detail:
+                    startActivity(passdetailintent);
                 default:
                     return;
             }

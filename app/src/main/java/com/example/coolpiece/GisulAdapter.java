@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 public class GisulAdapter extends RecyclerView.Adapter {
     private ArrayList<Gisul> mData=null;
+    String cat;
     static Context context;
-    public GisulAdapter(ArrayList<Gisul> mData){
+    public GisulAdapter(ArrayList<Gisul> mData, String cat){
         this.mData=mData;
+        this.cat=cat;
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView each_certificate;
@@ -37,10 +39,19 @@ public class GisulAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
         myViewHolder.each_certificate.setText(mData.get(position).getName());
-
+        final int pos=position;
+        myViewHolder.each_certificate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, EachCertificate.class);
+                intent.putExtra("certification", mData.get(pos));
+                intent.putExtra("cat", cat);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

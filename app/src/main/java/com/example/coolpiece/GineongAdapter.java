@@ -15,9 +15,11 @@ import java.util.ArrayList;
 
 public class GineongAdapter extends RecyclerView.Adapter {
     private ArrayList<Gineongsa> mData=null;
+    String cat;
     static Context context;
-    public GineongAdapter(ArrayList<Gineongsa> mData){
+    public GineongAdapter(ArrayList<Gineongsa> mData, String cat){
         this.mData=mData;
+        this.cat=cat;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -38,10 +40,19 @@ public class GineongAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
         myViewHolder.each_certicate.setText(mData.get(position).getName());
-
+        final int pos=position;
+        myViewHolder.each_certicate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, EachCertificate.class);
+                intent.putExtra("certification", mData.get(pos));
+                intent.putExtra("cat", cat);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

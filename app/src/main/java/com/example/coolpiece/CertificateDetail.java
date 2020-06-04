@@ -42,7 +42,7 @@ public class CertificateDetail extends AppCompatActivity {
         intent=getIntent();
 
         cat=intent.getStringExtra("cat");
-        if(cat.equals("gisul")){
+        if(cat.equals("기술사")){
             gisul=new Gisul();
             gisul=intent.getParcelableExtra("detail");
             name.setText(gisul.getName());
@@ -54,7 +54,7 @@ public class CertificateDetail extends AppCompatActivity {
             test_method.setText(gisul.getTest_method());
             cut_line.setText(gisul.getCut_line());
         }
-        else if(cat.equals("gineong")){
+        else if(cat.equals("기능사")){
             gineongsa=new Gineongsa();
             gineongsa=intent.getParcelableExtra("detail");
             name.setText(gineongsa.getName());

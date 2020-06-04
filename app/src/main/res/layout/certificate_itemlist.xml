@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="50sp"
         android:textSize="30sp"
-        android:text="자격증이름" />
+        android:text="자격증이름"
+        android:clickable="true"/>
 
 </RelativeLayout>

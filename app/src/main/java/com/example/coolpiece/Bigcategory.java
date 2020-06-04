@@ -59,12 +59,12 @@ public class Bigcategory extends AppCompatActivity {
         certificate_recycler.setLayoutManager(layoutManager);
         if(big.equals("기술사")){
             gisuls=select_gisul(0);
-            gisulAdapter=new GisulAdapter(gisuls);
+            gisulAdapter=new GisulAdapter(gisuls, big);
             certificate_recycler.setAdapter(gisulAdapter);
         }
         else if(big.equals("기능사")){
             gineongsas=select_gineong(0);
-            gineongAdapter=new GineongAdapter(gineongsas);
+            gineongAdapter=new GineongAdapter(gineongsas, big);
             certificate_recycler.setAdapter(gineongAdapter);
         }
 
