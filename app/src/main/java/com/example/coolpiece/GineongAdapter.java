@@ -22,13 +22,9 @@ public class GineongAdapter extends RecyclerView.Adapter {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView each_certicate;
-        public Button certificate_explain;
-        public Button certificate_academy;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             each_certicate=itemView.findViewById(R.id.each_certificate);
-            certificate_explain=(Button)itemView.findViewById(R.id.certificate_explain);
-            certificate_academy=(Button)itemView.findViewById(R.id.certificate_academy);
             context=itemView.getContext();
         }
     }
@@ -45,30 +41,19 @@ public class GineongAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
         myViewHolder.each_certicate.setText(mData.get(position).getName());
-        myViewHolder.certificate_explain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String cat="gineong";
-                Intent intent= new Intent(context, CertificateDetail.class);
-                intent.putExtra("detail", mData.get(position));
-                intent.putExtra("cat", cat);
-                context.startActivity(intent);
-            }
-        });
-        myViewHolder.certificate_academy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String cat="gineong";
-                Intent intent=new Intent(context, EachCertificate.class);
-                intent.putExtra("academy", mData.get(position));
-                intent.putExtra("cat", cat);
-                context.startActivity(intent);
-            }
-        });
+
     }
 
     @Override
     public int getItemCount() {
         return mData==null?0:mData.size();
+    }
+
+    public void removeall(ArrayList<Gineongsa> newData){
+        if(mData!=null){
+            mData=null;
+        }
+        mData=newData;
+        notifyDataSetChanged();
     }
 }

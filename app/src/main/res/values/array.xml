@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="small_category">
+        <item>안전관리</item>
+        <item>경영.회계.사무</item>
+        <item>광업자원</item>
+        <item>기계</item>
+        <item>농립어업</item>
+        <item>문화.예술.디자인.방송</item>
+        <item>보건.의료</item>
+        <item>사회복지.종교</item>
+        <item>섬유.의복</item>
+        <item>식품.가공</item>
+        <item>건설</item>
+        <item>영업.판매</item>
+        <item>운전.운송</item>
+        <item>음식서비스</item>
+        <item>이용.숙박.여행.오락.스포츠</item>
+        <item>인쇄.목재.가구.공예</item>
+        <item>재료</item>
+        <item>전기.전자</item>
+        <item>정보통신</item>
+        <item>화학</item>
+        <item>환경.에너지</item>
+    </string-array>
+</resources>

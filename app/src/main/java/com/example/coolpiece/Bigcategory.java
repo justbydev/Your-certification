@@ -4,220 +4,107 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bigcategory extends AppCompatActivity {
     TextView bigcategory;
     TextView back_button;
-    Button A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,r,S,T;
+    Spinner smallcategory;
+    RecyclerView certificate_recycler;
     private Intent intent;
     String big;
+    String array1[] = new String[]{"선택없음", "안전관리", "경영.회계.사무", "광업자원", "기계", "농림어업",
+    "문화.예술.디자인.방송", "보건.의료", "사회복지.종교", "섬유.의복", "식품.가공", "건설", "영업.판매",
+    "운전.운송", "음식서비스", "이용.숙박.여행.오락.스포츠", "인쇄.목재.가구.공예", "재료", "전기.전자", "정보통신",
+    "화학", "환경.에너지"};
+
+    private GisulAdapter gisulAdapter;
+    private GineongAdapter gineongAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    ArrayList<Gisul> gisuls=null;
+    ArrayList<Gineongsa> gineongsas=null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bigcategory);
 
         back_button=(TextView)findViewById(R.id.back_button);
-
+        certificate_recycler=(RecyclerView)findViewById(R.id.certificate_recycler);
         bigcategory=(TextView)findViewById(R.id.bigcategory);
+
+        smallcategory=(Spinner)findViewById(R.id.small_category_spinner);
         intent=getIntent();
         big=intent.getStringExtra("CA");
 
         bigcategory.setText(big);
-        A=(Button)findViewById(R.id.A);
-        B=(Button)findViewById(R.id.B);
-        C=(Button)findViewById(R.id.C);
-        D=(Button)findViewById(R.id.D);
-        E=(Button)findViewById(R.id.E);
-        F=(Button)findViewById(R.id.F);
-        G=(Button)findViewById(R.id.G);
-        H=(Button)findViewById(R.id.H);
-        I=(Button)findViewById(R.id.I);
-        J=(Button)findViewById(R.id.J);
-        K=(Button)findViewById(R.id.K);
-        L=(Button)findViewById(R.id.L);
-        M=(Button)findViewById(R.id.M);
-        N=(Button)findViewById(R.id.N);
-        O=(Button)findViewById(R.id.O);
-        P=(Button)findViewById(R.id.P);
-        Q=(Button)findViewById(R.id.Q);
-        r=(Button)findViewById(R.id.R);
-        S=(Button)findViewById(R.id.S);
-        T=(Button)findViewById(R.id.T);
 
-        A.setOnClickListener(buttonOnClickListener);
-        B.setOnClickListener(buttonOnClickListener);
-        C.setOnClickListener(buttonOnClickListener);
-        D.setOnClickListener(buttonOnClickListener);
-        E.setOnClickListener(buttonOnClickListener);
-        F.setOnClickListener(buttonOnClickListener);
-        G.setOnClickListener(buttonOnClickListener);
-        H.setOnClickListener(buttonOnClickListener);
-        I.setOnClickListener(buttonOnClickListener);
-        J.setOnClickListener(buttonOnClickListener);
-        K.setOnClickListener(buttonOnClickListener);
-        L.setOnClickListener(buttonOnClickListener);
-        M.setOnClickListener(buttonOnClickListener);
-        N.setOnClickListener(buttonOnClickListener);
-        O.setOnClickListener(buttonOnClickListener);
-        P.setOnClickListener(buttonOnClickListener);
-        Q.setOnClickListener(buttonOnClickListener);
-        r.setOnClickListener(buttonOnClickListener);
-        S.setOnClickListener(buttonOnClickListener);
-        T.setOnClickListener(buttonOnClickListener);
+        gisuls=new ArrayList<>();
+        gineongsas=new ArrayList<>();
 
-        back_button.setOnClickListener(buttonOnClickListener);
-
-
-    }
-    private View.OnClickListener buttonOnClickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int id=v.getId();
-            switch(id){
-                case R.id.A:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "건설");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.B:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "경영.회계.사무");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.C:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "광업자원");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.D:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "기계");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.E:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "농림어업");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.F:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "문화.예술");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.G:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "보건.의료");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.H:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "사회복지.종교");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.I:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "섬유.의복");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.J:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "식품.가공");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.K:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "안전관리");
-                    intent.putExtra("BCA", big);
-                    select(0);
-                    startActivity(intent);
-                    return;
-                case R.id.L:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "영업.판매");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.M:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "운전.운송");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                case R.id.N:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "음식서비스");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.O:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "이용.숙박.여행");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.P:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "가구.공예");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.Q:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "재료");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.R:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "전기.전자");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.S:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "정보통신");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.T:
-                    intent=new Intent(Bigcategory.this, Smallcategory.class);
-                    intent.putExtra("SCA", "화학.환경.에너지");
-                    intent.putExtra("BCA", big);
-                    startActivity(intent);
-                    return;
-                case R.id.back_button:
-                    finish();
-                    return;
-                default:
-                    return;
-            }
-        }
-    };
-    /****method that each small 20 categories and seperate each big category like gisulsa, gineongsa, etc****/
-    public void select(int index){
+        /***for certification list recyclerview***/
+        certificate_recycler.setHasFixedSize(true);
+        layoutManager=new LinearLayoutManager(this);
+        certificate_recycler.setLayoutManager(layoutManager);
         if(big.equals("기술사")){
-            intent.putExtra("Smallcategory", ManageGisulData.getInstance().getGisulArrayList(index));
+            gisuls=select_gisul(0);
+            gisulAdapter=new GisulAdapter(gisuls);
+            certificate_recycler.setAdapter(gisulAdapter);
         }
         else if(big.equals("기능사")){
-            intent.putExtra("Smallcategory", ManageGineongData.getInstance().getGineongArrayList(index));
+            gineongsas=select_gineong(0);
+            gineongAdapter=new GineongAdapter(gineongsas);
+            certificate_recycler.setAdapter(gineongAdapter);
         }
+
+
+        smallcategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //전체 데이터가 모두 들어오면 position에 의 한 if 문은 사라질 것
+                if(position==0){
+                    if(big.equals("기술사")){
+                        gisulAdapter.removeall(select_gisul(0));
+                    }
+                    else if(big.equals("기능사")){
+                        gineongAdapter.removeall(select_gineong(0));
+                    }
+                }
+                else{
+                    if(big.equals("기술사")){
+                        gisulAdapter.removeall(null);
+                    }
+                    else if(big.equals("기능사")){
+                        gineongAdapter.removeall(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
     };
+    public ArrayList<Gisul> select_gisul(int index){
+        return ManageGisulData.getInstance().getGisulArrayList(index);
+    }
+    public ArrayList<Gineongsa> select_gineong(int index){
+        return ManageGineongData.getInstance().getGineongArrayList(index);
+    }
 
     @Override
     public void onBackPressed() {
