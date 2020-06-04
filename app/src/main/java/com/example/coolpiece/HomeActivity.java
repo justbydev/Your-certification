@@ -1,37 +1,21 @@
 package com.example.coolpiece;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Parcelable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends Fragment {
     Button gineong;
     Button gisa;
     Button gisulsa;
@@ -41,26 +25,24 @@ public class MainActivity extends AppCompatActivity {
     TextView mylocation;
     TextView location_search;
     private Intent intent;
+    public static HomeActivity homecontext;
     String arg1=null, arg2=null, arg3=null;
-
-    public static Context maincontext;
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.activity_main, container, false);
 
-        maincontext=this;
+        homecontext=this;
 
-        //locate=(LinearLayout)findViewById(R.id.locate);
-        mylocation=(TextView) findViewById(R.id.mylocation);
-        location_search=(TextView)findViewById(R.id.location_search);
+        mylocation=(TextView) v.findViewById(R.id.mylocation);
+        location_search=(TextView)v.findViewById(R.id.location_search);
 
-        gineong=(Button)findViewById(R.id.gineong);
-        gisa=(Button)findViewById(R.id.gisa);
-        gisulsa=(Button)findViewById(R.id.gisulsa);
-        sanup=(Button)findViewById(R.id.sanup);
-        jido=(Button)findViewById(R.id.jido);
-        guitar=(Button)findViewById(R.id.guitar);
+        gineong=(Button)v.findViewById(R.id.gineong);
+        gisa=(Button)v.findViewById(R.id.gisa);
+        gisulsa=(Button)v.findViewById(R.id.gisulsa);
+        sanup=(Button)v.findViewById(R.id.sanup);
+        jido=(Button)v.findViewById(R.id.jido);
+        guitar=(Button)v.findViewById(R.id.guitar);
 
         //locate.setOnClickListener(buttonClickListener);
         mylocation.setOnClickListener(buttonClickListener);
@@ -73,53 +55,47 @@ public class MainActivity extends AppCompatActivity {
         jido.setOnClickListener(buttonClickListener);
         guitar.setOnClickListener(buttonClickListener);
 
-
+        return v;
     }
-
-    @Override
-    public void onBackPressed() {
-        closeApplication();
-    }
-
     /****butonclicklistener for big category like gisulsa, gineongsa, etc****/
     private View.OnClickListener buttonClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             int id=v.getId();
             switch(id){
-               // case R.id.locate:
+                // case R.id.locate:
                 case R.id.mylocation:
                 case R.id.location_search:
-                    intent=new Intent(MainActivity.this, DaumLocationActivity.class);
+                    intent=new Intent(getActivity(), DaumLocationActivity.class);
                     startActivity(intent);
                     return;
                 case R.id.gineong:
-                    intent=new Intent(MainActivity.this, Bigcategory.class);
+                    intent=new Intent(getActivity(), Bigcategory.class);
                     intent.putExtra("CA", "기능사");
                     startActivity(intent);
                     return;
                 case R.id.gisa:
-                    intent=new Intent(MainActivity.this, Bigcategory.class);
+                    intent=new Intent(getActivity(), Bigcategory.class);
                     intent.putExtra("CA", "기사");
                     startActivity(intent);
                     return;
                 case R.id.gisulsa:
-                    intent=new Intent(MainActivity.this, Bigcategory.class);
+                    intent=new Intent(getActivity(), Bigcategory.class);
                     intent.putExtra("CA", "기술사");
                     startActivity(intent);
                     return;
                 case R.id.sanup:
-                    intent=new Intent(MainActivity.this, Bigcategory.class);
+                    intent=new Intent(getActivity(), Bigcategory.class);
                     intent.putExtra("CA", "산업기사");
                     startActivity(intent);
                     return;
                 case R.id.jido:
-                    intent=new Intent(MainActivity.this, Bigcategory.class);
+                    intent=new Intent(getActivity(), Bigcategory.class);
                     intent.putExtra("CA", "지도사");
                     startActivity(intent);
                     return;
                 case R.id.guitar:
-                    intent=new Intent(MainActivity.this, Bigcategory.class);
+                    intent=new Intent(getActivity(), Bigcategory.class);
                     intent.putExtra("CA", "기타/취미");
                     startActivity(intent);
                     return;
@@ -129,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void closeApplication(){
+    /*public void closeApplication(){
         new AlertDialog.Builder(this)
                 .setTitle("쿨피스")
                 .setMessage("앱을 종료하시겠습니까?")
@@ -147,16 +123,5 @@ public class MainActivity extends AppCompatActivity {
                     }})
 
                 .show();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        if(arg1==null||arg1.length()<=0){
-            mylocation.setText("내 주소찾기 버튼을 눌러주세요");
-        }
-        else{
-            mylocation.setText(String.format("(%s) %s %s", arg1, arg2, arg3));
-        }
-    }
+    }*/
 }

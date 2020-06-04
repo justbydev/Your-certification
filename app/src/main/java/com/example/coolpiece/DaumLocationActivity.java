@@ -72,9 +72,9 @@ public class DaumLocationActivity extends AppCompatActivity {
                     intent.putExtra("arg2", arg2);
                     intent.putExtra("arg3", arg3);
                     startActivity(intent);*/
-                    ((MainActivity)MainActivity.maincontext).arg1=arg1;
-                    ((MainActivity)MainActivity.maincontext).arg2=arg2;
-                    ((MainActivity)MainActivity.maincontext).arg3=arg3;
+                    ((HomeActivity)HomeActivity.homecontext).arg1=arg1;
+                    ((HomeActivity)HomeActivity.homecontext).arg2=arg2;
+                    ((HomeActivity)HomeActivity.homecontext).arg3=arg3;
                     finish();
                 }
             });

@@ -57,7 +57,7 @@ public class SplashActivity extends AppCompatActivity {
             //have to write code Internet connection
 
 
-            Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent=new Intent(getApplicationContext(), MainFragment.class);
             startActivity(intent);
             finish();
         }

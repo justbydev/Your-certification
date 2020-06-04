@@ -83,12 +83,13 @@
                     android:layout_height="wrap_content"
                     android:text="기타/취미"/>
             </LinearLayout>
-            <TextView
+            <GridLayout
+                android:id="@+id/academy_advertisement"
                 android:layout_width="match_parent"
-                android:layout_height="500sp"
-                android:text="달력"
-                android:textSize="100sp">
-            </TextView>
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:rowCount="1"
+                android:columnCount="3"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

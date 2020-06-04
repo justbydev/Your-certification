@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_home"
+        android:title="홈"
+        android:enabled="true"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_mypage"
+        android:title="마이페이지"
+        android:enabled="true"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_log"
+        android:title="로그인"
+        android:enabled="true"
+        app:showAsAction="always"/>
+</menu>
