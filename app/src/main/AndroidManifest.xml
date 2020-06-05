@@ -35,6 +35,8 @@
         <activity android:name=".EachCertificate"/>
         <activity android:name=".CertificateDetail"/>
         <activity android:name=".CertificateAcademy"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".SignupActivity"/>
     </application>
 
 </manifest>
