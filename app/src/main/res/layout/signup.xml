@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
+        android:textSize="23sp"
+        android:textColor="@color/colorAccent"
+        android:text="회원가입" />
+    <EditText
+        android:id="@+id/signupname"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:layout_gravity="center_horizontal"
+        android:hint="이름을 입력해주세요" />
+    <EditText
+        android:id="@+id/signupemail"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:layout_gravity="center_horizontal"
+        android:hint="이메일을 입력해주세요"
+        android:inputType="textEmailAddress" />
+    <TextView
+        android:id="@+id/emailerrorcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="제대로 된 이메일 형식을 입력해주세요"
+        android:textSize="12sp"/>
+    <EditText
+        android:id="@+id/signuppassword"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:layout_gravity="center_horizontal"
+        android:hint="비밀번호를 입력해주세요"
+        android:inputType="textPassword" />
+    <TextView
+        android:id="@+id/passworderrorcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="영문자, 숫자, 특수문자 포함 9자리 이상으로 해주세요"
+        android:textSize="12sp"/>
+    <EditText
+        android:id="@+id/signuprepassword"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:layout_gravity="center_horizontal"
+        android:hint="비밀번호를 다시 입력해주세요"
+        android:inputType="textPassword" />
+    <TextView
+        android:id="@+id/passwordequalcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="비밀번호가 일치하지 않습니다"
+        android:textSize="12sp" />
+    <Button
+        android:id="@+id/buttonSignin"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15sp"
+        android:layout_gravity="center_horizontal"
+        android:text="회원가입" />
+    <TextView
+        android:id="@+id/tologin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="회원이시면 여기에서 로그인 해주세요."
+        android:textSize="12sp"
+        android:textColor="@color/colorAccent"
+        android:clickable="true"/>
+</LinearLayout>

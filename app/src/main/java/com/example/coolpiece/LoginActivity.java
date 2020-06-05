@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 case R.id.textViewSignin:
                     Intent intent=new Intent(LoginActivity.this, SignupActivity.class);
+                    finish();
                     startActivity(intent);
                 default:
                     return;

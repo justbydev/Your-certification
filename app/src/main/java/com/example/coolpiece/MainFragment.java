@@ -60,8 +60,16 @@ public class MainFragment extends AppCompatActivity {
             int id=v.getId();
             switch(id){
                 case R.id.menu_log:
-                    Intent intent=new Intent(MainFragment.this, LoginActivity.class);
-                    startActivity(intent);
+                    if(menu_log.getText().equals("로그인")){
+                        Intent intent=new Intent(MainFragment.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                    else if(menu_log.getText().equals("로그아웃")){
+                        firebaseAuth.signOut();
+                        Intent intent=new Intent(MainFragment.this, MainFragment.class);
+                        finish();
+                        startActivity(intent);
+                    }
                     return;
                 case R.id.menu_home:
                     if(homeActivity==null){
