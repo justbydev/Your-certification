@@ -15,81 +15,109 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <EditText
+                    android:id="@+id/searchedittext"
                     android:layout_width="330sp"
-                    android:layout_height="50sp">
+                    android:layout_height="50sp"
+                    android:hint="자격증을 검색해주세요">
                 </EditText>
                 <Button
+                    android:id="@+id/searchbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="50sp"
                     android:text="검색"></Button>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:clickable="true">
-                <TextView
-                    android:id="@+id/mylocation"
-                    android:layout_width="320sp"
-                    android:layout_height="50sp"
-                    android:textSize="15sp"
-                    android:clickable="true"
-                    android:text="내주소 찾기 버튼을 눌러주세요"/>
-                <TextView
-                    android:id="@+id/location_search"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="내주소 찾기"
-                    android:textSize="17sp"
-                    android:clickable="true"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/gineong"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
+                        <TextView
+                            android:id="@+id/mylocation"
+                            android:layout_width="0dp"
+                            android:layout_height="50sp"
+                            android:layout_weight="8"
+                            android:textSize="15sp"
+                            android:clickable="true"
+                            android:text="내 위치/주소 찾기를 눌러주세요"/>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/melocate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="내 위치 "
+                            android:textSize="17sp"
+                            android:clickable="true"/>
+                        <TextView
+                            android:id="@+id/location_search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="내주소 찾기"
+                            android:textSize="17sp"
+                            android:clickable="true"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/gineong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="기능사"/>
+                        <Button
+                            android:id="@+id/gisa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="기사"/>
+                        <Button
+                            android:id="@+id/gisulsa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="기술사"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/sanup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="산업기사"/>
+                        <Button
+                            android:id="@+id/jido"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="지도사"/>
+                        <Button
+                            android:id="@+id/guitar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="기타/취미"/>
+                    </LinearLayout>
+                    <GridLayout
+                        android:id="@+id/academy_advertisement"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:rowCount="1"
+                        android:columnCount="3"/>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/search_recycler"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="기능사"/>
-                <Button
-                    android:id="@+id/gisa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="기사"/>
-                <Button
-                    android:id="@+id/gisulsa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="기술사"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/sanup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="산업기사"/>
-                <Button
-                    android:id="@+id/jido"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="지도사"/>
-                <Button
-                    android:id="@+id/guitar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="기타/취미"/>
-            </LinearLayout>
-            <GridLayout
-                android:id="@+id/academy_advertisement"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:rowCount="1"
-                android:columnCount="3"/>
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

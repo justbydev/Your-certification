@@ -37,6 +37,9 @@ public class ManageGineongData {
         gineong_total=new ArrayList<>(20);
     }
 
+    public ArrayList<ArrayList<Gineongsa>> getGineong_total() {
+        return gineong_total;
+    }
 
     //get Gineongsa's certification list that category what I want
     public ArrayList<Gineongsa> getGineongArrayList(int position){

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/each_certificate"
+        android:layout_width="330sp"
+        android:layout_height="50sp"
+        android:textSize="20sp"
+        android:text="자격증이름"
+        android:textColor="#000000"
+        android:background="#FFFFFFFF"
+        android:clickable="true"/>
+
+</RelativeLayout>

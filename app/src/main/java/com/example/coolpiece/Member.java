@@ -4,6 +4,8 @@ public class Member {
     private String name;
     private String email;
 
+    public Member(){}
+
     public String getName() {
         return name;
     }

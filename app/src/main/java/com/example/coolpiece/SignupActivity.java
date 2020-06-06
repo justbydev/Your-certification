@@ -189,8 +189,7 @@ public class SignupActivity extends AppCompatActivity {
                                         Member member=new Member();
                                         member.setEmail(email);
                                         member.setName(name);
-                                        FirebaseDatabase database=FirebaseDatabase.getInstance();
-                                        DatabaseReference memberReference= database.getReference("Member");
+                                        DatabaseReference memberReference= FirebaseDatabase.getInstance().getReference("Member");
                                         memberReference.push().setValue(member);
                                         firebaseAuth.signOut();
                                         Intent intent=new Intent(SignupActivity.this, LoginActivity.class);

@@ -29,6 +29,11 @@ public class ManageGisulData {
         gisulArrayList=new ArrayList<>(20);
         gisul_total=new ArrayList<>(20);
     }
+
+    public ArrayList<ArrayList<Gisul>> getGisul_total() {
+        return gisul_total;
+    }
+
     //get Gisulsa's certification list that category what I want
     public ArrayList<Gisul> getGisulArrayList(int position){
         return gisul_total.get(position);
