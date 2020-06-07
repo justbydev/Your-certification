@@ -2,8 +2,6 @@ package com.example.coolpiece;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class AcademyAdapter extends RecyclerView.Adapter {
+public class NotConnectAcademyAdapter extends RecyclerView.Adapter {
     private ArrayList<String> academy_name=null;
     private ArrayList<String> academy_address=null;
     private ArrayList<String> academy_phone=null;
 
     private static Context context;
-    public AcademyAdapter(ArrayList<String> academy_name, ArrayList<String> academy_address, ArrayList<String> academy_phone){
+    public NotConnectAcademyAdapter(ArrayList<String> academy_name, ArrayList<String> academy_address, ArrayList<String> academy_phone){
         this.academy_name=academy_name;
         this.academy_address=academy_address;
         this.academy_phone=academy_phone;
@@ -36,7 +32,7 @@ public class AcademyAdapter extends RecyclerView.Adapter {
             super(itemView);
             each_academy=itemView.findViewById(R.id.each_academy);
             academy_arrow=itemView.findViewById(R.id.academy_arrow);
-            context=itemView.getContext();
+            context=EachCertificate.context;
         }
     }
     @NonNull
@@ -44,36 +40,36 @@ public class AcademyAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v= LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.academy_itemlist, parent, false);
-        MyViewHolder vh=new MyViewHolder(v);
+        AcademyAdapter.MyViewHolder vh=new AcademyAdapter.MyViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MyViewHolder myViewHolder=(MyViewHolder)holder;
-        myViewHolder.each_academy.setText("[제휴학원]"+academy_name.get(position));
+        AcademyAdapter.MyViewHolder myViewHolder=(AcademyAdapter.MyViewHolder)holder;
+        myViewHolder.each_academy.setText(academy_name.get(position));
         final int pos=position;
         myViewHolder.each_academy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(context, CertificateAcademy.class);
+                Intent intent=new Intent(v.getContext(), NotConnectCertificateAcademy.class);
                 intent.putExtra("academy_name", academy_name.get(pos));
                 intent.putExtra("academy_address", academy_address.get(pos));
                 intent.putExtra("academy_phone", academy_phone.get(pos));
 
-                context.startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
         myViewHolder.academy_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, CertificateAcademy.class);
+                Intent intent=new Intent(v.getContext(), NotConnectCertificateAcademy.class);
                 intent.putExtra("academy_name", academy_name.get(pos));
                 intent.putExtra("academy_address", academy_address.get(pos));
                 intent.putExtra("academy_phone", academy_phone.get(pos));
 
-                context.startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
     }

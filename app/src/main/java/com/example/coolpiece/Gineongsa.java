@@ -23,6 +23,7 @@ public class Gineongsa implements Parcelable {
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+    ArrayList<String> academy_connect;
     ArrayList<Double> lat;
     ArrayList<Double> lon;
     String online;
@@ -45,6 +46,7 @@ public class Gineongsa implements Parcelable {
         academy_name = in.createStringArrayList();
         academy_address = in.createStringArrayList();
         academy_phone = in.createStringArrayList();
+        academy_connect=in.createStringArrayList();
         online = in.readString();
     }
 
@@ -197,6 +199,14 @@ public class Gineongsa implements Parcelable {
         this.academy_phone = academy_phone;
     }
 
+    public ArrayList<String> getAcademy_connect() {
+        return academy_connect;
+    }
+
+    public void setAcademy_connect(ArrayList<String> academy_connect) {
+        this.academy_connect = academy_connect;
+    }
+
     public String getOnline() {
         return online;
     }
@@ -245,6 +255,7 @@ public class Gineongsa implements Parcelable {
         dest.writeStringList(academy_name);
         dest.writeStringList(academy_address);
         dest.writeStringList(academy_phone);
+        dest.writeStringList(academy_connect);
         dest.writeString(online);
     }
 }

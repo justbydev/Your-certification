@@ -22,6 +22,7 @@ public class ManageGineongData {
     private ArrayList<ArrayList<Gineongsa>> gineong_total;
     List<String> category= Arrays.asList("안전관리");
 
+    int testflag=0;
 
     //get ManageGineongData instance, make singleton pattern
     public static ManageGineongData getInstance(){
@@ -87,17 +88,26 @@ public class ManageGineongData {
                 ArrayList<String> academy_name=new ArrayList<>();
                 ArrayList<String> academy_address=new ArrayList<>();
                 ArrayList<String> academy_phone=new ArrayList<>();
+                ArrayList<String> academy_connect=new ArrayList<>();
                 for(int a=0; a<jsonArray.length(); a++){//for each academy jsonArray
                     JSONObject temp3=aca.getJSONObject(a);
                     String address=temp3.get("academy_address").toString();
                     academy_name.add(temp3.get("academy_name").toString());
                     academy_address.add(address);
                     academy_phone.add(temp3.get("academy_phone").toString());
-
+                    //academy_connect.add(temp3.get("").toString());
+                    if(testflag==0){
+                        academy_connect.add("yes");
+                        testflag=1;
+                    }
+                    else{
+                        academy_connect.add("no");
+                    }
                 }
                 gineongsa.setAcademy_name(academy_name);
                 gineongsa.setAcademy_address(academy_address);
                 gineongsa.setAcademy_phone(academy_phone);
+                gineongsa.setAcademy_connect(academy_connect);
                 gineongsa.setOnline(temp.get("online(온라인강의)").toString());
                 gineongArrayList.add(gineongsa);
                 gineongsa=new Gineongsa();

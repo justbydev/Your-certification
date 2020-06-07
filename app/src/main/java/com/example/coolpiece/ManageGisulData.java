@@ -84,15 +84,18 @@ public class ManageGisulData {
                 ArrayList<String> academy_name=new ArrayList<>();
                 ArrayList<String> academy_address=new ArrayList<>();
                 ArrayList<String> academy_phone=new ArrayList<>();
+                ArrayList<String> academy_connect=new ArrayList<>();
                 for(int a=0; a<jsonArray.length(); a++){
                     JSONObject temp3=aca.getJSONObject(a);
                     academy_name.add(temp3.get("academy_name").toString());
                     academy_address.add(temp3.get("academy_address").toString());
                     academy_phone.add(temp3.get("academy_phone").toString());
+                    academy_connect.add(temp3.get("").toString());
                 }
                 gisul.setAcademy_name(academy_name);
                 gisul.setAcademy_address(academy_address);
-                gisul.setAcademy_phone(academy_phone);*/
+                gisul.setAcademy_phone(academy_phone);
+                gisul.setAcademy_connect(academy_connect);*/
                 //when setting one certification, then add to gisulArrayList
                 gisulArrayList.add(gisul);
                 gisul=new Gisul();

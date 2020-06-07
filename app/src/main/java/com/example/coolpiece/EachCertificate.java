@@ -39,15 +39,21 @@ public class EachCertificate extends AppCompatActivity {
     Button certificate_detail;
     Button certificate_calender;
     RecyclerView each_academy;
+    RecyclerView not_connect_each_academy;
     Gisul gisul;
     Gineongsa gineongsa;
     Intent intent;
     Intent passdetailintent;
     RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager otherlayoutManager;
     AcademyAdapter mAdapter;
+    NotConnectAcademyAdapter notConnectAcademyAdapter;
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+    ArrayList<String> not_academy_name;
+    ArrayList<String> not_academy_address;
+    ArrayList<String> not_academy_phone;
     String cat;
 
     public static Context context;
@@ -61,6 +67,7 @@ public class EachCertificate extends AppCompatActivity {
         name=(TextView)findViewById(R.id.name);
         back_button=(TextView)findViewById(R.id.back_button);
         each_academy=(RecyclerView)findViewById(R.id.each_academy);
+        not_connect_each_academy=(RecyclerView)findViewById(R.id.not_connect_each_academy);
         certificate_detail=(Button)findViewById(R.id.certificate_detail);
         certificate_calender=(Button)findViewById(R.id.certificate_calender);
 
@@ -81,6 +88,28 @@ public class EachCertificate extends AppCompatActivity {
             layoutManager=new LinearLayoutManager(this);
             each_academy.setLayoutManager(layoutManager);
 
+            not_connect_each_academy.setHasFixedSize(true);
+            otherlayoutManager=new LinearLayoutManager(this);
+            not_connect_each_academy.setLayoutManager(otherlayoutManager);
+
+            /*academy_name=new ArrayList<>();
+            academy_address=new ArrayList<>();
+            academy_phone=new ArrayList<>();
+            not_academy_name=new ArrayList<>();
+            not_academy_address=new ArrayList<>();
+            not_academy_phone=new ArrayList<>();
+            for(int i=0; i<gisul.getAcademy_name().size(); i++){
+                if(gisul.getAcademy_connect().get(i)=="1"){
+                    academy_name.add(gisul.getAcademy_name().get(i));
+                    academy_address.add(gisul.getAcademy_address().get(i));
+                    academy_phone.add(gisul.getAcademy_phone().get(i));
+                }
+                else{
+                    not_academy_name.add(gisul.getAcademy_name().get(i));
+                    not_academy_address.add(gisul.getAcademy_address().get(i));
+                    not_academy_phone.add(gisul.getAcademy_phone().get(i));
+                }
+            }*/
             academy_name=new ArrayList<>();
             academy_name=gisul.getAcademy_name();
             academy_address=new ArrayList<>();
@@ -88,9 +117,11 @@ public class EachCertificate extends AppCompatActivity {
             academy_phone=new ArrayList<>();
             academy_phone=gisul.getAcademy_phone();
 
-
             mAdapter=new AcademyAdapter(academy_name, academy_address, academy_phone);
             each_academy.setAdapter(mAdapter);
+
+            notConnectAcademyAdapter=new NotConnectAcademyAdapter(not_academy_name, not_academy_address, not_academy_phone);
+            not_connect_each_academy.setAdapter(notConnectAcademyAdapter);
 
             passdetailintent=new Intent(EachCertificate.this, CertificateDetail.class);
             passdetailintent.putExtra("detail", gisul);
@@ -99,23 +130,41 @@ public class EachCertificate extends AppCompatActivity {
         else if(cat.equals("기능사")){
             gineongsa=new Gineongsa();
             gineongsa=intent.getParcelableExtra("certification");
-            System.out.println(gineongsa.getIntro());
             name.setText(gineongsa.getName());
 
             each_academy.setHasFixedSize(true);
             layoutManager=new LinearLayoutManager(this);
             each_academy.setLayoutManager(layoutManager);
 
+            not_connect_each_academy.setHasFixedSize(true);
+            otherlayoutManager=new LinearLayoutManager(this);
+            not_connect_each_academy.setLayoutManager(otherlayoutManager);
+
             academy_name=new ArrayList<>();
-            academy_name=gineongsa.getAcademy_name();
             academy_address=new ArrayList<>();
-            academy_address=gineongsa.getAcademy_address();
             academy_phone=new ArrayList<>();
-            academy_phone=gineongsa.getAcademy_phone();
+            not_academy_name=new ArrayList<>();
+            not_academy_address=new ArrayList<>();
+            not_academy_phone=new ArrayList<>();
+            for(int i=0; i<gineongsa.getAcademy_name().size(); i++){
+                if(gineongsa.getAcademy_connect().get(i).equals("yes")){
+                    academy_name.add(gineongsa.getAcademy_name().get(i));
+                    academy_address.add(gineongsa.getAcademy_address().get(i));
+                    academy_phone.add(gineongsa.getAcademy_phone().get(i));
+                }
+                else{
+                    not_academy_name.add(gineongsa.getAcademy_name().get(i));
+                    not_academy_address.add(gineongsa.getAcademy_address().get(i));
+                    not_academy_phone.add(gineongsa.getAcademy_phone().get(i));
+                }
+            }
 
 
             mAdapter=new AcademyAdapter(academy_name, academy_address, academy_phone);
             each_academy.setAdapter(mAdapter);
+
+            notConnectAcademyAdapter=new NotConnectAcademyAdapter(not_academy_name, not_academy_address, not_academy_phone);
+            not_connect_each_academy.setAdapter(notConnectAcademyAdapter);
 
             passdetailintent=new Intent(EachCertificate.this, CertificateDetail.class);
             passdetailintent.putExtra("detail", gineongsa);

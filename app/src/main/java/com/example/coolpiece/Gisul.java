@@ -24,6 +24,7 @@ public class Gisul implements Parcelable {
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+    ArrayList<String> academy_connect;
 
     protected Gisul(Parcel in) {
         name = in.readString();
@@ -44,6 +45,7 @@ public class Gisul implements Parcelable {
         academy_name = in.createStringArrayList();
         academy_address = in.createStringArrayList();
         academy_phone = in.createStringArrayList();
+        academy_connect=in.createStringArrayList();
     }
 
     public static final Creator<Gisul> CREATOR = new Creator<Gisul>() {
@@ -205,6 +207,15 @@ public class Gisul implements Parcelable {
     public void setAcademy_phone(ArrayList<String> academy_phone) {
         this.academy_phone = academy_phone;
     }
+
+    public ArrayList<String> getAcademy_connect() {
+        return academy_connect;
+    }
+
+    public void setAcademy_connect(ArrayList<String> academy_connect) {
+        this.academy_connect = academy_connect;
+    }
+
     public void printall(){
         System.out.println("======================================");
         System.out.println(this.name);
@@ -253,5 +264,6 @@ public class Gisul implements Parcelable {
         dest.writeStringList(academy_name);
         dest.writeStringList(academy_address);
         dest.writeStringList(academy_phone);
+        dest.writeStringList(academy_connect);
     }
 }
