@@ -14,13 +14,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,12 +34,19 @@ public class CalendarFragment extends Fragment {
     CalendarView calendarView;
     TextView selected_date;
     ImageView add_schedule;
+    RecyclerView selected_date_schedulelist;
     int select_year;
     int select_month;
     int select_day;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
+
+    ArrayList<String> schedule;
+    //ArrayList<String> tmp=null;
+    RecyclerView.LayoutManager layoutManager;
+    EachDateScheduleAdapter eachDateScheduleAdapter;
+    int first=0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,6 +55,11 @@ public class CalendarFragment extends Fragment {
         calendarView=(CalendarView)v.findViewById(R.id.calender);
         selected_date=(TextView)v.findViewById(R.id.selected_date);
         add_schedule=(ImageView)v.findViewById(R.id.add_schedule);
+        selected_date_schedulelist=(RecyclerView)v.findViewById(R.id.selected_date_schedulelist);
+
+        selected_date_schedulelist.setHasFixedSize(true);
+        layoutManager=new LinearLayoutManager(getActivity());
+        selected_date_schedulelist.setLayoutManager(layoutManager);
 
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy.M.d");
         String selectedDate=sdf.format(new Date(calendarView.getDate()));
@@ -50,6 +68,14 @@ public class CalendarFragment extends Fragment {
         select_month=Calendar.getInstance().get(Calendar.MONTH)+1;
         select_day=Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
+        schedule=new ArrayList<String>();
+        //tmp=new ArrayList<>();
+
+        getschedulefromrealtime();
+
+
+
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -57,6 +83,9 @@ public class CalendarFragment extends Fragment {
                 select_year=year;
                 select_month=month+1;
                 select_day=dayOfMonth;
+                schedule.clear();
+                getschedulefromrealtime();
+                //eachDateScheduleAdapter.setchange(tmp);
             }
         });
 
@@ -86,7 +115,13 @@ public class CalendarFragment extends Fragment {
                         String date=Integer.toString(select_year)+'-'+Integer.toString(select_month)+'-'+Integer.toString(select_day);
                         databaseReference= FirebaseDatabase.getInstance().getReference("Calendar").child(name).child(date);
                         databaseReference.push().setValue(text);
+                        if(schedule.get(0).equals("일정이 없습니다.")){
+                            schedule.clear();
+                        }
+                        schedule.add(text);
+                        eachDateScheduleAdapter.notifyDataSetChanged();
                         dialog.cancel();
+
                     }
                 })
                 .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -97,5 +132,42 @@ public class CalendarFragment extends Fragment {
                 });
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
+    }
+    public void getschedulefromrealtime(){
+        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+        String temp=firebaseUser.getEmail().toString();
+        String name=temp.replace('.', '-');
+        String date=Integer.toString(select_year)+'-'+Integer.toString(select_month)+'-'+Integer.toString(select_day);
+        databaseReference= FirebaseDatabase.getInstance().getReference("Calendar").child(name).child(date);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int count=0;
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    String text=snapshot.getValue().toString();
+                    schedule.add(text);
+                    count=1;
+                }
+                if(first==0){
+                    if(count==0){
+                        schedule.add("일정이 없습니다.");
+                    }
+                    eachDateScheduleAdapter=new EachDateScheduleAdapter(schedule);
+                    selected_date_schedulelist.setAdapter(eachDateScheduleAdapter);
+                    first=1;
+                }
+                else{
+                    if(count==0){
+                        schedule.add("일정이 없습니다.");
+                    }
+                    eachDateScheduleAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

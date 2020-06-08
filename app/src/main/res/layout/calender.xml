@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <CalendarView
+        android:id="@+id/calender"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <CalendarView
-            android:id="@+id/calender"
+        android:layout_height="350sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/selected_date"
             android:layout_width="match_parent"
-            android:layout_height="350sp"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/selected_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="선택된 날짜"
-                android:textSize="20sp"/>
-            <ImageView
-                android:id="@+id/add_schedule"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
-                android:src="@drawable/plus_icon"
-                android:layout_alignParentRight="true"
-                android:clickable="true"/>
-        </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:text="선택된 날짜"
+            android:textSize="20sp"/>
+        <ImageView
+            android:id="@+id/add_schedule"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:src="@drawable/plus_icon"
+            android:layout_alignParentRight="true"
+            android:clickable="true"/>
+    </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/selected_date_schedulelist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/selected_date_schedulelist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

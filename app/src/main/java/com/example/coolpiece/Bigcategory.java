@@ -25,7 +25,7 @@ public class Bigcategory extends AppCompatActivity {
     RecyclerView certificate_recycler;
     private Intent intent;
     String big;
-    String array1[] = new String[]{"선택없음", "안전관리", "경영.회계.사무", "광업자원", "기계", "농림어업",
+    String array1[] = new String[]{"안전관리", "경영.회계.사무", "광업자원", "기계", "농림어업",
     "문화.예술.디자인.방송", "보건.의료", "사회복지.종교", "섬유.의복", "식품.가공", "건설", "영업.판매",
     "운전.운송", "음식서비스", "이용.숙박.여행.오락.스포츠", "인쇄.목재.가구.공예", "재료", "전기.전자", "정보통신",
     "화학", "환경.에너지"};
