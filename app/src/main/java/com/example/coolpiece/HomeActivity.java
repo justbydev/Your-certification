@@ -1,8 +1,12 @@
 package com.example.coolpiece;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +20,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,18 +38,19 @@ public class HomeActivity extends Fragment {
     Button guitar;
     TextView mylocation;
     TextView melocate;
-    TextView location_search;
     EditText searchedittext;
     RecyclerView search_recycler;
     Button searchbutton;
     private Intent intent;
     public static HomeActivity homecontext;
     String arg1=null, arg2=null, arg3=null;
+    String nowlocation=null;
 
     private SearchAdapter searchAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Search> list;
     private ArrayList<Search> searcharray;
+    int locationFirstcheck;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,7 +60,6 @@ public class HomeActivity extends Fragment {
 
         mylocation=(TextView) v.findViewById(R.id.mylocation);
         melocate=(TextView)v.findViewById(R.id.melocate);
-        location_search=(TextView)v.findViewById(R.id.location_search);
         search_recycler=(RecyclerView)v.findViewById(R.id.search_recycler);
         searchbutton=(Button)v.findViewById(R.id.searchbutton);
 
@@ -69,7 +74,7 @@ public class HomeActivity extends Fragment {
 
         //locate.setOnClickListener(buttonClickListener);
         mylocation.setOnClickListener(buttonClickListener);
-        location_search.setOnClickListener(buttonClickListener);
+        melocate.setOnClickListener(buttonClickListener);
         searchbutton.setOnClickListener(buttonClickListener);
 
         gineong.setOnClickListener(buttonClickListener);
@@ -123,13 +128,9 @@ public class HomeActivity extends Fragment {
         public void onClick(View v) {
             int id=v.getId();
             switch(id){
-                // case R.id.locate:
                 case R.id.mylocation:
-                case R.id.location_search:
-                    intent=new Intent(getActivity(), DaumLocationActivity.class);
-                    startActivity(intent);
-                    return;
                 case R.id.melocate:
+                    getlocationpermission();
                     return;
                 case R.id.searchbutton:
                     String name=searchedittext.getText().toString();
@@ -249,4 +250,69 @@ public class HomeActivity extends Fragment {
         list.add(new Search("가스기능사", 1));
         list.add(new Search("침투비파괴검사기능사", 1));
     }
+
+    public void getlocationpermission(){
+        if(Build.VERSION.SDK_INT<23){
+            return;
+        }
+
+        int permissioncoarse=ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION);
+        int permissionfine=ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
+        if(permissioncoarse==PackageManager.PERMISSION_DENIED||permissionfine==PackageManager.PERMISSION_DENIED){
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION},
+                    1001);
+        }
+        else{
+            Toast.makeText(getContext(), "설정이 되어있습니다", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch(requestCode){
+            case 1001:
+                int cnt=0;
+                for(int i=0; i<permissions.length; i++){
+                    String permission=permissions[i];
+                    int grantResult=grantResults[i];
+                    if(permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION)){
+                        if(grantResult==PackageManager.PERMISSION_GRANTED){
+                            cnt+=1;
+                        }
+                    }
+                    if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        if(grantResult==PackageManager.PERMISSION_GRANTED){
+                            cnt+=1;
+                        }
+                    }
+                }
+                if(cnt==2){
+                    System.out.println("======---------==++++++++++++++++");
+                    System.out.println("허용");
+                }
+                else{
+
+                    android.app.AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                    builder.setTitle("알림");
+                    builder.setMessage("[설정]->[권한]에서\n권한을 허용해주세요.\n");
+                    builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog alertDialog=builder.create();
+                    alertDialog.show();
+                }
+                return;
+            default:
+                return;
+        }
+
+    }
+
+
 }

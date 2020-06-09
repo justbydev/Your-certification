@@ -33,38 +33,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="10">
+                        android:layout_height="match_parent">
                         <TextView
                             android:id="@+id/mylocation"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="50sp"
-                            android:layout_weight="8"
                             android:textSize="15sp"
                             android:clickable="true"
-                            android:text="내 위치/주소 찾기를 눌러주세요"/>
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
+                            android:text="내 위치를 눌러주세요"/>
                         <TextView
                             android:id="@+id/melocate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="내 위치 "
                             android:textSize="17sp"
+                            android:layout_alignParentRight="true"
                             android:clickable="true"/>
-                        <TextView
-                            android:id="@+id/location_search"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="내주소 찾기"
-                            android:textSize="17sp"
-                            android:clickable="true"/>
-                    </LinearLayout>
+                    </RelativeLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
