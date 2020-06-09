@@ -61,7 +61,7 @@ public class MyscheduleFragment extends Fragment {
         Date mDate=new Date(now);
         SimpleDateFormat simpleDate=new SimpleDateFormat("yyyy-MM-dd");
         String today=simpleDate.format(mDate);
-        todaytext.setText(today);
+        todaytext.setText("오늘: "+today);
 
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
         String temp=firebaseUser.getEmail().toString();

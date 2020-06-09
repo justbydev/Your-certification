@@ -34,6 +34,7 @@
         <activity android:name=".DaumLocationActivity"/>
         <activity android:name=".EachCertificate"/>
         <activity android:name=".CertificateDetail"/>
+        <activity android:name=".CertificateSchedule"/>
         <activity android:name=".CertificateAcademy"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SignupActivity"/>

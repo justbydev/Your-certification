@@ -2,6 +2,7 @@ package com.example.coolpiece;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ public class AcademyAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
         myViewHolder.each_academy.setText("[제휴학원]"+academy_name.get(position));
+        myViewHolder.each_academy.setTextColor(Color.BLUE);
         final int pos=position;
         myViewHolder.each_academy.setOnClickListener(new View.OnClickListener() {
             @Override
