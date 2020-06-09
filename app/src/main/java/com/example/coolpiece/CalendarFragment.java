@@ -109,7 +109,8 @@ public class CalendarFragment extends Fragment {
                 .setPositiveButton("등록", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String text=input.getText().toString();
+                        String temptext=input.getText().toString();
+                        String text=temptext.replace(" ", "$");
                         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
                         String temp=firebaseUser.getEmail().toString();
                         String name=temp.replace('.', '-');
@@ -122,8 +123,9 @@ public class CalendarFragment extends Fragment {
                         if(schedule.get(0).equals("일정이 없습니다.")){
                             schedule.clear();
                         }
-                        schedule.add(text);
+                        schedule.add(temptext);
                         eachDateScheduleAdapter.notifyDataSetChanged();
+
                         dialog.cancel();
 
                     }
@@ -143,12 +145,13 @@ public class CalendarFragment extends Fragment {
         String name=temp.replace('.', '-');
         String date=Integer.toString(select_year)+'-'+Integer.toString(select_month)+'-'+Integer.toString(select_day);
         databaseReference= FirebaseDatabase.getInstance().getReference("Calendar").child(name).child(date);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {//전체 Realtime을 한번 읽을 때 사용
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int count=0;
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    String text=snapshot.getValue().toString();
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){//dataSnapshot에 한꺼번에 들어옴
+                    String temptext=snapshot.getValue().toString();
+                    String text=temptext.replace("$", " ");
                     schedule.add(text);
                     count=1;
                 }
