@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/today_date"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/schedule"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="내 스케쥴"/>
-    </LinearLayout>
-</ScrollView>
+        android:layout_height="wrap_content"
+        android:text="오늘 날짜"
+        android:textSize="20sp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/schedule_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

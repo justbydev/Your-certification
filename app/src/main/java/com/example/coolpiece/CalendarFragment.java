@@ -41,6 +41,7 @@ public class CalendarFragment extends Fragment {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
+    DatabaseReference scheduleReference;
 
     ArrayList<String> schedule;
     //ArrayList<String> tmp=null;
@@ -114,6 +115,9 @@ public class CalendarFragment extends Fragment {
                         String name=temp.replace('.', '-');
                         String date=Integer.toString(select_year)+'-'+Integer.toString(select_month)+'-'+Integer.toString(select_day);
                         databaseReference= FirebaseDatabase.getInstance().getReference("Calendar").child(name).child(date);
+                        scheduleReference=FirebaseDatabase.getInstance().getReference("Schedule").child(name);
+                        Schedule scheduleclass=new Schedule(date, text);
+                        scheduleReference.push().setValue(scheduleclass);
                         databaseReference.push().setValue(text);
                         if(schedule.get(0).equals("일정이 없습니다.")){
                             schedule.clear();
