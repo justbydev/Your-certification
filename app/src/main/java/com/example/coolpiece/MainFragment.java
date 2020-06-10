@@ -1,20 +1,17 @@
 package com.example.coolpiece;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.coolpiece.login.LoginActivity;
+import com.example.coolpiece.mypage.MypageActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainFragment extends AppCompatActivity {

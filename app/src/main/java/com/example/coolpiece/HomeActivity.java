@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,14 +23,27 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coolpiece.home.button.certification.EachCertificate;
+import com.example.coolpiece.home.location.GpsTracker;
+import com.example.coolpiece.splash.manageclass.ManageGineongData;
+import com.example.coolpiece.splash.manageclass.ManageGisulData;
+import com.example.coolpiece.home.button.Bigcategory;
+import com.example.coolpiece.home.AcademyGridAdapter;
+import com.example.coolpiece.home.search.SearchAdapter;
+import com.example.coolpiece.splash.dataclass.Gineongsa;
+import com.example.coolpiece.splash.dataclass.Gisul;
+import com.example.coolpiece.home.search.Search;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeActivity extends Fragment {
     Button gineong;
@@ -41,15 +57,24 @@ public class HomeActivity extends Fragment {
     EditText searchedittext;
     RecyclerView search_recycler;
     Button searchbutton;
+    RecyclerView grid_recyclerview;
     private Intent intent;
     public static HomeActivity homecontext;
     String arg1=null, arg2=null, arg3=null;
     String nowlocation=null;
+    private GpsTracker gpsTracker;
+    private double latitude;
+    private double longitude;
 
     private SearchAdapter searchAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Search> list;
     private ArrayList<Search> searcharray;
+
+    private AcademyGridAdapter academyGridAdapter;
+    private RecyclerView.LayoutManager layoutManager2;
+    private ArrayList<String> academy_name;
+
     int locationFirstcheck;
     @Nullable
     @Override
@@ -72,8 +97,9 @@ public class HomeActivity extends Fragment {
 
         searchedittext=(EditText)v.findViewById(R.id.searchedittext);
 
+        grid_recyclerview=(RecyclerView)v.findViewById(R.id.grid_recyclerview);
+
         //locate.setOnClickListener(buttonClickListener);
-        mylocation.setOnClickListener(buttonClickListener);
         melocate.setOnClickListener(buttonClickListener);
         searchbutton.setOnClickListener(buttonClickListener);
 
@@ -100,6 +126,33 @@ public class HomeActivity extends Fragment {
 
         list.clear();
         searchAdapter.notifyDataSetChanged();
+
+        grid_recyclerview.setHasFixedSize(true);
+        layoutManager2=new GridLayoutManager(getContext(), 3);
+        grid_recyclerview.setLayoutManager(layoutManager2);
+
+        academy_name=new ArrayList<>();
+
+        /***example****/
+        academy_name.add("학원1");
+        academy_name.add("학원2");
+        academy_name.add("학원3");
+        academy_name.add("학원4");
+        academy_name.add("학원5");
+        academy_name.add("학원6");
+        academy_name.add("학원7");
+        academy_name.add("학원8");
+        academy_name.add("학원9");
+        academy_name.add("학원10");
+        academy_name.add("학원11");
+        academy_name.add("학원12");
+        academy_name.add("학원13");
+        academy_name.add("학원14");
+        academy_name.add("학원15");
+        academy_name.add("학원16");
+        /***example***/
+        academyGridAdapter=new AcademyGridAdapter(academy_name);
+        grid_recyclerview.setAdapter(academyGridAdapter);
 
 
         searchedittext.addTextChangedListener(new TextWatcher() {
@@ -128,7 +181,6 @@ public class HomeActivity extends Fragment {
         public void onClick(View v) {
             int id=v.getId();
             switch(id){
-                case R.id.mylocation:
                 case R.id.melocate:
                     getlocationpermission();
                     return;
@@ -141,7 +193,7 @@ public class HomeActivity extends Fragment {
                             int type=searcharray.get(i).getType();
                             if(type==0){
                                 intent.putExtra("cat", "기술사");
-                                ArrayList<ArrayList<Gisul>> gisul_total=ManageGisulData.getInstance().getGisul_total();
+                                ArrayList<ArrayList<Gisul>> gisul_total= ManageGisulData.getInstance().getGisul_total();
                                 for(int j=0; j<gisul_total.size(); j++){
                                     ArrayList<Gisul> gisul=gisul_total.get(j);
                                     for(int k=0; k<gisul.size(); k++){
@@ -155,7 +207,7 @@ public class HomeActivity extends Fragment {
                             }
                             else if(type==1){
                                 intent.putExtra("cat", "기능사");
-                                ArrayList<ArrayList<Gineongsa>> gineong_total=ManageGineongData.getInstance().getGineong_total();
+                                ArrayList<ArrayList<Gineongsa>> gineong_total= ManageGineongData.getInstance().getGineong_total();
                                 for(int j=0; j<gineong_total.size(); j++){
                                     ArrayList<Gineongsa> gineongsa=gineong_total.get(j);
                                     for(int k=0; k<gineongsa.size(); k++){
@@ -255,17 +307,23 @@ public class HomeActivity extends Fragment {
         if(Build.VERSION.SDK_INT<23){
             return;
         }
+        if(!checkLocationServicesStatus()){//핸드폰 자체의 위치 설정 허가를 위한 것
+            showDialogForLocationServiceSetting();
+        }
+        else{//핸드폰 자체의 위치 정보 사용이 허가되었으면 앱의 위치 권한 허가를 위한 것
+            int permissioncoarse=ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION);
+            int permissionfine=ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
+            if(permissioncoarse==PackageManager.PERMISSION_DENIED||permissionfine==PackageManager.PERMISSION_DENIED){
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION},
+                        1001);
+            }
+            else{
+                nowlocation=getnowaddress();
+                mylocation.setText(nowlocation);
+            }
+        }
 
-        int permissioncoarse=ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION);
-        int permissionfine=ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permissioncoarse==PackageManager.PERMISSION_DENIED||permissionfine==PackageManager.PERMISSION_DENIED){
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION},
-                    1001);
-        }
-        else{
-            Toast.makeText(getContext(), "설정이 되어있습니다", Toast.LENGTH_SHORT).show();
-        }
     }
 
 
@@ -290,8 +348,7 @@ public class HomeActivity extends Fragment {
                     }
                 }
                 if(cnt==2){
-                    System.out.println("======---------==++++++++++++++++");
-                    System.out.println("허용");
+                    Toast.makeText(getContext(), "위치 권한이 설정되었습니다", Toast.LENGTH_SHORT).show();
                 }
                 else{
 
@@ -314,5 +371,61 @@ public class HomeActivity extends Fragment {
 
     }
 
+    public String getnowaddress(){
+        gpsTracker=new GpsTracker(getContext());
+        latitude=gpsTracker.getLatitude();
+        longitude=gpsTracker.getLongitude();
 
+        Geocoder geocoder=new Geocoder(getContext(), Locale.KOREAN);
+        List<Address> addresses;
+
+        try{
+            addresses=geocoder.getFromLocation(latitude, longitude, 1);
+        }catch(IOException ioException){
+            Toast.makeText(getContext(), "지오코더 서비스 사용불가", Toast.LENGTH_SHORT).show();
+
+            return "지오코더 서비스 사용불가";
+        }
+
+        if(addresses==null||addresses.size()==0){
+
+            Toast.makeText(getContext(), "주소를 발견하지 못했습니다", Toast.LENGTH_SHORT).show();
+
+            return "내 위치를 다시 눌러주세요";
+        }
+        Address address=addresses.get(0);
+        return address.getAddressLine(0).toString();
+
+    }
+
+    private void showDialogForLocationServiceSetting() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("위치 서비스 비활성화");
+        builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.\n"
+                + "위치 설정을 수정하시겠습니까?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Intent callGPSSettingIntent
+                        = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(callGPSSettingIntent, 2001);
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
+    }
+
+    public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
 }

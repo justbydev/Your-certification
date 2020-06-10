@@ -38,10 +38,9 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:id="@+id/mylocation"
-                            android:layout_width="match_parent"
-                            android:layout_height="50sp"
+                            android:layout_width="350sp"
+                            android:layout_height="wrap_content"
                             android:textSize="15sp"
-                            android:clickable="true"
                             android:text="내 위치를 눌러주세요"/>
                         <TextView
                             android:id="@+id/melocate"
@@ -92,13 +91,10 @@
                             android:layout_height="wrap_content"
                             android:text="기타/취미"/>
                     </LinearLayout>
-                    <GridLayout
-                        android:id="@+id/academy_advertisement"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/grid_recyclerview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:rowCount="1"
-                        android:columnCount="3"/>
+                        android:layout_height="match_parent" />
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/search_recycler"
