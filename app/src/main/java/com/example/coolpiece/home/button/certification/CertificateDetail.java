@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolpiece.R;
 import com.example.coolpiece.splash.dataclass.Gineongsa;
+import com.example.coolpiece.splash.dataclass.Gisa;
 import com.example.coolpiece.splash.dataclass.Gisul;
+import com.example.coolpiece.splash.dataclass.Sanup;
 
 public class CertificateDetail extends AppCompatActivity {
     TextView back_button;
@@ -25,6 +27,8 @@ public class CertificateDetail extends AppCompatActivity {
     Intent intent;
     Gineongsa gineongsa;
     Gisul gisul;
+    Gisa gisa;
+    Sanup sanup;
     String cat;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,8 +74,32 @@ public class CertificateDetail extends AppCompatActivity {
             test_method.setText(gineongsa.getTest_method());
             cut_line.setText(gineongsa.getCut_line());
         }
-
+        else if(cat.equals("기사")){
+            gisa=new Gisa();
+            gisa=intent.getParcelableExtra("detail");
+            name.setText(gisa.getName());
+            intro.setText(gisa.getIntro());
+            association.setText(gisa.getAssociation());
+            major.setText(gisa.getMajor());
+            training_center.setText(gisa.getTraining_center());
+            test_subject.setText(gisa.getTest_subject());
+            test_method.setText(gisa.getTest_method());
+            cut_line.setText(gisa.getCut_line());
+        }
+        else if(cat.equals("산업기사")){
+            sanup=new Sanup();
+            sanup=intent.getParcelableExtra("detail");
+            name.setText(sanup.getName());
+            intro.setText(sanup.getIntro());
+            association.setText(sanup.getAssociation());
+            major.setText(sanup.getMajor());
+            training_center.setText(sanup.getTraining_center());
+            test_subject.setText(sanup.getTest_subject());
+            test_method.setText(sanup.getTest_method());
+            cut_line.setText(sanup.getCut_line());
+        }
     }
+
 
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
         @Override

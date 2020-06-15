@@ -1,5 +1,6 @@
 package com.example.coolpiece.splash.manageclass;
 
+import com.example.coolpiece.splash.dataclass.Gisa;
 import com.example.coolpiece.splash.dataclass.Gisul;
 
 import org.json.JSONArray;
@@ -10,40 +11,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ManageGisulData {
-    private static ManageGisulData manageGisulData;
-    Gisul gisul;
-    private ArrayList<Gisul> gisulArrayList;
-    private ArrayList<ArrayList<Gisul>> gisul_total;
+public class ManageGisaData {
+    private static ManageGisaData manageGisaData;
+    Gisa gisa;
+    private ArrayList<Gisa> gisaArrayList;
+    private ArrayList<ArrayList<Gisa>> gisa_total;
     List<String> category= Arrays.asList("건설", "경영,회계,사무", "광업자원", "기계", "농림어업",
             "문화,예술,디자인,방송", "보건,의료", "사회복지,종교", "섬유,의복", "식품,가공", "안전관리", "영업,판매",
             "운전,운송", "음식서비스", "이용,숙박,여행,오락,스포츠", "인쇄,목재,가구,공예", "재료", "전기,전자", "정보통신",
             "화학", "환경,에너지");
-
-
-    //get ManageGisulData instance, make singleton pattern
-    public static ManageGisulData getInstance(){
-        if(manageGisulData==null){
-            manageGisulData=new ManageGisulData();
+    public static ManageGisaData getInstance(){
+        if(manageGisaData==null){
+            manageGisaData=new ManageGisaData();
         }
-        return manageGisulData;
+        return manageGisaData;
     }
-    //Constructor
-    ManageGisulData(){
-        gisul=new Gisul();
-        gisulArrayList=new ArrayList<>(20);
-        gisul_total=new ArrayList<>(20);
+    ManageGisaData(){
+        gisa=new Gisa();
+        gisaArrayList=new ArrayList<>(20);
+        gisa_total=new ArrayList<>(20);
     }
+    public ArrayList<ArrayList<Gisa>> getGisa_total(){return gisa_total;}
 
-    public ArrayList<ArrayList<Gisul>> getGisul_total() {
-        return gisul_total;
+    public ArrayList<Gisa> getGisaArrayList(int position){
+        return gisa_total.get(position);
     }
-
-    //get Gisulsa's certification list that category what I want
-    public ArrayList<Gisul> getGisulArrayList(int position){
-        return gisul_total.get(position);
-    }
-    //parsing json data, String json is result of String data getting from url
     public void startParsing(String json) throws JSONException {
         JSONObject jsonObject=new JSONObject(json);
         //for each category
@@ -51,15 +43,15 @@ public class ManageGisulData {
             JSONArray jsonArray=jsonObject.getJSONArray(category.get(i));
             for(int j=0; j<jsonArray.length()-1; j++){
                 JSONObject temp=jsonArray.getJSONObject(j);
-                gisul=new Gisul();
-                gisul.setName(temp.get("name").toString());
-                gisul.setIntro(temp.get("intro(개요)").toString());
-                gisul.setAssociation(temp.get("association(실시기관)").toString());
-                gisul.setMajor(temp.get("major(관련학과)").toString());
-                gisul.setTraining_center(temp.get("training_center(훈련기관)").toString());
-                gisul.setTest_subject(temp.get("test_subject(시험과목)").toString());
-                gisul.setTest_method(temp.get("test_method(검정방법)").toString());
-                gisul.setCut_line(temp.get("cut_line(합격기준)").toString());
+                gisa=new Gisa();
+                gisa.setName(temp.get("name").toString());
+                gisa.setIntro(temp.get("intro(개요)").toString());
+                gisa.setAssociation(temp.get("association(실시기관)").toString());
+                gisa.setMajor(temp.get("major(관련학과)").toString());
+                gisa.setTraining_center(temp.get("training_center(훈련기관)").toString());
+                gisa.setTest_subject(temp.get("test_subject(시험과목)").toString());
+                gisa.setTest_method(temp.get("test_method(검정방법)").toString());
+                gisa.setCut_line(temp.get("cut_line(합격기준)").toString());
                 JSONArray cal=temp.getJSONArray("calender(일정)");
                 ArrayList<String> pilgi_apply=new ArrayList<>();
                 ArrayList<String> pilgi_test=new ArrayList<>();
@@ -78,13 +70,13 @@ public class ManageGisulData {
                     silgi_test.add(temp2.get("silgi_test(면접시험)").toString());
                     final_balpyo.add(temp2.get("final_balpyo(합격자발표)").toString());
                 }
-                gisul.setPilgi_apply(pilgi_apply);
-                gisul.setPilgi_test(pilgi_test);
-                gisul.setPilgi_balpyo(pilgi_balpyo);
-                gisul.setPilgi_balpyo_final(pilgi_balpyo_final);
-                gisul.setSilgi_apply(silgi_apply);
-                gisul.setSilgi_test(silgi_test);
-                gisul.setFinal_balpyo(final_balpyo);
+                gisa.setPilgi_apply(pilgi_apply);
+                gisa.setPilgi_test(pilgi_test);
+                gisa.setPilgi_balpyo(pilgi_balpyo);
+                gisa.setPilgi_balpyo_final(pilgi_balpyo_final);
+                gisa.setSilgi_apply(silgi_apply);
+                gisa.setSilgi_test(silgi_test);
+                gisa.setFinal_balpyo(final_balpyo);
                 JSONArray aca=temp.getJSONArray("academy(학원)");
                 ArrayList<String> academy_name=new ArrayList<>();
                 ArrayList<String> academy_address=new ArrayList<>();
@@ -98,16 +90,16 @@ public class ManageGisulData {
                     //academy_connect.add(temp3.get("jaehyu").toString());
                     academy_connect.add("no");
                 }
-                gisul.setAcademy_name(academy_name);
-                gisul.setAcademy_address(academy_address);
-                gisul.setAcademy_phone(academy_phone);
-                gisul.setAcademy_connect(academy_connect);
+                gisa.setAcademy_name(academy_name);
+                gisa.setAcademy_address(academy_address);
+                gisa.setAcademy_phone(academy_phone);
+                gisa.setAcademy_connect(academy_connect);
                 //when setting one certification, then add to gisulArrayList
-                gisulArrayList.add(gisul);
-                gisul=new Gisul();
+                gisaArrayList.add(gisa);
+                gisa=new Gisa();
             }//end of one category
-            gisul_total.add(gisulArrayList);
-            gisulArrayList=new ArrayList<>(20);
+            gisa_total.add(gisaArrayList);
+            gisaArrayList=new ArrayList<>(20);
         }
     }
 }

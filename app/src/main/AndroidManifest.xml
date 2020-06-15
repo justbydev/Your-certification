@@ -31,9 +31,11 @@
         </activity>
         <activity android:name=".MainFragment"/>
         <activity android:name=".home.button.Bigcategory"/>
+        <activity android:name=".home.button.Bigcategory_guitar"/>
         <activity android:name=".DaumLocationActivity"/>
         <activity android:name=".home.button.certification.EachCertificate"/>
         <activity android:name=".home.button.certification.CertificateDetail"/>
+        <activity android:name=".home.button.certification.CertificateGuitarDetail"/>
         <activity android:name=".home.button.certification.CertificateSchedule"/>
         <activity android:name=".home.button.academy.CertificateAcademy"/>
         <activity android:name=".login.LoginActivity"/>

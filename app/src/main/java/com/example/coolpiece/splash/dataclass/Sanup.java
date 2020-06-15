@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-public class Gineongsa implements Parcelable {
+public class Sanup implements Parcelable {
     String name;
     String intro;
     String association;
@@ -25,11 +25,8 @@ public class Gineongsa implements Parcelable {
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
     ArrayList<String> academy_connect;
-    ArrayList<Double> lat;
-    ArrayList<Double> lon;
-    String online;
 
-    protected Gineongsa(Parcel in) {
+    protected Sanup(Parcel in) {
         name = in.readString();
         intro = in.readString();
         association = in.readString();
@@ -41,30 +38,29 @@ public class Gineongsa implements Parcelable {
         pilgi_apply = in.createStringArrayList();
         pilgi_test = in.createStringArrayList();
         pilgi_balpyo = in.createStringArrayList();
-        pilgi_balpyo_final=in.createStringArrayList();
+        pilgi_balpyo_final = in.createStringArrayList();
         silgi_apply = in.createStringArrayList();
         silgi_test = in.createStringArrayList();
         final_balpyo = in.createStringArrayList();
         academy_name = in.createStringArrayList();
         academy_address = in.createStringArrayList();
         academy_phone = in.createStringArrayList();
-        academy_connect=in.createStringArrayList();
-        online = in.readString();
+        academy_connect = in.createStringArrayList();
     }
 
-    public static final Creator<Gineongsa> CREATOR = new Creator<Gineongsa>() {
+    public static final Creator<Sanup> CREATOR = new Creator<Sanup>() {
         @Override
-        public Gineongsa createFromParcel(Parcel in) {
-            return new Gineongsa(in);
+        public Sanup createFromParcel(Parcel in) {
+            return new Sanup(in);
         }
 
         @Override
-        public Gineongsa[] newArray(int size) {
-            return new Gineongsa[size];
+        public Sanup[] newArray(int size) {
+            return new Sanup[size];
         }
     };
 
-    public Gineongsa(){}
+    public Sanup(){}
     public String getName() {
         return name;
     }
@@ -217,30 +213,6 @@ public class Gineongsa implements Parcelable {
         this.academy_connect = academy_connect;
     }
 
-    public String getOnline() {
-        return online;
-    }
-
-    public void setOnline(String online) {
-        this.online = online;
-    }
-
-    public ArrayList<Double> getLat() {
-        return lat;
-    }
-
-    public void setLat(ArrayList<Double> lat) {
-        this.lat = lat;
-    }
-
-    public ArrayList<Double> getLon() {
-        return lon;
-    }
-
-    public void setLon(ArrayList<Double> lon) {
-        this.lon = lon;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -267,6 +239,5 @@ public class Gineongsa implements Parcelable {
         dest.writeStringList(academy_address);
         dest.writeStringList(academy_phone);
         dest.writeStringList(academy_connect);
-        dest.writeString(online);
     }
 }

@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coolpiece.home.button.Bigcategory_guitar;
 import com.example.coolpiece.home.button.certification.EachCertificate;
 import com.example.coolpiece.home.location.GpsTracker;
 import com.example.coolpiece.splash.manageclass.ManageGineongData;
@@ -50,7 +51,6 @@ public class HomeActivity extends Fragment {
     Button gisa;
     Button gisulsa;
     Button sanup;
-    Button jido;
     Button guitar;
     TextView mylocation;
     TextView melocate;
@@ -92,7 +92,6 @@ public class HomeActivity extends Fragment {
         gisa=(Button)v.findViewById(R.id.gisa);
         gisulsa=(Button)v.findViewById(R.id.gisulsa);
         sanup=(Button)v.findViewById(R.id.sanup);
-        jido=(Button)v.findViewById(R.id.jido);
         guitar=(Button)v.findViewById(R.id.guitar);
 
         searchedittext=(EditText)v.findViewById(R.id.searchedittext);
@@ -107,7 +106,6 @@ public class HomeActivity extends Fragment {
         gisa.setOnClickListener(buttonClickListener);
         gisulsa.setOnClickListener(buttonClickListener);
         sanup.setOnClickListener(buttonClickListener);
-        jido.setOnClickListener(buttonClickListener);
         guitar.setOnClickListener(buttonClickListener);
 
         search_recycler.setHasFixedSize(true);
@@ -245,14 +243,9 @@ public class HomeActivity extends Fragment {
                     intent.putExtra("CA", "산업기사");
                     startActivity(intent);
                     return;
-                case R.id.jido:
-                    intent=new Intent(getActivity(), Bigcategory.class);
-                    intent.putExtra("CA", "지도사");
-                    startActivity(intent);
-                    return;
                 case R.id.guitar:
-                    intent=new Intent(getActivity(), Bigcategory.class);
-                    intent.putExtra("CA", "기타/취미");
+                    intent=new Intent(getActivity(), Bigcategory_guitar.class);
+                    intent.putExtra("CA", "지도사/기타/취미");
                     startActivity(intent);
                     return;
                 default:

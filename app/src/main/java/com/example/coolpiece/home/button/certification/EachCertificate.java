@@ -16,7 +16,10 @@ import com.example.coolpiece.R;
 import com.example.coolpiece.home.button.academy.AcademyAdapter;
 import com.example.coolpiece.home.button.academy.NotConnectAcademyAdapter;
 import com.example.coolpiece.splash.dataclass.Gineongsa;
+import com.example.coolpiece.splash.dataclass.Gisa;
 import com.example.coolpiece.splash.dataclass.Gisul;
+import com.example.coolpiece.splash.dataclass.Guitar;
+import com.example.coolpiece.splash.dataclass.Sanup;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,9 @@ public class EachCertificate extends AppCompatActivity {
     RecyclerView not_connect_each_academy;
     Gisul gisul;
     Gineongsa gineongsa;
+    Gisa gisa;
+    Sanup sanup;
+    Guitar guitar;
     Intent intent;
     Intent passdetailintent;
     RecyclerView.LayoutManager layoutManager;
@@ -79,7 +85,7 @@ public class EachCertificate extends AppCompatActivity {
             otherlayoutManager=new LinearLayoutManager(this);
             not_connect_each_academy.setLayoutManager(otherlayoutManager);
 
-            /*academy_name=new ArrayList<>();
+            academy_name=new ArrayList<>();
             academy_address=new ArrayList<>();
             academy_phone=new ArrayList<>();
             not_academy_name=new ArrayList<>();
@@ -96,7 +102,7 @@ public class EachCertificate extends AppCompatActivity {
                     not_academy_address.add(gisul.getAcademy_address().get(i));
                     not_academy_phone.add(gisul.getAcademy_phone().get(i));
                 }
-            }*/
+            }
             academy_name=new ArrayList<>();
             academy_name=gisul.getAcademy_name();
             academy_address=new ArrayList<>();
@@ -157,8 +163,134 @@ public class EachCertificate extends AppCompatActivity {
             passdetailintent.putExtra("detail", gineongsa);
             passdetailintent.putExtra("cat", cat);
         }
+        else if(cat.equals("기사")){
+            gisa=new Gisa();
+            gisa=intent.getParcelableExtra("certification");
+            name.setText(gisa.getName());
+
+            each_academy.setHasFixedSize(true);
+            layoutManager=new LinearLayoutManager(this);
+            each_academy.setLayoutManager(layoutManager);
+
+            not_connect_each_academy.setHasFixedSize(true);
+            otherlayoutManager=new LinearLayoutManager(this);
+            not_connect_each_academy.setLayoutManager(otherlayoutManager);
+
+            academy_name=new ArrayList<>();
+            academy_address=new ArrayList<>();
+            academy_phone=new ArrayList<>();
+            not_academy_name=new ArrayList<>();
+            not_academy_address=new ArrayList<>();
+            not_academy_phone=new ArrayList<>();
+            for(int i=0; i<gisa.getAcademy_name().size(); i++){
+                if(gisa.getAcademy_connect().get(i)=="1"){
+                    academy_name.add(gisa.getAcademy_name().get(i));
+                    academy_address.add(gisa.getAcademy_address().get(i));
+                    academy_phone.add(gisa.getAcademy_phone().get(i));
+                }
+                else{
+                    not_academy_name.add(gisa.getAcademy_name().get(i));
+                    not_academy_address.add(gisa.getAcademy_address().get(i));
+                    not_academy_phone.add(gisa.getAcademy_phone().get(i));
+                }
+            }
 
 
+            mAdapter=new AcademyAdapter(academy_name, academy_address, academy_phone);
+            each_academy.setAdapter(mAdapter);
+
+            notConnectAcademyAdapter=new NotConnectAcademyAdapter(not_academy_name, not_academy_address, not_academy_phone);
+            not_connect_each_academy.setAdapter(notConnectAcademyAdapter);
+
+            passdetailintent=new Intent(EachCertificate.this, CertificateDetail.class);
+            passdetailintent.putExtra("detail", gisa);
+            passdetailintent.putExtra("cat", cat);
+        }
+        else if(cat.equals("산업기사")){
+            sanup=new Sanup();
+            sanup=intent.getParcelableExtra("certification");
+            name.setText(sanup.getName());
+
+            each_academy.setHasFixedSize(true);
+            layoutManager=new LinearLayoutManager(this);
+            each_academy.setLayoutManager(layoutManager);
+
+            not_connect_each_academy.setHasFixedSize(true);
+            otherlayoutManager=new LinearLayoutManager(this);
+            not_connect_each_academy.setLayoutManager(otherlayoutManager);
+
+            academy_name=new ArrayList<>();
+            academy_address=new ArrayList<>();
+            academy_phone=new ArrayList<>();
+            not_academy_name=new ArrayList<>();
+            not_academy_address=new ArrayList<>();
+            not_academy_phone=new ArrayList<>();
+            for(int i=0; i<sanup.getAcademy_name().size(); i++){
+                if(sanup.getAcademy_connect().get(i)=="1"){
+                    academy_name.add(sanup.getAcademy_name().get(i));
+                    academy_address.add(sanup.getAcademy_address().get(i));
+                    academy_phone.add(sanup.getAcademy_phone().get(i));
+                }
+                else{
+                    not_academy_name.add(sanup.getAcademy_name().get(i));
+                    not_academy_address.add(sanup.getAcademy_address().get(i));
+                    not_academy_phone.add(sanup.getAcademy_phone().get(i));
+                }
+            }
+
+
+            mAdapter=new AcademyAdapter(academy_name, academy_address, academy_phone);
+            each_academy.setAdapter(mAdapter);
+
+            notConnectAcademyAdapter=new NotConnectAcademyAdapter(not_academy_name, not_academy_address, not_academy_phone);
+            not_connect_each_academy.setAdapter(notConnectAcademyAdapter);
+
+            passdetailintent=new Intent(EachCertificate.this, CertificateDetail.class);
+            passdetailintent.putExtra("detail", sanup);
+            passdetailintent.putExtra("cat", cat);
+        }
+        else if(cat.equals("지도사/기타/취미")){
+            guitar=new Guitar();
+            guitar=intent.getParcelableExtra("certification");
+            name.setText(guitar.getName());
+
+            each_academy.setHasFixedSize(true);
+            layoutManager=new LinearLayoutManager(this);
+            each_academy.setLayoutManager(layoutManager);
+
+            not_connect_each_academy.setHasFixedSize(true);
+            otherlayoutManager=new LinearLayoutManager(this);
+            not_connect_each_academy.setLayoutManager(otherlayoutManager);
+
+            academy_name=new ArrayList<>();
+            academy_address=new ArrayList<>();
+            academy_phone=new ArrayList<>();
+            not_academy_name=new ArrayList<>();
+            not_academy_address=new ArrayList<>();
+            not_academy_phone=new ArrayList<>();
+            for(int i=0; i<guitar.getAcademy_name().size(); i++){
+                if(guitar.getAcademy_connect().get(i)=="1"){
+                    academy_name.add(guitar.getAcademy_name().get(i));
+                    academy_address.add(guitar.getAcademy_address().get(i));
+                    academy_phone.add(guitar.getAcademy_phone().get(i));
+                }
+                else{
+                    not_academy_name.add(guitar.getAcademy_name().get(i));
+                    not_academy_address.add(guitar.getAcademy_address().get(i));
+                    not_academy_phone.add(guitar.getAcademy_phone().get(i));
+                }
+            }
+
+            mAdapter=new AcademyAdapter(academy_name, academy_address, academy_phone);
+            each_academy.setAdapter(mAdapter);
+
+            notConnectAcademyAdapter=new NotConnectAcademyAdapter(not_academy_name, not_academy_address, not_academy_phone);
+            not_connect_each_academy.setAdapter(notConnectAcademyAdapter);
+
+            passdetailintent=new Intent(EachCertificate.this, CertificateGuitarDetail.class);
+            passdetailintent.putExtra("detail", guitar);
+            passdetailintent.putExtra("cat", cat);
+        }
     }
 
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뒤로가기"
+        android:textSize="20sp"
+        android:clickable="true"/>
+
+    <TextView
+        android:id="@+id/bigcategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="큰 카테고리 이름"
+        android:textSize="40sp"></TextView>
+    <Spinner
+        android:id="@+id/small_category_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/guitar_category"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20sp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/certificate_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

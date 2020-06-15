@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="guitar_category">
+        <item>강사과정</item>
+        <item>커피과정</item>
+        <item>산업과정</item>
+        <item>심리상담과정</item>
+        <item>전문가과정</item>
+        <item>방과후과정</item>
+        <item>공부과정</item>
+        <item>항공과정</item>
+        <item>아동과정</item>
+        <item>병원과정</item>
+        <item>실버과정</item>
+        <item>안전과정</item>
+        <item>인문과정</item>
+        <item>IT과정</item>
+        <item>부동산과정</item>
+        <item>반려과정</item>
+        <item>취업과정</item>
+    </string-array>
+</resources>

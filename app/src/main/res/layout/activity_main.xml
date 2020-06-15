@@ -81,15 +81,10 @@
                             android:layout_height="wrap_content"
                             android:text="산업기사"/>
                         <Button
-                            android:id="@+id/jido"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="지도사"/>
-                        <Button
                             android:id="@+id/guitar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="기타/취미"/>
+                            android:text="지도사/기타/취미"/>
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/grid_recyclerview"

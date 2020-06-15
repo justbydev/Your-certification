@@ -1,8 +1,12 @@
 package com.example.coolpiece.splash.dataclass;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Gisa {
+public class Gisa implements Parcelable {
+    String name;
     String intro;
     String association;
     String major;
@@ -13,12 +17,56 @@ public class Gisa {
     ArrayList<String> pilgi_apply;
     ArrayList<String> pilgi_test;
     ArrayList<String> pilgi_balpyo;
+    ArrayList<String> pilgi_balpyo_final;
     ArrayList<String> silgi_apply;
     ArrayList<String> silgi_test;
     ArrayList<String> final_balpyo;
     ArrayList<String> academy_name;
     ArrayList<String> academy_address;
     ArrayList<String> academy_phone;
+    ArrayList<String> academy_connect;
+
+    protected Gisa(Parcel in) {
+        name = in.readString();
+        intro = in.readString();
+        association = in.readString();
+        major = in.readString();
+        training_center = in.readString();
+        test_subject = in.readString();
+        test_method = in.readString();
+        cut_line = in.readString();
+        pilgi_apply = in.createStringArrayList();
+        pilgi_test = in.createStringArrayList();
+        pilgi_balpyo = in.createStringArrayList();
+        pilgi_balpyo_final = in.createStringArrayList();
+        silgi_apply = in.createStringArrayList();
+        silgi_test = in.createStringArrayList();
+        final_balpyo = in.createStringArrayList();
+        academy_name = in.createStringArrayList();
+        academy_address = in.createStringArrayList();
+        academy_phone = in.createStringArrayList();
+        academy_connect = in.createStringArrayList();
+    }
+
+    public static final Creator<Gisa> CREATOR = new Creator<Gisa>() {
+        @Override
+        public Gisa createFromParcel(Parcel in) {
+            return new Gisa(in);
+        }
+
+        @Override
+        public Gisa[] newArray(int size) {
+            return new Gisa[size];
+        }
+    };
+    public Gisa(){}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getIntro() {
         return intro;
@@ -124,6 +172,22 @@ public class Gisa {
         this.final_balpyo = final_balpyo;
     }
 
+    public ArrayList<String> getPilgi_balpyo_final() {
+        return pilgi_balpyo_final;
+    }
+
+    public void setPilgi_balpyo_final(ArrayList<String> pilgi_balpyo_final) {
+        this.pilgi_balpyo_final = pilgi_balpyo_final;
+    }
+
+    public ArrayList<String> getAcademy_connect() {
+        return academy_connect;
+    }
+
+    public void setAcademy_connect(ArrayList<String> academy_connect) {
+        this.academy_connect = academy_connect;
+    }
+
     public ArrayList<String> getAcademy_name() {
         return academy_name;
     }
@@ -146,5 +210,33 @@ public class Gisa {
 
     public void setAcademy_phone(ArrayList<String> academy_phone) {
         this.academy_phone = academy_phone;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(intro);
+        dest.writeString(association);
+        dest.writeString(major);
+        dest.writeString(training_center);
+        dest.writeString(test_subject);
+        dest.writeString(test_method);
+        dest.writeString(cut_line);
+        dest.writeStringList(pilgi_apply);
+        dest.writeStringList(pilgi_test);
+        dest.writeStringList(pilgi_balpyo);
+        dest.writeStringList(pilgi_balpyo_final);
+        dest.writeStringList(silgi_apply);
+        dest.writeStringList(silgi_test);
+        dest.writeStringList(final_balpyo);
+        dest.writeStringList(academy_name);
+        dest.writeStringList(academy_address);
+        dest.writeStringList(academy_phone);
+        dest.writeStringList(academy_connect);
     }
 }
