@@ -10,17 +10,25 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coolpiece.QA.QAActivity;
+import com.example.coolpiece.board.BoardActivity;
 import com.example.coolpiece.login.LoginActivity;
 import com.example.coolpiece.mypage.MypageActivity;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.w3c.dom.Text;
 
 public class MainFragment extends AppCompatActivity {
 
     HomeActivity homeActivity=null;
     MypageActivity mypageActivity=null;
+    BoardActivity boardActivity=null;
+    QAActivity qaActivity=null;
     TextView menu_home;
     TextView menu_mypage;
-    TextView menu_log;
+    TextView menu_board;
+    TextView menu_qa;
+    TextView logbutton;
     FirebaseAuth firebaseAuth;
 
 
@@ -32,18 +40,22 @@ public class MainFragment extends AppCompatActivity {
 
         menu_home=(TextView)findViewById(R.id.menu_home);
         menu_mypage=(TextView)findViewById(R.id.menu_mypage);
-        menu_log=(TextView)findViewById(R.id.menu_log);
+        menu_board=(TextView)findViewById(R.id.menu_board);
+        menu_qa=(TextView)findViewById(R.id.menu_QA);
+        logbutton=(TextView)findViewById(R.id.logbutton);
 
         menu_home.setOnClickListener(buttononclicklistener);
         menu_mypage.setOnClickListener(buttononclicklistener);
-        menu_log.setOnClickListener(buttononclicklistener);
+        menu_board.setOnClickListener(buttononclicklistener);
+        menu_qa.setOnClickListener(buttononclicklistener);
+        logbutton.setOnClickListener(buttononclicklistener);
 
         firebaseAuth=FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser()!=null){
-            menu_log.setText("로그아웃");
+            logbutton.setText("로그아웃");
         }
         else{
-            menu_log.setText("로그인");
+            logbutton.setText("로그인");
         }
 
         homeActivity=new HomeActivity();
@@ -56,12 +68,12 @@ public class MainFragment extends AppCompatActivity {
         public void onClick(View v) {
             int id=v.getId();
             switch(id){
-                case R.id.menu_log:
-                    if(menu_log.getText().equals("로그인")){
+                case R.id.logbutton:
+                    if(logbutton.getText().equals("로그인")){
                         Intent intent=new Intent(MainFragment.this, LoginActivity.class);
                         startActivity(intent);
                     }
-                    else if(menu_log.getText().equals("로그아웃")){
+                    else if(logbutton.getText().equals("로그아웃")){
                         firebaseAuth.signOut();
                         Intent intent=new Intent(MainFragment.this, MainFragment.class);
                         finish();
@@ -79,6 +91,48 @@ public class MainFragment extends AppCompatActivity {
                     if(mypageActivity!=null){
                         getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
                     }
+                    if(boardActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                    }
+                    if(qaActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
+                    }
+                    return;
+                case R.id.menu_board:
+                    if(boardActivity==null){
+                        boardActivity=new BoardActivity();
+                        getSupportFragmentManager().beginTransaction().add(R.id.container, boardActivity).commit();
+                    }
+                    else{
+                        getSupportFragmentManager().beginTransaction().show(boardActivity).commit();
+                    }
+                    if(homeActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
+                    }
+                    if(mypageActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                    }
+                    if(qaActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
+                    }
+                    return;
+                case R.id.menu_QA:
+                    if(qaActivity==null){
+                        qaActivity=new QAActivity();
+                        getSupportFragmentManager().beginTransaction().add(R.id.container, qaActivity).commit();
+                    }
+                    else{
+                        getSupportFragmentManager().beginTransaction().show(qaActivity).commit();
+                    }
+                    if(homeActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
+                    }
+                    if(mypageActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                    }
+                    if(boardActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                    }
                     return;
                 case R.id.menu_mypage:
                     if(firebaseAuth.getCurrentUser()!=null){
@@ -91,6 +145,12 @@ public class MainFragment extends AppCompatActivity {
                         }
                         if(homeActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
+                        }
+                        if(boardActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                        }
+                        if(qaActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
                         }
                     }
                     else{
@@ -116,6 +176,12 @@ public class MainFragment extends AppCompatActivity {
                                         }
                                         if(mypageActivity!=null){
                                             getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                                        }
+                                        if(boardActivity!=null){
+                                            getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                                        }
+                                        if(qaActivity!=null){
+                                            getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
                                         }
                                         dialog.cancel();
                                     }

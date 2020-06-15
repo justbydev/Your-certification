@@ -27,6 +27,8 @@ public class MypageActivity extends Fragment {
         mypage_tab_layout=(TabLayout)v.findViewById(R.id.mypage_tab_layout);
         mypage_tab_layout.addTab(mypage_tab_layout.newTab().setText("달력"));
         mypage_tab_layout.addTab(mypage_tab_layout.newTab().setText("내일정"));
+        mypage_tab_layout.addTab(mypage_tab_layout.newTab().setText("명함"));
+        mypage_tab_layout.addTab(mypage_tab_layout.newTab().setText("챌린지"));
 
         mypageContentsPagerAdapter=new MypageContentsPagerAdapter(getChildFragmentManager(), mypage_tab_layout.getTabCount());
         mypage_pager_content.setAdapter(mypageContentsPagerAdapter);
