@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -90,6 +88,7 @@
                         android:id="@+id/grid_recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
+
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/search_recycler"
@@ -97,5 +96,5 @@
                     android:layout_height="wrap_content"/>
             </RelativeLayout>
         </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>

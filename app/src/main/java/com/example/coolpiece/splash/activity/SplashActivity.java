@@ -26,11 +26,11 @@ import java.net.URL;
 
 public class SplashActivity extends AppCompatActivity {
     /****for json data url from firebase storage****/
-    String []url=new String[]{"https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgisulsa.json?alt=media&token=f79b791a-b678-4775-994f-6e337f0e0248",
-            "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgineungsa.json?alt=media&token=1e93d4c6-205d-4e32-ad8c-f700106f1c8b",
-    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgisa.json?alt=media&token=e85e11d2-cfc7-4d55-a592-3544d5bb3373",
-    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fsanupgisa.json?alt=media&token=dd25d613-2561-44c4-964c-8a841b145b35",
-    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fdata.json?alt=media&token=dcc2aab5-6953-4ba4-be20-a047966edc0f"};
+    String []url=new String[]{"https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgisulsa.json?alt=media&token=45abe4b7-470e-4761-a355-3fa486dff7fe",
+            "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgineungs.json?alt=media&token=a6048df9-9b2a-4ddb-b907-c4e01ff75b9c",
+    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgisa.json?alt=media&token=e529244d-d5ce-4015-ac99-7417c366486d",
+    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fsanupgisa.json?alt=media&token=e1e7ab93-421b-42da-972b-3c1dab0cd9ad",
+    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fdata.json?alt=media&token=b6fcd08f-ff61-4917-b0cf-2fbc63f34918"};
     public static Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
