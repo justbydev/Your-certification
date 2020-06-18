@@ -54,6 +54,13 @@ public class Bigcategory extends AppCompatActivity {
         certificate_recycler=(RecyclerView)findViewById(R.id.certificate_recycler);
         bigcategory=(TextView)findViewById(R.id.bigcategory);
 
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         smallcategory=(Spinner)findViewById(R.id.small_category_spinner);
         intent=getIntent();
         big=intent.getStringExtra("CA");

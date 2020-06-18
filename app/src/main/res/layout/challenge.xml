@@ -1,10 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3">
     <TextView
-        android:id="@+id/challengetest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="여기는 챌린지를 위한 fragment"/>
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="25sp"
+        android:layout_marginTop="10sp"
+        android:text="나의 도전과제"
+        android:textSize="25sp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mychanllenge_recyclerview"
+        android:layout_margin="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.3"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="도전과제 선택"
+        android:layout_marginLeft="25sp"
+        android:layout_marginRight="25sp"
+        android:textSize="25sp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20sp"
+        android:layout_weight="1.3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/challenge_80"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="출석률 80% 도전"/>
+            <Button
+                android:id="@+id/challenge_90"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="출석률 90% 도전"/>
+            <Button
+                android:id="@+id/challenge_100"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="출석률 100% 도전"/>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

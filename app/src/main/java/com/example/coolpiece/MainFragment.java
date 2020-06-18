@@ -117,22 +117,28 @@ public class MainFragment extends AppCompatActivity {
                     }
                     return;
                 case R.id.menu_QA:
-                    if(qaActivity==null){
-                        qaActivity=new QAActivity();
-                        getSupportFragmentManager().beginTransaction().add(R.id.container, qaActivity).commit();
+                    if(firebaseAuth.getCurrentUser()!=null){
+                        if(qaActivity==null){
+                            qaActivity=new QAActivity();
+                            getSupportFragmentManager().beginTransaction().add(R.id.container, qaActivity).commit();
+                        }
+                        else{
+                            getSupportFragmentManager().beginTransaction().show(qaActivity).commit();
+                        }
+                        if(homeActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
+                        }
+                        if(mypageActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                        }
+                        if(boardActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                        }
                     }
                     else{
-                        getSupportFragmentManager().beginTransaction().show(qaActivity).commit();
+                        changetologinpage();
                     }
-                    if(homeActivity!=null){
-                        getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
-                    }
-                    if(mypageActivity!=null){
-                        getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
-                    }
-                    if(boardActivity!=null){
-                        getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
-                    }
+
                     return;
                 case R.id.menu_mypage:
                     if(firebaseAuth.getCurrentUser()!=null){
@@ -154,40 +160,7 @@ public class MainFragment extends AppCompatActivity {
                         }
                     }
                     else{
-                        AlertDialog.Builder builder= new AlertDialog.Builder(MainFragment.this);
-                        builder.setTitle("로그인이 필요합니다.")
-                                .setMessage("로그인 화면으로 이동하시겠습니까?")
-                                .setPositiveButton("네", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent=new Intent(MainFragment.this, LoginActivity.class);
-                                        startActivity(intent);
-                                    }
-                                })
-                                .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        if(homeActivity==null){
-                                            homeActivity=new HomeActivity();
-                                            getSupportFragmentManager().beginTransaction().add(R.id.container, homeActivity).commit();
-                                        }
-                                        else{
-                                            getSupportFragmentManager().beginTransaction().show(homeActivity).commit();
-                                        }
-                                        if(mypageActivity!=null){
-                                            getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
-                                        }
-                                        if(boardActivity!=null){
-                                            getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
-                                        }
-                                        if(qaActivity!=null){
-                                            getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
-                                        }
-                                        dialog.cancel();
-                                    }
-                                });
-                        AlertDialog alertDialog=builder.create();
-                        alertDialog.show();
+                        changetologinpage();
                     }
 
                     return;
@@ -196,4 +169,40 @@ public class MainFragment extends AppCompatActivity {
             }
         }
     };
+    public void changetologinpage(){
+        AlertDialog.Builder builder= new AlertDialog.Builder(MainFragment.this);
+        builder.setTitle("로그인이 필요합니다.")
+                .setMessage("로그인 화면으로 이동하시겠습니까?")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent=new Intent(MainFragment.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(homeActivity==null){
+                            homeActivity=new HomeActivity();
+                            getSupportFragmentManager().beginTransaction().add(R.id.container, homeActivity).commit();
+                        }
+                        else{
+                            getSupportFragmentManager().beginTransaction().show(homeActivity).commit();
+                        }
+                        if(mypageActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                        }
+                        if(boardActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                        }
+                        if(qaActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
+                        }
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+    }
 }

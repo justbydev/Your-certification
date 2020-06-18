@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="day">
+        <item>14일</item>
+        <item>21일</item>
+        <item>28일</item>
+        <item>56일</item>
+        <item>84일</item>
+        <item>100일</item>
+    </string-array>
+</resources>

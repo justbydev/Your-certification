@@ -41,6 +41,11 @@
         <activity android:name=".login.LoginActivity"/>
         <activity android:name=".login.SignupActivity"/>
         <activity android:name=".home.button.academy.NotConnectCertificateAcademy"/>
+        <activity android:name=".QA.Newqa"/>
+        <activity android:name=".QA.QAwithanswer"/>
+        <activity android:name=".mypage.challenge.NewChallenge"/>
+        <activity android:name=".mypage.challenge.Challengedetail"/>
+        <activity android:name=".mypage.challenge.Challengeauthen"/>
     </application>
 
 </manifest>

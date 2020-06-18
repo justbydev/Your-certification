@@ -4,13 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <Button
-        android:id="@+id/questionbutton"
+        android:id="@+id/final_auth_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="질문하기"
-        android:textSize="20sp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/questionlist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:text="인증하기"/>
 </LinearLayout>
