@@ -25,6 +25,7 @@ import java.util.Date;
 public class Challengedetail extends AppCompatActivity {
     TextView challengetitle;
     TextView successday;
+    TextView success_percent;
     RecyclerView check_recyclerview;
     Button authen_button;
     Intent intent;
@@ -35,6 +36,7 @@ public class Challengedetail extends AppCompatActivity {
     String startdate;
     ArrayList<String> day_check;
     int okday=0;
+    int percentage=0;
 
     String title;
     DatabaseReference databaseReference;
@@ -48,6 +50,7 @@ public class Challengedetail extends AppCompatActivity {
 
         challengetitle=(TextView)findViewById(R.id.challenge_title);
         successday=(TextView)findViewById(R.id.successday);
+        success_percent=(TextView)findViewById(R.id.success_percent);
         check_recyclerview=(RecyclerView)findViewById(R.id.check_recyclerview);
         authen_button=(Button)findViewById(R.id.authen_button);
 
@@ -68,6 +71,11 @@ public class Challengedetail extends AppCompatActivity {
 
         challengetitle.setText(certification+" 출석률 "+attend+"%");
         successday.setText("달성일: "+Integer.toString(okday)+"/"+day);
+        System.out.println(day_check.size());
+        System.out.println(okday/day_check.size());
+        System.out.println((okday/day_check.size())*100);
+        percentage=Math.round((okday*100)/day_check.size());
+        success_percent.setText("달성률: "+Integer.toString(percentage)+"%");
 
         check_recyclerview.setHasFixedSize(true);
         layoutManager=new GridLayoutManager(this, 7);
