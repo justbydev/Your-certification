@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true">
         <meta-data
             android:name="com.google.android.actions"
-            android:resource="@xml/Card" />
+            android:resource="@xml/card" />
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="zldmnpnv8d" />
