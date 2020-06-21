@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +24,9 @@ import java.util.Date;
 
 public class Challengeauthen extends AppCompatActivity {
     Button final_auth_button;
+    ImageView certi_image;
+    TextView picture_text;
+    RadioButton board_upload_access;
     String certification;
     String day;
     String point;
@@ -37,6 +43,9 @@ public class Challengeauthen extends AppCompatActivity {
         setContentView(R.layout.challenge_authen);
 
         final_auth_button=(Button)findViewById(R.id.final_auth_button);
+        certi_image=(ImageView)findViewById(R.id.certi_image);
+        picture_text=(TextView)findViewById(R.id.picture_text);
+        board_upload_access=(RadioButton)findViewById(R.id.board_upload_access);
 
         Intent intent=getIntent();
         certification=intent.getStringExtra("certification");
