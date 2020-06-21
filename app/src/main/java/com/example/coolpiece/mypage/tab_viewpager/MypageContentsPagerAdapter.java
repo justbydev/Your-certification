@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.coolpiece.mypage.calendar.CalendarFragment;
+import com.example.coolpiece.mypage.card.CardFragment;
 import com.example.coolpiece.mypage.challenge.ChallengeFragment;
-import com.example.coolpiece.mypage.mycard.MycardFragment;
 import com.example.coolpiece.mypage.schedule.MyscheduleFragment;
 
 public class MypageContentsPagerAdapter extends FragmentStatePagerAdapter {
@@ -28,8 +28,8 @@ public class MypageContentsPagerAdapter extends FragmentStatePagerAdapter {
                 MyscheduleFragment myscheduleFragment=new MyscheduleFragment();
                 return myscheduleFragment;
             case 2:
-                MycardFragment mycardFragment=new MycardFragment();
-                return mycardFragment;
+                CardFragment cardFragment=new CardFragment();
+                return cardFragment;
             case 3:
                 ChallengeFragment challengeFragment=new ChallengeFragment();
                 return challengeFragment;
