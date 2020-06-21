@@ -2,26 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.coolpiece">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:hardwareAccelerated="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/Card" />
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="zldmnpnv8d" />
-        <uses-library android:name="com.google.android.maps"/>
-        <activity android:name=".splash.activity.SplashActivity"
+
+        <uses-library android:name="com.google.android.maps" />
+
+        <activity
+            android:name=".splash.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,23 +35,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainFragment"/>
-        <activity android:name=".home.button.Bigcategory"/>
-        <activity android:name=".home.button.Bigcategory_guitar"/>
-        <activity android:name=".DaumLocationActivity"/>
-        <activity android:name=".home.button.certification.EachCertificate"/>
-        <activity android:name=".home.button.certification.CertificateDetail"/>
-        <activity android:name=".home.button.certification.CertificateGuitarDetail"/>
-        <activity android:name=".home.button.certification.CertificateSchedule"/>
-        <activity android:name=".home.button.academy.CertificateAcademy"/>
-        <activity android:name=".login.LoginActivity"/>
-        <activity android:name=".login.SignupActivity"/>
-        <activity android:name=".home.button.academy.NotConnectCertificateAcademy"/>
-        <activity android:name=".QA.Newqa"/>
-        <activity android:name=".QA.QAwithanswer"/>
-        <activity android:name=".mypage.challenge.NewChallenge"/>
-        <activity android:name=".mypage.challenge.Challengedetail"/>
-        <activity android:name=".mypage.challenge.Challengeauthen"/>
+        <activity android:name=".MainFragment" />
+        <activity android:name=".home.button.Bigcategory" />
+        <activity android:name=".home.button.Bigcategory_guitar" />
+        <activity android:name=".DaumLocationActivity" />
+        <activity android:name=".home.button.certification.EachCertificate" />
+        <activity android:name=".home.button.certification.CertificateDetail" />
+        <activity android:name=".home.button.certification.CertificateGuitarDetail" />
+        <activity android:name=".home.button.certification.CertificateSchedule" />
+        <activity android:name=".home.button.academy.CertificateAcademy" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.SignupActivity" />
+        <activity android:name=".home.button.academy.NotConnectCertificateAcademy" />
+        <activity android:name=".QA.Newqa" />
+        <activity android:name=".QA.QAwithanswer" />
+        <activity android:name=".mypage.challenge.NewChallenge" />
+        <activity android:name=".mypage.challenge.Challengedetail" />
+        <activity android:name=".mypage.challenge.Challengeauthen" />
     </application>
 
 </manifest>
