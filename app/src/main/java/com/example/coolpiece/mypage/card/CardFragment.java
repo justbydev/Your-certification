@@ -38,7 +38,7 @@ public class CardFragment extends Fragment{
     public TextView imoticon_list;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.certificate_register, container, false);
+        View v=inflater.inflate(R.layout.card, container, false);
 
         certi_list=(TextView)v.findViewById(R.id.certi_list);
         font_list=(TextView)v.findViewById(R.id.font_list);
