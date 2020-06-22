@@ -9,6 +9,7 @@ import com.example.coolpiece.mypage.calendar.CalendarFragment;
 import com.example.coolpiece.mypage.card.CardFragment;
 import com.example.coolpiece.mypage.challenge.ChallengeFragment;
 import com.example.coolpiece.mypage.schedule.MyscheduleFragment;
+import com.example.coolpiece.mypage.authen.AuthenFragment;
 
 public class MypageContentsPagerAdapter extends FragmentStatePagerAdapter {
     int pagecount;
@@ -33,6 +34,9 @@ public class MypageContentsPagerAdapter extends FragmentStatePagerAdapter {
             case 3:
                 ChallengeFragment challengeFragment=new ChallengeFragment();
                 return challengeFragment;
+            case 4:
+                AuthenFragment authenFragment = new AuthenFragment();
+                return authenFragment;
             default:
                 return null;
         }
