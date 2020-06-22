@@ -33,18 +33,42 @@ import java.util.Date;
 
 public class CardFragment extends Fragment{
 
-    FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-    DatabaseReference databaseReference;
-    DatabaseReference scheduleReference;
-    @Nullable
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-        String temp=firebaseUser.getEmail().toString();
-        String name=temp.replace('.', '-');
-        databaseReference= FirebaseDatabase.getInstance().getReference("Card").child(name);
+    public TextView certi_list;
+    public TextView font_list;
+    public TextView imoticon_list;
 
-        return null;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v=inflater.inflate(R.layout.certificate_register, container, false);
+
+        certi_list=(TextView)v.findViewById(R.id.certi_list);
+        font_list=(TextView)v.findViewById(R.id.font_list);
+        imoticon_list=(TextView)v.findViewById(R.id.imoticon_list);
+
+        certi_list.setOnClickListener(buttononclicklistener);
+        font_list.setOnClickListener(buttononclicklistener);
+        imoticon_list.setOnClickListener(buttononclicklistener);
+
+
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
+    private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id=v.getId();
+            switch(id) {
+                case R.id.certi_list:
+                    //do
+                    break;
+                case R.id.font_list:
+                    //do
+                    break;
+                case R.id.imoticon_list:
+                    //do
+                    break;
+                default:break;
+            }
+        }
+
+
+    };
 }
