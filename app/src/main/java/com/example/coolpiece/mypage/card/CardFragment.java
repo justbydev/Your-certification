@@ -48,8 +48,7 @@ public class CardFragment extends Fragment{
         font_list.setOnClickListener(buttononclicklistener);
         imoticon_list.setOnClickListener(buttononclicklistener);
 
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return v;
     }
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
         @Override
