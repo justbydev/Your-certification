@@ -39,7 +39,7 @@ public class AuthenFragment extends Fragment {
 
         buttonCertificate = (Button)v.findViewById(R.id.buttonCertificate);
         return v;
-//        return super.onCreateView(inflater, container, savedInstanceState);
+
     }
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
         @Override
