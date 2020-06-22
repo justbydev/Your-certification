@@ -38,8 +38,8 @@ public class AuthenFragment extends Fragment {
         certificate_institution = (EditText)v.findViewById(R.id.certificate_institution);
 
         buttonCertificate = (Button)v.findViewById(R.id.buttonCertificate);
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return v;
+//        return super.onCreateView(inflater, container, savedInstanceState);
     }
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
         @Override
