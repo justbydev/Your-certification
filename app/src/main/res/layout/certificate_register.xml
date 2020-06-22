@@ -3,59 +3,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
-        android:textSize="23sp"
-        android:textColor="@color/colorAccent"
-        android:text="자격증등록" />
 
-    <EditText
-        android:id="@+id/certficate_name"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10sp"
-        android:hint="자격증을 입력해주세요"
-        android:singleLine="true" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <EditText
-        android:id="@+id/certificate_serial_num"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:layout_gravity="center_horizontal"
-        android:hint="자격증번호를 입력해주세요"
-        android:singleLine="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/birthday"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:layout_gravity="center_horizontal"
-        android:hint="생년월일(YYYY-MM-DD)"
-        android:inputType="text|date" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50sp"
+                android:text="자격증등록"
+                android:textColor="@color/colorAccent"
+                android:textSize="23sp" />
 
-    <EditText
-        android:id="@+id/certificate_date"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10sp"
-        android:hint="발급날짜(YYYY-MM-DD)"
-        android:inputType="text|date" />
+            <EditText
+                android:id="@+id/certificate_name"
+                android:layout_width="250sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10sp"
+                android:hint="자격증을 입력해주세요"
+                android:singleLine="true" />
 
-    <EditText
-        android:id="@+id/certificate_institution"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10sp"
-        android:hint="발급기관을 입력해주세요"/>
+            <EditText
+                android:id="@+id/certificate_serial_num"
+                android:layout_width="250sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10sp"
+                android:hint="자격증번호를 입력해주세요"
+                android:singleLine="true" />
 
+            <EditText
+                android:id="@+id/birthday"
+                android:layout_width="250sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10sp"
+                android:hint="생년월일(YYYY-MM-DD)"
+                android:inputType="text|date" />
+
+            <EditText
+                android:id="@+id/certificate_date"
+                android:layout_width="250sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10sp"
+                android:hint="발급날짜(YYYY-MM-DD)"
+                android:inputType="text|date" />
+
+            <EditText
+                android:id="@+id/certificate_institution"
+                android:layout_width="250sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10sp"
+                android:hint="발급기관을 입력해주세요" />
+        </LinearLayout>
+    </ScrollView>
     <Button
         android:id="@+id/buttonCertificate"
         android:layout_width="200sp"
@@ -63,6 +75,7 @@
         android:layout_margin="15sp"
         android:layout_gravity="center_horizontal"
         android:text="인증" />
+
 </LinearLayout>
 
 
