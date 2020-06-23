@@ -67,6 +67,7 @@ public class SignupActivity extends AppCompatActivity {
         tologin.setOnClickListener(buttononclicklistener);
 
         firebaseAuth=FirebaseAuth.getInstance();
+
         progressDialog=new ProgressDialog(this);
 
 
