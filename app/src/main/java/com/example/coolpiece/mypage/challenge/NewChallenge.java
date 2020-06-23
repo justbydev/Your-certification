@@ -67,7 +67,7 @@ public class NewChallenge extends AppCompatActivity {
         attend=intent.getStringExtra("attend");
 
         arrayAdapter=new ArrayAdapter(
-                getApplicationContext(),
+                NewChallenge.this,
                 android.R.layout.simple_dropdown_item_1line,
                 gineonglist
         );
@@ -81,7 +81,7 @@ public class NewChallenge extends AppCompatActivity {
                     case R.id.radio_gineong:
                         arrayAdapter=null;
                         arrayAdapter=new ArrayAdapter(
-                                getApplicationContext(),
+                                NewChallenge.this,
                                 android.R.layout.simple_dropdown_item_1line,
                                 gineonglist
                         );
@@ -92,7 +92,7 @@ public class NewChallenge extends AppCompatActivity {
                     case R.id.radio_gisulsa:
                         arrayAdapter=null;
                         arrayAdapter=new ArrayAdapter(
-                                getApplicationContext(),
+                                NewChallenge.this,
                                 android.R.layout.simple_dropdown_item_1line,
                                 gisulsalist
                         );
@@ -103,7 +103,7 @@ public class NewChallenge extends AppCompatActivity {
                     case R.id.radio_gisa:
                         arrayAdapter=null;
                         arrayAdapter=new ArrayAdapter(
-                                getApplicationContext(),
+                                NewChallenge.this,
                                 android.R.layout.simple_dropdown_item_1line,
                                 gisalist
                         );
@@ -114,7 +114,7 @@ public class NewChallenge extends AppCompatActivity {
                     case R.id.radio_sanup:
                         arrayAdapter=null;
                         arrayAdapter=new ArrayAdapter(
-                                getApplicationContext(),
+                                NewChallenge.this,
                                 android.R.layout.simple_dropdown_item_1line,
                                 sanuplist
                         );
@@ -125,7 +125,7 @@ public class NewChallenge extends AppCompatActivity {
                     case R.id.radio_guitar:
                         arrayAdapter=null;
                         arrayAdapter=new ArrayAdapter(
-                                getApplicationContext(),
+                                NewChallenge.this,
                                 android.R.layout.simple_dropdown_item_1line,
                                 guitarlist
                         );

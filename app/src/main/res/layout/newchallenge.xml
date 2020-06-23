@@ -24,7 +24,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="기능사"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:layout_weight="1"
             android:checked="true"/>
         <RadioButton
@@ -32,34 +32,37 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="기술사"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:layout_weight="1"/>
         <RadioButton
             android:id="@+id/radio_gisa"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="기사"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:layout_weight="1"/>
         <RadioButton
             android:id="@+id/radio_sanup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="산업기사"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:layout_weight="1"/>
         <RadioButton
             android:id="@+id/radio_guitar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="기타"
-            android:textSize="13sp"
+            android:textSize="10sp"
             android:layout_weight="1"/>
     </RadioGroup>
     <Spinner
         android:id="@+id/certificate_spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20sp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,35 +70,39 @@
         android:layout_marginLeft="25sp"
         android:layout_marginRight="25sp"
         android:textSize="25sp"/>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="20sp"
-        android:layout_weight="1">
+        android:layout_height="270sp"
+        android:layout_margin="20sp">
+
         <RadioGroup
             android:id="@+id/point_radiogroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <RadioButton
                 android:id="@+id/radio_5000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="5000포인트"
-                android:textSize="25sp"
-                android:checked="true"/>
+                android:textSize="25sp" />
+
             <RadioButton
                 android:id="@+id/radio_10000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="10000포인트"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
+
             <RadioButton
                 android:id="@+id/radio_15000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="15000포인트"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
         </RadioGroup>
     </ScrollView>
     <LinearLayout

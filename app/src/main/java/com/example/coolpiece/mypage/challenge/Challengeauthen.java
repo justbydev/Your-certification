@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -37,9 +38,10 @@ import java.util.Date;
 
 public class Challengeauthen extends AppCompatActivity {
     Button final_auth_button;
+    Button auth_cancel;
     ImageView certi_image;
     TextView picture_text;
-    RadioButton board_upload_access;
+    CheckBox board_upload_access;
     String certification;
     String day;
     String point;
@@ -51,15 +53,18 @@ public class Challengeauthen extends AppCompatActivity {
     DatabaseReference databaseReference;
     Challenge challenge;
     static final int REQUEST_IMAGE_CODE=1002;
+    int image_check=0;
+    int upload_check=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.challenge_authen);
 
         final_auth_button=(Button)findViewById(R.id.final_auth_button);
+        auth_cancel=(Button)findViewById(R.id.auth_cancel);
         certi_image=(ImageView)findViewById(R.id.certi_image);
         picture_text=(TextView)findViewById(R.id.picture_text);
-        board_upload_access=(RadioButton)findViewById(R.id.board_upload_access);
+        board_upload_access=(CheckBox) findViewById(R.id.board_upload_access);
 
         certi_image.setOnClickListener(buttononclicklistener);
         picture_text.setOnClickListener(buttononclicklistener);
@@ -77,24 +82,51 @@ public class Challengeauthen extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        if(board_upload_access.isChecked()){
+            upload_check=1;
+        }
+
         final_auth_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                day_check.set(border, "ok");
-                certification=certification.replace(" ", "-");
-                title=certification+attend+day+point;
-                databaseReference= FirebaseDatabase.getInstance().getReference("Challenge");
-                String email= FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-                email=email.replace(".", "-");
-                challenge=new Challenge();
-                challenge.setCertification(certification);
-                challenge.setDay(day);
-                challenge.setStartdate(startdate);
-                challenge.setPoint(point);
-                challenge.setStartdate(startdate);
-                challenge.setAttend(attend);
-                challenge.setDay_check(day_check);
-                databaseReference.child(email).child(title).setValue(challenge);
+                if(image_check==1){
+                    day_check.set(border, "ok");
+                    certification=certification.replace(" ", "-");
+                    title=certification+attend+day+point;
+                    databaseReference= FirebaseDatabase.getInstance().getReference("Challenge");
+                    String email= FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                    email=email.replace(".", "-");
+                    challenge=new Challenge();
+                    challenge.setCertification(certification);
+                    challenge.setDay(day);
+                    challenge.setStartdate(startdate);
+                    challenge.setPoint(point);
+                    challenge.setStartdate(startdate);
+                    challenge.setAttend(attend);
+                    challenge.setDay_check(day_check);
+                    databaseReference.child(email).child(title).setValue(challenge);
+                    Intent giveintent=new Intent(Challengeauthen.this, Challengedetail.class);
+                    giveintent.putExtra("certification", certification);
+                    giveintent.putExtra("day", day);
+                    giveintent.putExtra("startdate", startdate);
+                    giveintent.putExtra("attend", attend);
+                    giveintent.putExtra("point", point);
+                    giveintent.putStringArrayListExtra("day_check", day_check);
+                    if(upload_check==1){//게시판에 업로드하기로 체크하면 작동하는 부분
+
+                    }
+                    startActivity(giveintent);
+                    finish();
+                }
+                else if(image_check==0){
+                    Toast.makeText(Challengeauthen.this, "사진을 등록해주세요", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        auth_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent giveintent=new Intent(Challengeauthen.this, Challengedetail.class);
                 giveintent.putExtra("certification", certification);
                 giveintent.putExtra("day", day);
@@ -214,6 +246,7 @@ public class Challengeauthen extends AppCompatActivity {
                 certi_image.setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
                 certi_image.setImageURI(image);
                 picture_text.setText("");
+                image_check=1;
                 /*try {
                     Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(), image);
                     certi_image.setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
