@@ -46,6 +46,7 @@ public class AuthenFragment extends Fragment {
         certificate_institution = (EditText)v.findViewById(R.id.certificate_institution);
 
         buttonCertificate = (Button)v.findViewById(R.id.buttonCertificate);
+        buttonCertificate.setOnClickListener(buttononclicklistener);
         return v;
 
     }
@@ -67,9 +68,11 @@ public class AuthenFragment extends Fragment {
                     t.show();
                 } else {
                     DatabaseReference usersRef = ref.child(email);
-                    Authentificate_user newuser = new Authentificate_user(name, serial_num, birth, date, institution);
-                    usersRef.child(email).setValue(newuser);
-                    System.out.println("hello");
+                    Authentificate_user new_user = new Authentificate_user(name, serial_num, birth, date, institution);
+                    usersRef.child(email).setValue(new_user);
+                    Toast t = Toast.makeText(getContext(), "인증완료.", Toast.LENGTH_SHORT);
+                    t.show();
+
                 }
             }
 
