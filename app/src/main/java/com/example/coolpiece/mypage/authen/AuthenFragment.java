@@ -52,22 +52,25 @@ public class AuthenFragment extends Fragment {
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            firebaseAuth = FirebaseAuth.getInstance().getCurrentUser();;
-            String email=firebaseAuth.getEmail().toString();
-            String name=certificate_name.getText().toString();
-            String serial_num = certificate_serial_num.getText().toString();
-            String birth=birthday.getText().toString();
-            String date = birthday.getText().toString();
-            String institution = certificate_institution.getText().toString();
-            if(name==null ||email.equals("")|| name.equals("")|| serial_num.equals("")||birth.equals("")||date.equals("")|| institution.equals("")){
-                Toast t = Toast.makeText(getContext(),"빈 항목이 있습니다.", Toast.LENGTH_SHORT);
-                t.show();
-            }
-            else {
-                DatabaseReference usersRef = ref.child(email);
-                Authentificate_user newuser = new Authentificate_user(name, serial_num, birth, date, institution);
-                usersRef.child(email).setValue(newuser);
-                System.out.println("hello");
+            int id=v.getId();
+            if (v==buttonCertificate) {
+                firebaseAuth = FirebaseAuth.getInstance().getCurrentUser();
+                ;
+                String email = firebaseAuth.getEmail().toString();
+                String name = certificate_name.getText().toString();
+                String serial_num = certificate_serial_num.getText().toString();
+                String birth = birthday.getText().toString();
+                String date = birthday.getText().toString();
+                String institution = certificate_institution.getText().toString();
+                if (name == null || email.equals("") || name.equals("") || serial_num.equals("") || birth.equals("") || date.equals("") || institution.equals("")) {
+                    Toast t = Toast.makeText(getContext(), "빈 항목이 있습니다.", Toast.LENGTH_SHORT);
+                    t.show();
+                } else {
+                    DatabaseReference usersRef = ref.child(email);
+                    Authentificate_user newuser = new Authentificate_user(name, serial_num, birth, date, institution);
+                    usersRef.child(email).setValue(newuser);
+                    System.out.println("hello");
+                }
             }
 
         }
