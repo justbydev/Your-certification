@@ -57,7 +57,8 @@ public class AuthenFragment extends Fragment {
             if (v==buttonCertificate) {
                 firebaseAuth = FirebaseAuth.getInstance().getCurrentUser();
                 ;
-                String email = firebaseAuth.getEmail().toString();
+                String temp = firebaseAuth.getEmail().toString();
+                String email =temp.replace('.', '-');
                 String name = certificate_name.getText().toString();
                 String serial_num = certificate_serial_num.getText().toString();
                 String birth = birthday.getText().toString();
@@ -67,9 +68,9 @@ public class AuthenFragment extends Fragment {
                     Toast t = Toast.makeText(getContext(), "빈 항목이 있습니다.", Toast.LENGTH_SHORT);
                     t.show();
                 } else {
-                    DatabaseReference usersRef = ref.child(email);
+                    //DatabaseReference usersRef = ref.child(email);
                     Authentificate_user new_user = new Authentificate_user(name, serial_num, birth, date, institution);
-                    usersRef.child(email).setValue(new_user);
+                    ref.child(email).push().setValue(new_user);
                     Toast t = Toast.makeText(getContext(), "인증완료.", Toast.LENGTH_SHORT);
                     t.show();
 
