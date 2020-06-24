@@ -13,7 +13,7 @@ public class Card {
     public int getcard(){
         return this.cardnum;
     }//자격증 개수 return
-    public ArrayList<String> getwholecard(){
+    public ArrayList<String> getcardlist(){
         return this.card;
     }//자격증 리스트 return
     public void addcard(String newone){
