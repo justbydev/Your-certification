@@ -62,7 +62,7 @@ public class AuthenFragment extends Fragment {
                 String name = certificate_name.getText().toString();
                 String serial_num = certificate_serial_num.getText().toString();
                 String birth = birthday.getText().toString();
-                String date = birthday.getText().toString();
+                String date = certificate_date.getText().toString();
                 String institution = certificate_institution.getText().toString();
                 if (name == null || email.equals("") || name.equals("") || serial_num.equals("") || birth.equals("") || date.equals("") || institution.equals("")) {
                     Toast t = Toast.makeText(getContext(), "빈 항목이 있습니다.", Toast.LENGTH_SHORT);
@@ -73,8 +73,12 @@ public class AuthenFragment extends Fragment {
                     ref.child(email).push().setValue(new_user);
                     Toast t = Toast.makeText(getContext(), "인증완료.", Toast.LENGTH_SHORT);
                     t.show();
-
                 }
+                certificate_name.setText("");
+                certificate_serial_num.setText("");
+                birthday.setText("");
+                certificate_date.setText("");
+                certificate_institution.setText("");
             }
 
         }
