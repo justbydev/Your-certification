@@ -31,8 +31,10 @@ public class MypageActivity extends Fragment {
         mypage_tab_layout.addTab(mypage_tab_layout.newTab().setText("챌린지"));
         mypage_tab_layout.addTab(mypage_tab_layout.newTab().setText("인증"));
 
+
         mypageContentsPagerAdapter=new MypageContentsPagerAdapter(getChildFragmentManager(), mypage_tab_layout.getTabCount());
         mypage_pager_content.setAdapter(mypageContentsPagerAdapter);
+
 
         mypage_pager_content.addOnPageChangeListener(
                 new TabLayout.TabLayoutOnPageChangeListener(mypage_tab_layout)
@@ -54,6 +56,7 @@ public class MypageActivity extends Fragment {
 
             }
         });
+        mypage_pager_content.setOffscreenPageLimit(5);
         return v;
     }
 }
