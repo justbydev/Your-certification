@@ -11,16 +11,21 @@
             android:layout_height="wrap_content"
             android:text="명함"
             android:gravity="center_horizontal" />
-        <LinearLayout
-            android:id="@+id/certi_view"
+        <RelativeLayout
+            android:id="@+id/image_layout"
             android:layout_width="match_parent"
-            android:layout_height="450sp"
-            android:orientation="vertical"/>
+            android:layout_height="450sp">
+            <ImageView
+                android:id="@+id/certi_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30sp"
             android:orientation="horizontal"
-            android:weightSum="5">
+            android:weightSum="4">
             <TextView
                 android:id="@+id/certi_list"
                 android:layout_width="match_parent"
@@ -35,15 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="폰트"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:textSize="15sp"/>
-            <TextView
-                android:id="@+id/color_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="글자색"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:clickable="true"

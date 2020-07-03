@@ -3,6 +3,7 @@ package com.example.coolpiece.mypage.card;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -45,10 +46,10 @@ import java.util.Date;
 
 public class CardFragment extends Fragment{
 
-    LinearLayout certi_view;
+    RelativeLayout image_layout;
+    ImageView certi_view;
     public TextView certi_list;
     public TextView font_list;
-    public TextView color_list;
     public TextView background_list;
     public TextView add_text;
     ArrayList<String> mList;
@@ -66,10 +67,10 @@ public class CardFragment extends Fragment{
         View v=inflater.inflate(R.layout.card, container, false);
 
         context=getContext();
-        certi_view=(LinearLayout) v.findViewById(R.id.certi_view);
+        certi_view=(ImageView) v.findViewById(R.id.certi_view);
+        image_layout=(RelativeLayout)v.findViewById(R.id.image_layout);
         certi_list=(TextView)v.findViewById(R.id.certi_list);
         font_list=(TextView)v.findViewById(R.id.font_list);
-        color_list=(TextView)v.findViewById(R.id.color_list);
         background_list=(TextView)v.findViewById(R.id.background_list);
         add_text=(TextView)v.findViewById(R.id.add_text);
 
@@ -102,7 +103,6 @@ public class CardFragment extends Fragment{
 
         certi_list.setOnClickListener(buttononclicklistener);
         font_list.setOnClickListener(buttononclicklistener);
-        color_list.setOnClickListener(buttononclicklistener);
         background_list.setOnClickListener(buttononclicklistener);
         add_text.setOnClickListener(buttononclicklistener);
 
@@ -155,46 +155,121 @@ public class CardFragment extends Fragment{
                 case R.id.font_list:
                     //do
                     break;
-                case R.id.color_list:
-                    break;
                 case R.id.background_list:
 
                     break;
                 case R.id.add_text:
-                    AlertDialog.Builder edit=new AlertDialog.Builder(context);
-                    edit.setMessage("새로운 텍스트를 추가하시겠습니까?");
-                    edit.setNegativeButton("취소",
+                    AlertDialog.Builder a=new AlertDialog.Builder(context);
+                    a.setTitle("새 텍스트 추가");
+                    final EditText first=new EditText(context);
+                    a.setView(first);
+                    a.setPositiveButton("확인",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    edit.setPositiveButton("확인",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    final EditText tx=new EditText(context);
-                                    tx.setHint("새로운 글 추가");
-                                    tx.setOnTouchListener(new View.OnTouchListener() {
+                                    final TextView tx=new TextView(context);
+                                    tx.setText(first.getText().toString());
+                                    tx.setTextColor(Color.BLACK);
+                                    tx.setOnLongClickListener(new View.OnLongClickListener() {
                                         @Override
-                                        public boolean onTouch(View v, MotionEvent event) {
-                                            switch(event.getAction()){
-                                                case MotionEvent.ACTION_DOWN:
-                                                case MotionEvent.ACTION_MOVE:
-                                                case MotionEvent.ACTION_UP:
-                                                    tx.setX(event.getX());
-                                                    tx.setX(event.getY());
-                                                    break;
-                                            }
+                                        public boolean onLongClick(View v) {
+                                            AlertDialog.Builder changechoice=new AlertDialog.Builder(context);
+                                            changechoice.setTitle("텍스트 변경");
+                                            final ArrayAdapter<String> ad=new ArrayAdapter<>(
+                                                    context, android.R.layout.select_dialog_singlechoice);
+                                            ad.add("텍스트 변경");
+                                            ad.add("글자색 변경");
+                                            changechoice.setAdapter(ad,
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            switch(which){
+                                                                case 1:
+                                                                    AlertDialog.Builder color=new AlertDialog.Builder(context);
+                                                                    color.setTitle("텍스트 색깔 변경");
+                                                                    final ArrayAdapter<String> cl=new ArrayAdapter<>(
+                                                                            context, android.R.layout.select_dialog_singlechoice);
+                                                                    cl.add("검은색");
+                                                                    cl.add("회색");
+                                                                    cl.add("초록색");
+                                                                    cl.add("빨간색");
+                                                                    cl.add("노란색");
+                                                                    cl.add("파란색");
+                                                                    color.setNegativeButton("취소",
+                                                                            new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                    dialog.dismiss();
+                                                                                }
+                                                                            });
+                                                                    color.setAdapter(cl,
+                                                                            new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                    switch(which){
+                                                                                        case 0:
+                                                                                            tx.setTextColor(Color.BLACK);
+                                                                                            break;
+                                                                                        case 1:
+                                                                                            tx.setTextColor(Color.GRAY);
+                                                                                            break;
+                                                                                        case 2:
+                                                                                            tx.setTextColor(Color.GREEN);
+                                                                                            break;
+                                                                                        case 3:
+                                                                                            tx.setTextColor(Color.RED);
+                                                                                            break;
+                                                                                        case 4:
+                                                                                            tx.setTextColor(Color.YELLOW);
+                                                                                            break;
+                                                                                        case 5:
+                                                                                            tx.setTextColor(Color.BLUE);
+                                                                                            break;
+                                                                                    }
+                                                                                }
+                                                                            });
+                                                                    color.show();
+                                                                    break;
+                                                                case 0:
+                                                                    AlertDialog.Builder newtext=new AlertDialog.Builder(context);
+                                                                    newtext.setTitle("새로운 텍스트 입력");
+                                                                    final EditText newinput=new EditText(context);
+                                                                    newtext.setView(newinput);
+                                                                    newtext.setPositiveButton("확인",
+                                                                            new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                    tx.setText(newinput.getText().toString());
+                                                                                    dialog.dismiss();
+                                                                                }
+                                                                            });
+                                                                    newtext.setNegativeButton("취소",
+                                                                            new DialogInterface.OnClickListener() {
+                                                                                @Override
+                                                                                public void onClick(DialogInterface dialog, int which) {
+                                                                                    dialog.dismiss();
+                                                                                }
+                                                                            });
+                                                                    newtext.show();
+                                                            }
+                                                        }
+                                                    });
+                                            changechoice.show();
                                             return true;
                                         }
                                     });
-                                    certi_view.addView(tx);
+                                    image_layout.addView(tx);
                                     dialog.dismiss();
                                 }
                             });
-                    edit.show();
+                    a.setNegativeButton("취소",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    a.show();
                     break;
                 default:break;
             }
