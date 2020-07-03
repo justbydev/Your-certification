@@ -17,4 +17,8 @@ public  class Authentificate_user {
         this.certificate_institution=institution;
 
     };
+
+    public String getCertificate_name() {
+        return certificate_name;
+    }
 }

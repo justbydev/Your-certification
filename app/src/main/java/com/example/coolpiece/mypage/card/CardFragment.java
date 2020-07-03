@@ -1,15 +1,21 @@
 package com.example.coolpiece.mypage.card;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coolpiece.R;
+import com.example.coolpiece.mypage.authen.Authentificate_user;
 import com.example.coolpiece.mypage.schedule.MyScheduleAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,79 +45,53 @@ import java.util.Date;
 
 public class CardFragment extends Fragment{
 
+    LinearLayout certi_view;
     public TextView certi_list;
     public TextView font_list;
-    public TextView imoticon_list;
-    ArrayList<String> cardlist;
-    RecyclerView card_recyclerview;
-    RecyclerView.LayoutManager layoutManager;
+    public TextView color_list;
+    public TextView background_list;
+    public TextView add_text;
+    ArrayList<String> mList;
+    LayoutInflater layoutInflater;
 
-    CardAdapter cardAdapter;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     public boolean flag=false;
     private boolean first;
+    static Context context;
+    String mychoicecert=null;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.card, container, false);
 
+        context=getContext();
+        certi_view=(LinearLayout) v.findViewById(R.id.certi_view);
         certi_list=(TextView)v.findViewById(R.id.certi_list);
         font_list=(TextView)v.findViewById(R.id.font_list);
-        imoticon_list=(TextView)v.findViewById(R.id.imoticon_list);
-        card_recyclerview=v.findViewById(R.id.certificate_list);
-        card_recyclerview.setLayoutManager(layoutManager);
+        color_list=(TextView)v.findViewById(R.id.color_list);
+        background_list=(TextView)v.findViewById(R.id.background_list);
+        add_text=(TextView)v.findViewById(R.id.add_text);
+
 
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
         String temp=firebaseUser.getEmail().toString();
         String name=temp.replace('.', '-');
+        mList=new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference("certificate/data").child(name);
-
-        certi_list.setOnClickListener(buttononclicklistener);
-        font_list.setOnClickListener(buttononclicklistener);
-        imoticon_list.setOnClickListener(buttononclicklistener);
-        cardlist = new ArrayList<>();
-
-
-        return v;
-    }
-    public void updatecard(){
-        databaseReference.addChildEventListener(new ChildEventListener() {//계속 추가되는 경우, 처음에는 전체를 읽고 그 후, 추가되는 데이터에 한해서만 읽음
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {//한번에 하나씩 읽게 됨, dataSnapshot에 하나의 데이터만이 들어있음
-                String line=dataSnapshot.getValue().toString();
-                String name=null;
-                try {
-                    JSONObject jsonObject=new JSONObject(line);
-                    String tm=jsonObject.getString("certificate_name");
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    String json=snapshot.getValue().toString();
+                    try {
+                        JSONObject jsonObject=new JSONObject(json);
+                        String certificate_name=jsonObject.getString("certificate_name");
+                        mList.add(certificate_name);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-                cardlist.add(name);
-                if(first==false){
-                    cardAdapter=new CardAdapter(cardlist);
-                    card_recyclerview.setAdapter(cardAdapter);
-                    first=true;
-                }
-                else{
-                    cardAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
@@ -118,21 +99,102 @@ public class CardFragment extends Fragment{
 
             }
         });
-    };
+
+        certi_list.setOnClickListener(buttononclicklistener);
+        font_list.setOnClickListener(buttononclicklistener);
+        color_list.setOnClickListener(buttononclicklistener);
+        background_list.setOnClickListener(buttononclicklistener);
+        add_text.setOnClickListener(buttononclicklistener);
+
+        return v;
+    }
+
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             int id=v.getId();
             switch(id) {
                 case R.id.certi_list:
-                    CardAdapter ca = new CardAdapter(cardlist);
-                    //do
+                    AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                    builder.setTitle("자격증 목록");
+                    final ArrayAdapter<String> adapter=new ArrayAdapter<>(
+                            context, android.R.layout.select_dialog_singlechoice
+                    );
+                    for(int i=0; i<mList.size(); i++){
+                        adapter.add(mList.get(i));
+                    }
+
+                    builder.setAdapter(adapter,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mychoicecert=adapter.getItem(which);
+                                    final AlertDialog.Builder inBuilder=new AlertDialog.Builder(context);
+                                    inBuilder.setMessage(mychoicecert+"입니다.");
+                                    inBuilder.setTitle("당신이 선택한 것은 ");
+                                    inBuilder.setPositiveButton("확인",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
+                                    inBuilder.show();
+                                }
+                            });
+                    builder.setNegativeButton("취소",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                    builder.show();
                     break;
                 case R.id.font_list:
                     //do
                     break;
-                case R.id.imoticon_list:
-                    //do
+                case R.id.color_list:
+                    break;
+                case R.id.background_list:
+
+                    break;
+                case R.id.add_text:
+                    AlertDialog.Builder edit=new AlertDialog.Builder(context);
+                    edit.setMessage("새로운 텍스트를 추가하시겠습니까?");
+                    edit.setNegativeButton("취소",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    edit.setPositiveButton("확인",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    final EditText tx=new EditText(context);
+                                    tx.setHint("새로운 글 추가");
+                                    tx.setOnTouchListener(new View.OnTouchListener() {
+                                        @Override
+                                        public boolean onTouch(View v, MotionEvent event) {
+                                            switch(event.getAction()){
+                                                case MotionEvent.ACTION_DOWN:
+                                                case MotionEvent.ACTION_MOVE:
+                                                case MotionEvent.ACTION_UP:
+                                                    tx.setX(event.getX());
+                                                    tx.setX(event.getY());
+                                                    break;
+                                            }
+                                            return true;
+                                        }
+                                    });
+                                    certi_view.addView(tx);
+                                    dialog.dismiss();
+                                }
+                            });
+                    edit.show();
                     break;
                 default:break;
             }
