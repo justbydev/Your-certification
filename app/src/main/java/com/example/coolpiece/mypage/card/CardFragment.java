@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ import com.example.coolpiece.R;
 import com.example.coolpiece.mypage.challenge.Challengeauthen;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -54,20 +56,19 @@ public class CardFragment extends Fragment{
     RelativeLayout image_layout;
     ImageView certi_view;
     public TextView certi_list;
-    public TextView font_list;
+    public TextView size_list;
     public TextView background_list;
     public TextView add_text;
     ArrayList<String> mList;
-    LayoutInflater layoutInflater;
 
-    FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
-    public boolean flag=false;
     private boolean first;
     static Context context;
     String mychoicecert=null;
     static final int REQUEST_IMAGE_CODE=1001;
+    TextView mycert;
+    int choose=0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.card, container, false);
@@ -76,9 +77,11 @@ public class CardFragment extends Fragment{
         certi_view=(ImageView) v.findViewById(R.id.certi_view);
         image_layout=(RelativeLayout)v.findViewById(R.id.image_layout);
         certi_list=(TextView)v.findViewById(R.id.certi_list);
-        font_list=(TextView)v.findViewById(R.id.font_list);
+        size_list=(TextView)v.findViewById(R.id.size_list);
         background_list=(TextView)v.findViewById(R.id.background_list);
         add_text=(TextView)v.findViewById(R.id.add_text);
+
+        mycert=new TextView(context);
 
 
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
@@ -86,19 +89,37 @@ public class CardFragment extends Fragment{
         String name=temp.replace('.', '-');
         mList=new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference("certificate/data").child(name);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    String json=snapshot.getValue().toString();
-                    try {
-                        JSONObject jsonObject=new JSONObject(json);
-                        String certificate_name=jsonObject.getString("certificate_name");
-                        mList.add(certificate_name);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String json=dataSnapshot.getValue().toString();
+                json=json.replaceAll(" ", "`");
+                try {
+                    JSONObject jsonObject=new JSONObject(json);
+                    String certificate_name=jsonObject.optString("certificate_name", "nothing");
+                    if(certificate_name.equals("nothing")){
+                        certificate_name=jsonObject.getString("`certificate_name");
+                        certificate_name=certificate_name.replace("`", " ");
                     }
+                    mList.add(certificate_name);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -107,8 +128,9 @@ public class CardFragment extends Fragment{
             }
         });
 
+
         certi_list.setOnClickListener(buttononclicklistener);
-        font_list.setOnClickListener(buttononclicklistener);
+        size_list.setOnClickListener(buttononclicklistener);
         background_list.setOnClickListener(buttononclicklistener);
         add_text.setOnClickListener(buttononclicklistener);
 
@@ -142,6 +164,65 @@ public class CardFragment extends Fragment{
                                             new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
+                                                    if(choose==1){
+                                                        image_layout.removeView(mycert);
+                                                    }
+                                                    mycert.setText("");
+                                                    mycert.setText(mychoicecert);
+                                                    mycert.setTextColor(Color.BLACK);
+                                                    mycert.setTextSize(23);
+                                                    mycert.setOnLongClickListener(new View.OnLongClickListener() {
+                                                        @Override
+                                                        public boolean onLongClick(View v) {
+                                                            AlertDialog.Builder certcolor=new AlertDialog.Builder(context);
+                                                            certcolor.setTitle("텍스트 색깔 변경");
+                                                            final ArrayAdapter<String> ccl=new ArrayAdapter<>(
+                                                                    context, android.R.layout.select_dialog_singlechoice);
+                                                            ccl.add("검은색");
+                                                            ccl.add("회색");
+                                                            ccl.add("초록색");
+                                                            ccl.add("빨간색");
+                                                            ccl.add("노란색");
+                                                            ccl.add("파란색");
+                                                            certcolor.setNegativeButton("취소",
+                                                                    new DialogInterface.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(DialogInterface dialog, int which) {
+                                                                            dialog.dismiss();
+                                                                        }
+                                                                    });
+                                                            certcolor.setAdapter(ccl,
+                                                                    new DialogInterface.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(DialogInterface dialog, int which) {
+                                                                            switch(which){
+                                                                                case 0:
+                                                                                    mycert.setTextColor(Color.BLACK);
+                                                                                    break;
+                                                                                case 1:
+                                                                                    mycert.setTextColor(Color.GRAY);
+                                                                                    break;
+                                                                                case 2:
+                                                                                    mycert.setTextColor(Color.GREEN);
+                                                                                    break;
+                                                                                case 3:
+                                                                                    mycert.setTextColor(Color.RED);
+                                                                                    break;
+                                                                                case 4:
+                                                                                    mycert.setTextColor(Color.YELLOW);
+                                                                                    break;
+                                                                                case 5:
+                                                                                    mycert.setTextColor(Color.BLUE);
+                                                                                    break;
+                                                                            }
+                                                                        }
+                                                                    });
+                                                            certcolor.show();
+                                                            return true;
+                                                        }
+                                                    });
+                                                    image_layout.addView(mycert);
+                                                    choose=1;
                                                     dialog.dismiss();
                                                 }
                                             });
@@ -158,8 +239,44 @@ public class CardFragment extends Fragment{
 
                     builder.show();
                     break;
-                case R.id.font_list:
-                    //do
+                case R.id.size_list:
+                    AlertDialog.Builder size=new AlertDialog.Builder(context);
+                    size.setTitle("크기 결정");
+                    size.setNegativeButton("취소",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    ArrayAdapter<String> sizeadapter=new ArrayAdapter<>(context,
+                            android.R.layout.select_dialog_singlechoice);
+                    sizeadapter.add("가로로");
+                    sizeadapter.add("세로로");
+                    size.setAdapter(sizeadapter,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch(which) {
+                                        case 0:
+                                            LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
+                                                    LinearLayout.LayoutParams.MATCH_PARENT, 1000
+                                            );
+                                            p.setMargins(0, 400, 0, 0);
+                                            image_layout.setLayoutParams(p);
+                                            break;
+                                        case 1:
+                                            LinearLayout.LayoutParams p2 = new LinearLayout.LayoutParams(
+                                                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT
+                                            );
+                                            p2.setMargins(180, 0, 180, 0);
+                                            image_layout.setLayoutParams(p2);
+                                            break;
+                                    }
+                                }
+                            }
+                    );
+                    size.show();
                     break;
                 case R.id.background_list:
                     if(Build.VERSION.SDK_INT>=23){
@@ -212,11 +329,12 @@ public class CardFragment extends Fragment{
                                                     System.out.println("finger up");
                                                     if((bx-ax)>=-10&&(bx-ax)<=10&&(by-ay)>=-10&&(by-ay)<=10){
                                                         AlertDialog.Builder changechoice=new AlertDialog.Builder(context);
-                                                        changechoice.setTitle("글자/색 변경");
+                                                        changechoice.setTitle("글자/색 변경, 삭제");
                                                         final ArrayAdapter<String> ad=new ArrayAdapter<>(
                                                                 context, android.R.layout.select_dialog_singlechoice);
                                                         ad.add("텍스트 변경");
                                                         ad.add("글자색 변경");
+                                                        ad.add("텍스트 삭제");
                                                         changechoice.setNegativeButton("취소",
                                                                 new DialogInterface.OnClickListener() {
                                                                     @Override
@@ -296,6 +414,9 @@ public class CardFragment extends Fragment{
                                                                                             }
                                                                                         });
                                                                                 newtext.show();
+                                                                                break;
+                                                                            case 2:
+                                                                                image_layout.removeView(tx);
                                                                         }
                                                                     }
                                                                 });
