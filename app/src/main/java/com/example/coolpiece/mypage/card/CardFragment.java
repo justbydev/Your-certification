@@ -55,6 +55,7 @@ public class CardFragment extends Fragment{
 
     RelativeLayout image_layout;
     ImageView certi_view;
+    public TextView card_explain;
     public TextView certi_list;
     public TextView size_list;
     public TextView background_list;
@@ -74,6 +75,7 @@ public class CardFragment extends Fragment{
         View v=inflater.inflate(R.layout.card, container, false);
 
         context=getContext();
+        card_explain=(TextView)v.findViewById(R.id.card_explain);
         certi_view=(ImageView) v.findViewById(R.id.certi_view);
         image_layout=(RelativeLayout)v.findViewById(R.id.image_layout);
         certi_list=(TextView)v.findViewById(R.id.certi_list);
@@ -129,6 +131,7 @@ public class CardFragment extends Fragment{
         });
 
 
+        card_explain.setOnClickListener(buttononclicklistener);
         certi_list.setOnClickListener(buttononclicklistener);
         size_list.setOnClickListener(buttononclicklistener);
         background_list.setOnClickListener(buttononclicklistener);
@@ -142,6 +145,23 @@ public class CardFragment extends Fragment{
         public void onClick(View v) {
             int id=v.getId();
             switch(id) {
+                case R.id.card_explain:
+                    AlertDialog.Builder explain=new AlertDialog.Builder(context);
+                    explain.setTitle("명함 사용법");
+                    explain.setMessage("1. 추가된 텍스트를 조금씩 움직일 수 있습니다(명함 범위 내에서)\n" +
+                            "2. 추가된 텍스트를 클릭하면 추가 변경 사항이 나옵니다\n" +
+                            "3. 자격증 이름은 위치가 상단으로 고정됩니다\n" +
+                            "4. 자격증 이름을 길게 누르면 색깔을 변경할 수 있습니다\n" +
+                            "5. 배경은 자신의 갤러리에서 사진을 가져옵니다");
+                    explain.setPositiveButton("확인",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    explain.show();
+                    break;
                 case R.id.certi_list:
                     AlertDialog.Builder builder=new AlertDialog.Builder(context);
                     builder.setTitle("자격증 목록");

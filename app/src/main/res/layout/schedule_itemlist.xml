@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:layout_gravity="center_horizontal">
     <androidx.cardview.widget.CardView
+        android:id="@+id/schedule_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"

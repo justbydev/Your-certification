@@ -22,7 +22,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="자격증 이름"
-                android:textSize="30sp"/>
+                android:textSize="30sp"
+                android:textColor="#000000"/>
+            <TextView
+                android:id="@+id/intro_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="자격증 개요"
+                android:clickable="true"
+                android:textColor="#000000"
+                android:textSize="25sp"/>
             <TextView
                 android:id="@+id/intro"
                 android:layout_width="match_parent"
@@ -30,11 +39,27 @@
                 android:text="자격증 개요"
                 android:textSize="20sp"/>
             <TextView
+                android:id="@+id/association_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="자격증 실시기관"
+                android:clickable="true"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
+            <TextView
                 android:id="@+id/association"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="실시기관"
                 android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/major_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="자격증 관련학과"
+                android:clickable="true"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/major"
                 android:layout_width="match_parent"
@@ -42,11 +67,27 @@
                 android:text="관련학과"
                 android:textSize="20sp"/>
             <TextView
+                android:id="@+id/train_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="자격증 훈련기관"
+                android:clickable="true"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
+            <TextView
                 android:id="@+id/training_center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="훈련기관"
                 android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/test_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="시험과목"
+                android:clickable="true"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/test_subject"
                 android:layout_width="match_parent"
@@ -54,11 +95,27 @@
                 android:text="시험과목"
                 android:textSize="20sp"/>
             <TextView
+                android:id="@+id/method_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="검정방법"
+                android:clickable="true"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
+            <TextView
                 android:id="@+id/test_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="검정방법"
                 android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/cutline_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="합격기준"
+                android:clickable="true"
+                android:textSize="25sp"
+                android:textColor="#000000"/>
             <TextView
                 android:id="@+id/cut_line"
                 android:layout_width="match_parent"

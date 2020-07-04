@@ -3,10 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <CalendarView
         android:id="@+id/calender"
         android:layout_width="match_parent"
         android:layout_height="350sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="등록된 일정은 '내 일정' 탭에서 길게 누르시면 삭제가능합니다"
+        android:textColor="#0000ff"
+        android:gravity="center_horizontal"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
