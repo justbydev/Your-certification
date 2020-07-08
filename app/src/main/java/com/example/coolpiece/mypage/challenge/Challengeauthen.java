@@ -2,6 +2,7 @@ package com.example.coolpiece.mypage.challenge;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +76,7 @@ public class Challengeauthen extends AppCompatActivity {
     Uri image;
     String me;
     String Uripath;
+    ProgressDialog dialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,82 +112,93 @@ public class Challengeauthen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(image_check==1){
+                    showProgressDialog();
                     if(board_upload_access.isChecked()){
                         upload_check=1;
                     }
                     else{
                         upload_check=0;
                     }
-                    StorageReference storageRef= FirebaseStorage.getInstance().getReference();
-                    Uri file=Uri.fromFile(new File(Uripath));
-                    String big="Images of "+me+"/";
-                    StorageReference riversRef=storageRef.child(big+file.getLastPathSegment());
+                    final StorageReference storageRef= FirebaseStorage.getInstance().getReference();
+                    final Uri file=Uri.fromFile(new File(Uripath));
+                    final String[] big = {"Images of " + me + "/"};
+                    StorageReference riversRef=storageRef.child(big[0] +file.getLastPathSegment());
                     UploadTask uploadTask=riversRef.putFile(file);
                     System.out.println(file.getLastPathSegment());
                     uploadTask.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(Challengeauthen.this, "사진 업로드 실패", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                             return;
                         }
                     }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(Challengeauthen.this, "사진 업로드 성공", Toast.LENGTH_SHORT).show();
+
+                            big[0] = big[0].replace(".", "-");
+                            DatabaseReference image=FirebaseDatabase.getInstance().getReference(big[0]);
+                            image.push().setValue(file.getLastPathSegment());
+
+
+
+                            day_check.set(border, "ok");
+                            certification=certification.replace(" ", "-");
+                            title=certification+attend+day+point;
+                            databaseReference= FirebaseDatabase.getInstance().getReference("Challenge");
+                            String email= FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                            email=email.replace(".", "-");
+                            challenge=new Challenge();
+                            challenge.setCertification(certification);
+                            challenge.setDay(day);
+                            challenge.setStartdate(startdate);
+                            challenge.setPoint(point);
+                            challenge.setStartdate(startdate);
+                            challenge.setAttend(attend);
+                            challenge.setDay_check(day_check);
+                            databaseReference.child(email).child(title).setValue(challenge);
+                            final Intent giveintent=new Intent(Challengeauthen.this, Challengedetail.class);
+                            giveintent.putExtra("certification", certification);
+                            giveintent.putExtra("day", day);
+                            giveintent.putExtra("startdate", startdate);
+                            giveintent.putExtra("attend", attend);
+                            giveintent.putExtra("point", point);
+                            giveintent.putStringArrayListExtra("day_check", day_check);
+                            if(upload_check==1){//게시판에 업로드하기로 체크하면 작동하는 부분
+                                StorageReference totalRef=storageRef.child("Images/"+file.getLastPathSegment());
+                                UploadTask totalload=totalRef.putFile(file);
+                                totalload.addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(Challengeauthen.this, "사진 업로드 실패", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        dialog.dismiss();
+                                        Toast.makeText(Challengeauthen.this, "사진 업로드 성공", Toast.LENGTH_SHORT).show();
+                                        DatabaseReference totalimg=FirebaseDatabase.getInstance().getReference("Images");
+                                        totalimg.push().setValue(file.getLastPathSegment());
+                                        startActivity(giveintent);
+                                        finish();
+                                    }
+                                });
+
+                            }
+                            else{
+                                dialog.dismiss();
+                                Toast.makeText(Challengeauthen.this, "사진 업로드 성공", Toast.LENGTH_SHORT).show();
+                                startActivity(giveintent);
+                                finish();
+                            }
+
                         }
                     });
 
 
 
-                    big=big.replace(".", "-");
-                    DatabaseReference image=FirebaseDatabase.getInstance().getReference(big);
-                    image.push().setValue(file.getLastPathSegment());
 
-
-
-                    day_check.set(border, "ok");
-                    certification=certification.replace(" ", "-");
-                    title=certification+attend+day+point;
-                    databaseReference= FirebaseDatabase.getInstance().getReference("Challenge");
-                    String email= FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-                    email=email.replace(".", "-");
-                    challenge=new Challenge();
-                    challenge.setCertification(certification);
-                    challenge.setDay(day);
-                    challenge.setStartdate(startdate);
-                    challenge.setPoint(point);
-                    challenge.setStartdate(startdate);
-                    challenge.setAttend(attend);
-                    challenge.setDay_check(day_check);
-                    databaseReference.child(email).child(title).setValue(challenge);
-                    Intent giveintent=new Intent(Challengeauthen.this, Challengedetail.class);
-                    giveintent.putExtra("certification", certification);
-                    giveintent.putExtra("day", day);
-                    giveintent.putExtra("startdate", startdate);
-                    giveintent.putExtra("attend", attend);
-                    giveintent.putExtra("point", point);
-                    giveintent.putStringArrayListExtra("day_check", day_check);
-                    if(upload_check==1){//게시판에 업로드하기로 체크하면 작동하는 부분
-                        StorageReference totalRef=storageRef.child("Images/"+file.getLastPathSegment());
-                        UploadTask totalload=totalRef.putFile(file);
-                        totalload.addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Challengeauthen.this, "사진 업로드 실패", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(Challengeauthen.this, "사진 업로드 성공", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        DatabaseReference totalimg=FirebaseDatabase.getInstance().getReference("Images");
-                        totalimg.push().setValue(file.getLastPathSegment());
-                    }
-
-                    startActivity(giveintent);
-                    finish();
                 }
                 else if(image_check==0){
                     Toast.makeText(Challengeauthen.this, "사진을 등록해주세요", Toast.LENGTH_SHORT).show();
@@ -352,4 +366,10 @@ public class Challengeauthen extends AppCompatActivity {
 
     }
 
+    public void showProgressDialog(){
+        dialog=new ProgressDialog(this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("사진 업로드 중...");
+        dialog.show();
+    }
 }
