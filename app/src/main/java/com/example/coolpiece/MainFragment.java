@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
+import io.realm.Realm;
+
 public class MainFragment extends AppCompatActivity {
 
     HomeActivity homeActivity=null;
@@ -36,6 +38,8 @@ public class MainFragment extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frag_main);
+
+
 
 
         menu_home=(TextView)findViewById(R.id.menu_home);

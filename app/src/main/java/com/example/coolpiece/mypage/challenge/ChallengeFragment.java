@@ -1,6 +1,8 @@
 package com.example.coolpiece.mypage.challenge;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,26 +13,38 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coolpiece.R;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class ChallengeFragment extends Fragment {
     Button challenge_80;
@@ -39,12 +53,21 @@ public class ChallengeFragment extends Fragment {
 
     Intent intent;
     RecyclerView challenge_recyclerview;
+    RecyclerView myauthenpic_recyclerview;
     ArrayList<Challenge> mylist=null;
     ArrayList<String> title=null;
     RecyclerView.LayoutManager layoutManager;
     MyChallengeAdapter myChallengeAdapter;
     DatabaseReference databaseReference;
+    MyAuthenAdapter myAuthenAdapter;
+    GridLayoutManager gridlayoutManager;
+
+    ArrayList<MyPicture> myimages;
     int first=0;
+
+    private Realm realm;
+    private String me;
+    int img_first=0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +77,9 @@ public class ChallengeFragment extends Fragment {
         challenge_90=(Button)v.findViewById(R.id.challenge_90);
         challenge_100=(Button)v.findViewById(R.id.challenge_100);
         challenge_recyclerview=(RecyclerView)v.findViewById(R.id.mychanllenge_recyclerview);
+        myauthenpic_recyclerview=(RecyclerView)v.findViewById(R.id.myauthenpic_recyclerview);
+
+        me= FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
 
         challenge_100.setOnClickListener(buttononclicklistener);
         challenge_90.setOnClickListener(buttononclicklistener);
@@ -161,6 +187,58 @@ public class ChallengeFragment extends Fragment {
 
             }
         });
+        myimages=new ArrayList<>();
+        myauthenpic_recyclerview.setHasFixedSize(true);
+        gridlayoutManager=new GridLayoutManager(getContext(), 3);
+
+        myauthenpic_recyclerview.setLayoutManager(gridlayoutManager);
+
+        me=me.replace(".", "-");
+        final String big="Images of "+me;
+        DatabaseReference myimage=FirebaseDatabase.getInstance().getReference(big);
+        myimage.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String img=dataSnapshot.getValue().toString();
+                MyPicture myPicture=new MyPicture();
+                myPicture.setImg_name(img);
+                myPicture.setOwner(me);
+                myimages.add(0, myPicture);
+
+                if(img_first==0){
+                    img_first=1;
+                    myAuthenAdapter=new MyAuthenAdapter(myimages);
+                    myauthenpic_recyclerview.setAdapter(myAuthenAdapter);
+                }
+                else{
+                    myAuthenAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
 
         return v;
     }

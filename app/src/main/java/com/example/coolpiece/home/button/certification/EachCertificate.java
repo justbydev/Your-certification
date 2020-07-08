@@ -27,7 +27,6 @@ public class EachCertificate extends AppCompatActivity {
     TextView name;
     TextView back_button;
     Button certificate_detail;
-    Button certificate_schedule;
     RecyclerView each_academy;
     RecyclerView not_connect_each_academy;
     Gisul gisul;
@@ -62,11 +61,9 @@ public class EachCertificate extends AppCompatActivity {
         each_academy=(RecyclerView)findViewById(R.id.each_academy);
         not_connect_each_academy=(RecyclerView)findViewById(R.id.not_connect_each_academy);
         certificate_detail=(Button)findViewById(R.id.certificate_detail);
-        certificate_schedule=(Button)findViewById(R.id.certificate_schedule);
 
         back_button.setOnClickListener(buttononclicklistener);
         certificate_detail.setOnClickListener(buttononclicklistener);
-        certificate_schedule.setOnClickListener(buttononclicklistener);
 
         intent=getIntent();
 
@@ -304,9 +301,6 @@ public class EachCertificate extends AppCompatActivity {
                 case R.id.certificate_detail:
                     startActivity(passdetailintent);
                     return;
-                case R.id.certificate_schedule:
-                    Intent intent=new Intent(EachCertificate.this, CertificateSchedule.class);
-                    startActivity(intent);
                 default:
                     return;
             }

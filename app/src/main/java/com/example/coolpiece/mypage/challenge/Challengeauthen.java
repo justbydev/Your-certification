@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,18 +25,31 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.loader.content.CursorLoader;
 
 import com.example.coolpiece.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import io.realm.Realm;
 
 public class Challengeauthen extends AppCompatActivity {
     Button final_auth_button;
@@ -55,6 +70,10 @@ public class Challengeauthen extends AppCompatActivity {
     static final int REQUEST_IMAGE_CODE=1002;
     int image_check=0;
     int upload_check=0;
+
+    Uri image;
+    String me;
+    String Uripath;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +84,8 @@ public class Challengeauthen extends AppCompatActivity {
         certi_image=(ImageView)findViewById(R.id.certi_image);
         picture_text=(TextView)findViewById(R.id.picture_text);
         board_upload_access=(CheckBox) findViewById(R.id.board_upload_access);
+
+        me=FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
 
         certi_image.setOnClickListener(buttononclicklistener);
         picture_text.setOnClickListener(buttononclicklistener);
@@ -83,14 +104,44 @@ public class Challengeauthen extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        if(board_upload_access.isChecked()){
-            upload_check=1;
-        }
 
         final_auth_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(image_check==1){
+                    if(board_upload_access.isChecked()){
+                        upload_check=1;
+                    }
+                    else{
+                        upload_check=0;
+                    }
+                    StorageReference storageRef= FirebaseStorage.getInstance().getReference();
+                    Uri file=Uri.fromFile(new File(Uripath));
+                    String big="Images of "+me+"/";
+                    StorageReference riversRef=storageRef.child(big+file.getLastPathSegment());
+                    UploadTask uploadTask=riversRef.putFile(file);
+                    System.out.println(file.getLastPathSegment());
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Challengeauthen.this, "사진 업로드 실패", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(Challengeauthen.this, "사진 업로드 성공", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+
+                    big=big.replace(".", "-");
+                    DatabaseReference image=FirebaseDatabase.getInstance().getReference(big);
+                    image.push().setValue(file.getLastPathSegment());
+
+
+
                     day_check.set(border, "ok");
                     certification=certification.replace(" ", "-");
                     title=certification+attend+day+point;
@@ -114,8 +165,24 @@ public class Challengeauthen extends AppCompatActivity {
                     giveintent.putExtra("point", point);
                     giveintent.putStringArrayListExtra("day_check", day_check);
                     if(upload_check==1){//게시판에 업로드하기로 체크하면 작동하는 부분
-
+                        StorageReference totalRef=storageRef.child("Images/"+file.getLastPathSegment());
+                        UploadTask totalload=totalRef.putFile(file);
+                        totalload.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Challengeauthen.this, "사진 업로드 실패", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(Challengeauthen.this, "사진 업로드 성공", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        DatabaseReference totalimg=FirebaseDatabase.getInstance().getReference("Images");
+                        totalimg.push().setValue(file.getLastPathSegment());
                     }
+
                     startActivity(giveintent);
                     finish();
                 }
@@ -242,20 +309,47 @@ public class Challengeauthen extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==REQUEST_IMAGE_CODE){
             if(resultCode==RESULT_OK&&data!=null&&data.getData()!=null){
-                Uri image=data.getData();
+                image=data.getData();
+                System.out.println(image);
+                System.out.println("This is image URi==============================");
+                Uripath=getPath(image);
+                System.out.println(Uripath);
+                System.out.println("This is absolute image URi=====================");
+
                 certi_image.setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
                 certi_image.setImageURI(image);
                 picture_text.setText("");
                 image_check=1;
                 /*try {
-                    Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(), image);
+                    InputStream in=getContentResolver().openInputStream(data.getData());
+                    image= BitmapFactory.decodeStream(in);
+                    in.close();
                     certi_image.setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-                    certi_image.setImageBitmap(bitmap);
+                    certi_image.setImageBitmap(image);
+                    picture_text.setText("");
+                    image_check=1;
 
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }*/
             }
         }
     }
+    // uri 절대경로 가져오기
+    public String getPath(Uri uri){
+
+        String [] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader cursorLoader = new CursorLoader(this,uri,proj,null,null,null);
+
+        Cursor cursor = cursorLoader.loadInBackground();
+        int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        cursor.moveToFirst();
+
+        return cursor.getString(index);
+
+    }
+
 }

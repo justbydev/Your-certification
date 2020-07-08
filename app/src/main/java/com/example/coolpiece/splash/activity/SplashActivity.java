@@ -24,6 +24,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import io.realm.Realm;
+
 public class SplashActivity extends AppCompatActivity {
     /****for json data url from firebase storage****/
     String []url=new String[]{"https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgisulsa.json?alt=media&token=45abe4b7-470e-4761-a355-3fa486dff7fe",

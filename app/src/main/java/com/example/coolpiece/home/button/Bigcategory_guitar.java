@@ -68,9 +68,21 @@ public class Bigcategory_guitar extends AppCompatActivity {
             }
         });
 
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public ArrayList<Guitar> select_guitar(int index){
         return ManageGuitarData.getInstance().getGuitarArrayList(index);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
