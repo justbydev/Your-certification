@@ -17,6 +17,7 @@ public class ManageSanupData {
     Sanup sanup;
     private ArrayList<Sanup> sanupArrayList;
     private ArrayList<ArrayList<Sanup>> sanup_total;
+    private ArrayList<String> sanuplist;
     List<String> category= Arrays.asList("건설", "경영,회계,사무", "광업자원", "기계", "농림어업",
             "문화,예술,디자인,방송", "보건,의료", "사회복지,종교", "섬유,의복", "식품,가공", "안전관리", "영업,판매",
             "운전,운송", "음식서비스", "이용,숙박,여행,오락,스포츠", "인쇄,목재,가구,공예", "재료", "전기,전자", "정보통신",
@@ -31,6 +32,7 @@ public class ManageSanupData {
         sanup=new Sanup();
         sanupArrayList=new ArrayList<>(20);
         sanup_total=new ArrayList<>(20);
+        sanuplist=new ArrayList<>();
     }
     public ArrayList<ArrayList<Sanup>> getSanup_total(){return sanup_total;}
 
@@ -46,6 +48,7 @@ public class ManageSanupData {
                 JSONObject temp=jsonArray.getJSONObject(j);
                 sanup=new Sanup();
                 sanup.setName(temp.get("name").toString());
+                sanuplist.add(temp.get("name").toString());
                 sanup.setIntro(temp.get("intro(개요)").toString());
                 sanup.setAssociation(temp.get("association(실시기관)").toString());
                 sanup.setMajor(temp.get("major(관련학과)").toString());
@@ -53,7 +56,7 @@ public class ManageSanupData {
                 sanup.setTest_subject(temp.get("test_subject(시험과목)").toString());
                 sanup.setTest_method(temp.get("test_method(검정방법)").toString());
                 sanup.setCut_line(temp.get("cut_line(합격기준)").toString());
-                JSONArray cal=temp.getJSONArray("calender(일정)");
+                /*JSONArray cal=temp.getJSONArray("calender(일정)");
                 ArrayList<String> pilgi_apply=new ArrayList<>();
                 ArrayList<String> pilgi_test=new ArrayList<>();
                 ArrayList<String> pilgi_balpyo=new ArrayList<>();
@@ -94,7 +97,7 @@ public class ManageSanupData {
                 sanup.setAcademy_name(academy_name);
                 sanup.setAcademy_address(academy_address);
                 sanup.setAcademy_phone(academy_phone);
-                sanup.setAcademy_connect(academy_connect);
+                sanup.setAcademy_connect(academy_connect);*/
                 //when setting one certification, then add to gisulArrayList
                 sanupArrayList.add(sanup);
                 sanup=new Sanup();
@@ -102,5 +105,8 @@ public class ManageSanupData {
             sanup_total.add(sanupArrayList);
             sanupArrayList=new ArrayList<>(20);
         }
+    }
+    public ArrayList<String> getSanuplist(){
+        return sanuplist;
     }
 }

@@ -16,6 +16,7 @@ public class ManageGisaData {
     Gisa gisa;
     private ArrayList<Gisa> gisaArrayList;
     private ArrayList<ArrayList<Gisa>> gisa_total;
+    private ArrayList<String> gisalist;
     List<String> category= Arrays.asList("건설", "경영,회계,사무", "광업자원", "기계", "농림어업",
             "문화,예술,디자인,방송", "보건,의료", "사회복지,종교", "섬유,의복", "식품,가공", "안전관리", "영업,판매",
             "운전,운송", "음식서비스", "이용,숙박,여행,오락,스포츠", "인쇄,목재,가구,공예", "재료", "전기,전자", "정보통신",
@@ -30,6 +31,7 @@ public class ManageGisaData {
         gisa=new Gisa();
         gisaArrayList=new ArrayList<>(20);
         gisa_total=new ArrayList<>(20);
+        gisalist=new ArrayList<>();
     }
     public ArrayList<ArrayList<Gisa>> getGisa_total(){return gisa_total;}
 
@@ -45,6 +47,7 @@ public class ManageGisaData {
                 JSONObject temp=jsonArray.getJSONObject(j);
                 gisa=new Gisa();
                 gisa.setName(temp.get("name").toString());
+                gisalist.add(temp.get("name").toString());
                 gisa.setIntro(temp.get("intro(개요)").toString());
                 gisa.setAssociation(temp.get("association(실시기관)").toString());
                 gisa.setMajor(temp.get("major(관련학과)").toString());
@@ -52,7 +55,7 @@ public class ManageGisaData {
                 gisa.setTest_subject(temp.get("test_subject(시험과목)").toString());
                 gisa.setTest_method(temp.get("test_method(검정방법)").toString());
                 gisa.setCut_line(temp.get("cut_line(합격기준)").toString());
-                JSONArray cal=temp.getJSONArray("calender(일정)");
+                /*JSONArray cal=temp.getJSONArray("calender(일정)");
                 ArrayList<String> pilgi_apply=new ArrayList<>();
                 ArrayList<String> pilgi_test=new ArrayList<>();
                 ArrayList<String> pilgi_balpyo=new ArrayList<>();
@@ -93,7 +96,7 @@ public class ManageGisaData {
                 gisa.setAcademy_name(academy_name);
                 gisa.setAcademy_address(academy_address);
                 gisa.setAcademy_phone(academy_phone);
-                gisa.setAcademy_connect(academy_connect);
+                gisa.setAcademy_connect(academy_connect);*/
                 //when setting one certification, then add to gisulArrayList
                 gisaArrayList.add(gisa);
                 gisa=new Gisa();
@@ -101,5 +104,8 @@ public class ManageGisaData {
             gisa_total.add(gisaArrayList);
             gisaArrayList=new ArrayList<>(20);
         }
+    }
+    public ArrayList<String> getGisalist(){
+        return gisalist;
     }
 }

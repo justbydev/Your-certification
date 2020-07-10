@@ -18,23 +18,17 @@ import java.util.ArrayList;
 
 public class NotConnectAcademyAdapter extends RecyclerView.Adapter {
     private ArrayList<String> academy_name=null;
-    private ArrayList<String> academy_address=null;
-    private ArrayList<String> academy_phone=null;
 
     private static Context context;
-    public NotConnectAcademyAdapter(ArrayList<String> academy_name, ArrayList<String> academy_address, ArrayList<String> academy_phone){
+    public NotConnectAcademyAdapter(ArrayList<String> academy_name){
         this.academy_name=academy_name;
-        this.academy_address=academy_address;
-        this.academy_phone=academy_phone;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         public TextView each_academy;
-        public ImageView academy_arrow;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             each_academy=itemView.findViewById(R.id.each_academy);
-            academy_arrow=itemView.findViewById(R.id.academy_arrow);
             context= EachCertificate.context;
         }
     }
@@ -58,19 +52,6 @@ public class NotConnectAcademyAdapter extends RecyclerView.Adapter {
 
                 Intent intent=new Intent(v.getContext(), NotConnectCertificateAcademy.class);
                 intent.putExtra("academy_name", academy_name.get(pos));
-                intent.putExtra("academy_address", academy_address.get(pos));
-                intent.putExtra("academy_phone", academy_phone.get(pos));
-
-                v.getContext().startActivity(intent);
-            }
-        });
-        myViewHolder.academy_arrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(v.getContext(), NotConnectCertificateAcademy.class);
-                intent.putExtra("academy_name", academy_name.get(pos));
-                intent.putExtra("academy_address", academy_address.get(pos));
-                intent.putExtra("academy_phone", academy_phone.get(pos));
 
                 v.getContext().startActivity(intent);
             }

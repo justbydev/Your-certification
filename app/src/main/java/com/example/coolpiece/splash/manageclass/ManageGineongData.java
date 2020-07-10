@@ -1,5 +1,8 @@
 package com.example.coolpiece.splash.manageclass;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.coolpiece.splash.dataclass.Gineongsa;
 
 import org.json.JSONArray;
@@ -9,7 +12,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class ManageGineongData {
 
@@ -17,6 +23,7 @@ public class ManageGineongData {
     Gineongsa gineongsa;
     private ArrayList<Gineongsa> gineongArrayList;
     private ArrayList<ArrayList<Gineongsa>> gineong_total;
+    private ArrayList<String> gineonglist;
     List<String> category= Arrays.asList("건설", "경영,회계,사무", "광업자원", "기계", "농림어업",
             "문화,예술,디자인,방송", "보건,의료", "사회복지,종교", "섬유,의복", "식품,가공", "안전관리", "영업,판매",
             "운전,운송", "음식서비스", "이용,숙박,여행,오락,스포츠", "인쇄,목재,가구,공예", "재료", "전기,전자", "정보통신",
@@ -36,6 +43,7 @@ public class ManageGineongData {
         gineongsa=new Gineongsa();
         gineongArrayList=new ArrayList<>(20);
         gineong_total=new ArrayList<>(20);
+        gineonglist=new ArrayList<>();
     }
 
     public ArrayList<ArrayList<Gineongsa>> getGineong_total() {
@@ -63,6 +71,7 @@ public class ManageGineongData {
                 JSONObject temp=jsonArray.getJSONObject(j);
                 System.out.println(temp.get("name").toString());
                 gineongsa.setName(temp.get("name").toString());
+                gineonglist.add(temp.get("name").toString());
                 System.out.println(temp.get("intro(개요)").toString());
                 gineongsa.setIntro(temp.get("intro(개요)").toString());
                 System.out.println(temp.get("association(실시기관)").toString());
@@ -77,8 +86,8 @@ public class ManageGineongData {
                 gineongsa.setTest_method(temp.get("test_method(검정방법)").toString());
                 System.out.println(temp.get("cut_line(합격기준)").toString());
                 gineongsa.setCut_line(temp.get("cut_line(합격기준)").toString());
-                JSONArray cal=temp.getJSONArray("calender(일정)");
-                ArrayList<String> pilgi_apply=new ArrayList<>();
+                //JSONArray cal=temp.getJSONArray("calender(일정)");
+                /*ArrayList<String> pilgi_apply=new ArrayList<>();
                 ArrayList<String> pilgi_test=new ArrayList<>();
                 ArrayList<String> pilgi_balpyo=new ArrayList<>();
                 ArrayList<String> pilgi_balpyo_final=new ArrayList<>();
@@ -140,7 +149,7 @@ public class ManageGineongData {
                 gineongsa.setAcademy_name(academy_name);
                 gineongsa.setAcademy_address(academy_address);
                 gineongsa.setAcademy_phone(academy_phone);
-                gineongsa.setAcademy_connect(academy_connect);
+                gineongsa.setAcademy_connect(academy_connect);*/
                 //gineongsa.setOnline(temp.get("online(온라인강의)").toString());
                 gineongArrayList.add(gineongsa);
                 gineongsa=new Gineongsa();
@@ -151,5 +160,8 @@ public class ManageGineongData {
             gineongArrayList=new ArrayList<>(20);
             System.out.println("cere");
         }
+    }
+    public ArrayList<String> getGineonglist(){
+        return gineonglist;
     }
 }

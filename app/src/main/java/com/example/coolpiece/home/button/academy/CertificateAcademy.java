@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.coolpiece.R;
+import com.example.coolpiece.splash.dataclass.Academy;
+import com.example.coolpiece.splash.manageclass.ManageAcademyData;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 
@@ -25,6 +27,7 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.MarkerIcons;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,7 +37,9 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
     TextView academy_address;
     TextView academy_phone;
     Intent intent;
+    String name=null;
     String address=null;
+    String phone=null;
     MapView mapView;
 
 
@@ -59,11 +64,19 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
         back_button.setOnClickListener(buttononclicklistener);
 
         intent=getIntent();
-        address=intent.getStringExtra("academy_address");
-        academy_name.setText(intent.getStringExtra("academy_name"));
+        name=intent.getStringExtra("academy_name");
+        academy_name.setText(name);
+        ArrayList<Academy> total=new ArrayList<>();
+        total= ManageAcademyData.getInstance().getAcademy_total();
+        for(int i=0; i<total.size(); i++){
+            if(name.equals(total.get(i).getAcademy_name())){
+                address=total.get(i).getAcademy_address();
+                phone=total.get(i).getAcademy_number();
+                break;
+            }
+        }
         academy_address.setText(address);
-        academy_phone.setText(intent.getStringExtra("academy_phone"));
-
+        academy_phone.setText(phone);
 
         //new markmap().execute(address);
 

@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolpiece.MainFragment;
+import com.example.coolpiece.splash.manageclass.ManageAcaCertData;
+import com.example.coolpiece.splash.manageclass.ManageAcademyData;
 import com.example.coolpiece.splash.manageclass.ManageGineongData;
 import com.example.coolpiece.splash.manageclass.ManageGisaData;
 import com.example.coolpiece.splash.manageclass.ManageGisulData;
@@ -32,7 +34,9 @@ public class SplashActivity extends AppCompatActivity {
             "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgineungs.json?alt=media&token=a6048df9-9b2a-4ddb-b907-c4e01ff75b9c",
     "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fgisa.json?alt=media&token=e529244d-d5ce-4015-ac99-7417c366486d",
     "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fsanupgisa.json?alt=media&token=e1e7ab93-421b-42da-972b-3c1dab0cd9ad",
-    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fdata.json?alt=media&token=b6fcd08f-ff61-4917-b0cf-2fbc63f34918"};
+    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Fdata.json?alt=media&token=b6fcd08f-ff61-4917-b0cf-2fbc63f34918",
+    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Facademydata.json?alt=media&token=80842c5f-98d7-4e1a-af33-0fe790587b46",
+    "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Facacertidata.json?alt=media&token=8d73d659-7da6-43c7-a8e1-98c80b898282"};
     public static Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +79,18 @@ public class SplashActivity extends AppCompatActivity {
             String guitarjson=getjsonHtml(urls[4]);
             try {
                 ManageGuitarData.getInstance().startParsing(guitarjson);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String academyjson=getjsonHtml(urls[5]);
+            try {
+                ManageAcademyData.getInstance().startParsing(academyjson);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String acacertjson=getjsonHtml(urls[6]);
+            try {
+                ManageAcaCertData.getInstance().startParsing(acacertjson);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

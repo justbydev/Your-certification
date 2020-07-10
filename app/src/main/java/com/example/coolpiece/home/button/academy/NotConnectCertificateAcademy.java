@@ -9,6 +9,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolpiece.R;
+import com.example.coolpiece.splash.dataclass.Academy;
+import com.example.coolpiece.splash.manageclass.ManageAcademyData;
+
+import java.util.ArrayList;
 
 public class NotConnectCertificateAcademy extends AppCompatActivity {
     TextView back_button;
@@ -17,6 +21,8 @@ public class NotConnectCertificateAcademy extends AppCompatActivity {
     TextView academy_phone;
     Intent intent;
     String address=null;
+    String name=null;
+    String phone=null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +37,19 @@ public class NotConnectCertificateAcademy extends AppCompatActivity {
         back_button.setOnClickListener(buttononclicklistener);
 
         intent=getIntent();
-        address=intent.getStringExtra("academy_address");
-        academy_name.setText(intent.getStringExtra("academy_name"));
+        name=intent.getStringExtra("academy_name");
+        academy_name.setText(name);
+        ArrayList<Academy> total=new ArrayList<>();
+        total= ManageAcademyData.getInstance().getAcademy_total();
+        for(int i=0; i<total.size(); i++){
+            if(name.equals(total.get(i).getAcademy_name())){
+                address=total.get(i).getAcademy_address();
+                phone=total.get(i).getAcademy_number();
+                break;
+            }
+        }
         academy_address.setText(address);
-        academy_phone.setText(intent.getStringExtra("academy_phone"));
+        academy_phone.setText(phone);
     }
 
     private View.OnClickListener buttononclicklistener=new View.OnClickListener() {

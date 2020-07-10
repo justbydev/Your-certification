@@ -15,6 +15,7 @@ public class ManageGuitarData {
     Guitar guitar;
     private ArrayList<Guitar> guitarArrayList;
     private ArrayList<ArrayList<Guitar>> guitar_total;
+    private ArrayList<String> guitarlist;
     List<String> category= Arrays.asList("강사과정", "커피과정", "산업과정", "심리상담과정", "전문가과정",
             "방과후과정", "공부과정", "항공과정", "아동과정", "병원과정", "실버과정", "안전과정",
             "인문과정", "IT과정", "부동산과정", "반려과정", "취업과정");
@@ -28,6 +29,7 @@ public class ManageGuitarData {
         guitar=new Guitar();
         guitarArrayList=new ArrayList<>(20);
         guitar_total=new ArrayList<>(20);
+        guitarlist=new ArrayList<>();
     }
     public ArrayList<ArrayList<Guitar>> getGuitar_total(){return guitar_total;}
 
@@ -42,6 +44,7 @@ public class ManageGuitarData {
             for(int j=0; j<jsonArray.length()-1; j++){
                 JSONObject temp=jsonArray.getJSONObject(j);
                 guitar.setName(temp.get("name").toString());
+                guitarlist.add(temp.get("name").toString());
                 System.out.println(temp.get("name").toString());
                 System.out.println("==========================");
                 guitar.setIntro(temp.get("intro(개요)").toString());
@@ -75,7 +78,7 @@ public class ManageGuitarData {
                 gisa.setSilgi_apply(silgi_apply);
                 gisa.setSilgi_test(silgi_test);
                 gisa.setFinal_balpyo(final_balpyo);*/
-                JSONArray aca=temp.getJSONArray("academy(학원)");
+                /*JSONArray aca=temp.getJSONArray("academy(학원)");
                 ArrayList<String> academy_name=new ArrayList<>();
                 ArrayList<String> academy_address=new ArrayList<>();
                 ArrayList<String> academy_phone=new ArrayList<>();
@@ -91,7 +94,7 @@ public class ManageGuitarData {
                 guitar.setAcademy_name(academy_name);
                 guitar.setAcademy_address(academy_address);
                 guitar.setAcademy_phone(academy_phone);
-                guitar.setAcademy_connect(academy_connect);
+                guitar.setAcademy_connect(academy_connect);*/
                 //when setting one certification, then add to gisulArrayList
                 guitarArrayList.add(guitar);
                 guitar=new Guitar();
@@ -99,5 +102,8 @@ public class ManageGuitarData {
             guitar_total.add(guitarArrayList);
             guitarArrayList=new ArrayList<>(20);
         }
+    }
+    public ArrayList<String> getGuitarlist(){
+        return guitarlist;
     }
 }
