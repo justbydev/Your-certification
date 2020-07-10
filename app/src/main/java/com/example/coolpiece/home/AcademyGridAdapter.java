@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coolpiece.home.button.academy.CertificateAcademy;
 import com.example.coolpiece.home.button.academy.NotConnectCertificateAcademy;
 import com.example.coolpiece.R;
 
@@ -50,10 +51,8 @@ public class AcademyGridAdapter extends RecyclerView.Adapter {
         myViewHolder.home_academy_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, NotConnectCertificateAcademy.class);
+                Intent intent=new Intent(context, CertificateAcademy.class);
                 intent.putExtra("academy_name", academy_name.get(pos));
-                intent.putExtra("academy_address", "nothing");
-                intent.putExtra("academy_phone", "nothing");
 
                 context.startActivity(intent);
             }
@@ -61,10 +60,8 @@ public class AcademyGridAdapter extends RecyclerView.Adapter {
         myViewHolder.academy_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, NotConnectCertificateAcademy.class);
+                Intent intent=new Intent(context, CertificateAcademy.class);
                 intent.putExtra("academy_name", academy_name.get(pos));
-                intent.putExtra("academy_address", "nothing");
-                intent.putExtra("academy_phone", "nothing");
 
                 context.startActivity(intent);
 

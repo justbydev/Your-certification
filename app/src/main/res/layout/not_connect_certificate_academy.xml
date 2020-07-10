@@ -15,18 +15,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="학원 이름"
+        android:textColor="#0000ff"
         android:textSize="30sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="※학원 주소※"
+        android:textSize="20sp"
+        android:textColor="#642EFE"/>
     <TextView
         android:id="@+id/academy_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="학원 주소"
-        android:textSize="20sp"/>
+        android:textSize="17sp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="※학원 번호※"
+        android:textSize="20sp"
+        android:textColor="#642EFE"/>
     <TextView
         android:id="@+id/academy_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="학원 번호"
-        android:textSize="20sp"/>
+        android:textSize="17sp"/>
 
 </LinearLayout>

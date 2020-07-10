@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
             android:id="@+id/back_button"
@@ -14,54 +14,64 @@
             android:textSize="20sp"
             android:clickable="true"/>
         <TextView
-            android:id="@+id/academy_name"
+            android:id="@+id/cert_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="학원 이름"
+            android:text="자격증 이름"
             android:textColor="#0000ff"
             android:textSize="30sp"/>
-        <com.naver.maps.map.MapView
-            android:id="@+id/map_view"
+        <ImageView
+            android:id="@+id/mycert_image"
             android:layout_width="match_parent"
-            android:layout_height="300sp"/>
+            android:layout_height="300sp"
+            android:scaleType="centerCrop"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="※학원 주소※"
+            android:text="※자격증 번호※"
             android:textSize="20sp"
             android:textColor="#642EFE"/>
         <TextView
-            android:id="@+id/academy_address"
+            android:id="@+id/cert_serial_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="학원 주소"
             android:textSize="17sp"
             android:textColor="#000000"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="※학원 번호※"
+            android:text="※생년월일※"
             android:textSize="20sp"
             android:textColor="#642EFE"/>
         <TextView
-            android:id="@+id/academy_phone"
+            android:id="@+id/birthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="학원 번호"
-            android:textColor="#000000"
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="#000000"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="※배울 수 있는 자격증※"
+            android:text="※발급날짜※"
             android:textSize="20sp"
             android:textColor="#642EFE"/>
         <TextView
-            android:id="@+id/certs"
+            android:id="@+id/cert_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="가능 자격증"
-            android:textColor="#000000"
-            android:textSize="17sp"/>
+            android:textSize="17sp"
+            android:textColor="#000000"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="※발급기관※"
+            android:textSize="20sp"
+            android:textColor="#642EFE"/>
+        <TextView
+            android:id="@+id/cert_institution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="#000000"/>
     </LinearLayout>
 </ScrollView>

@@ -26,6 +26,8 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.MarkerIcons;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +38,12 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
     TextView academy_name;
     TextView academy_address;
     TextView academy_phone;
+    TextView certs;
     Intent intent;
     String name=null;
     String address=null;
     String phone=null;
+    String cs=null;
     MapView mapView;
 
 
@@ -60,6 +64,7 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
         academy_address=(TextView)findViewById(R.id.academy_address);
         academy_phone=(TextView)findViewById(R.id.academy_phone);
         mapView=(MapView)findViewById(R.id.map_view);
+        certs=(TextView)findViewById(R.id.certs);
 
         back_button.setOnClickListener(buttononclicklistener);
 
@@ -72,11 +77,13 @@ public class CertificateAcademy extends AppCompatActivity implements OnMapReadyC
             if(name.equals(total.get(i).getAcademy_name())){
                 address=total.get(i).getAcademy_address();
                 phone=total.get(i).getAcademy_number();
+                cs=total.get(i).getAcademy_cert();
                 break;
             }
         }
         academy_address.setText(address);
         academy_phone.setText(phone);
+        certs.setText(cs);
 
         //new markmap().execute(address);
 

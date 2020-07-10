@@ -53,6 +53,7 @@
         <activity android:name=".mypage.challenge.Challengeauthen" />
         <activity android:name=".mypage.challenge.MyAuthenPic_large"/>
         <activity android:name=".board.BoardLarge"/>
+        <activity android:name=".mycert.EachmyCert"/>
     </application>
 
 </manifest>

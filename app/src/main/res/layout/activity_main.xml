@@ -14,7 +14,7 @@
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/searchedittext"
-                    android:layout_width="330sp"
+                    android:layout_width="270sp"
                     android:layout_height="50sp"
                     android:hint="자격증을 검색해주세요">
                 </EditText>

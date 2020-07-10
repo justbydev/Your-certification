@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:weightSum="4">
+        android:weightSum="5">
         <TextView
             android:id="@+id/menu_home"
             android:layout_width="0dp"
@@ -56,6 +56,15 @@
             android:layout_width="0dp"
             android:layout_height="40sp"
             android:text="마이페이지"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#F6CED8"
+            android:clickable="true"/>
+        <TextView
+            android:id="@+id/menu_mycert"
+            android:layout_width="0dp"
+            android:layout_height="40sp"
+            android:text="내자격증"
             android:layout_weight="1"
             android:gravity="center"
             android:background="#F6CED8"

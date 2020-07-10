@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.coolpiece.QA.QAActivity;
 import com.example.coolpiece.board.BoardActivity;
 import com.example.coolpiece.login.LoginActivity;
+import com.example.coolpiece.mycert.MyCertActivity;
 import com.example.coolpiece.mypage.MypageActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -26,8 +27,10 @@ public class MainFragment extends AppCompatActivity {
     MypageActivity mypageActivity=null;
     BoardActivity boardActivity=null;
     QAActivity qaActivity=null;
+    MyCertActivity myCertActivity=null;
     TextView menu_home;
     TextView menu_mypage;
+    TextView menu_mycert;
     TextView menu_board;
     TextView menu_qa;
     TextView logbutton;
@@ -44,12 +47,14 @@ public class MainFragment extends AppCompatActivity {
 
         menu_home=(TextView)findViewById(R.id.menu_home);
         menu_mypage=(TextView)findViewById(R.id.menu_mypage);
+        menu_mycert=(TextView)findViewById(R.id.menu_mycert);
         menu_board=(TextView)findViewById(R.id.menu_board);
         menu_qa=(TextView)findViewById(R.id.menu_QA);
         logbutton=(TextView)findViewById(R.id.logbutton);
 
         menu_home.setOnClickListener(buttononclicklistener);
         menu_mypage.setOnClickListener(buttononclicklistener);
+        menu_mycert.setOnClickListener(buttononclicklistener);
         menu_board.setOnClickListener(buttononclicklistener);
         menu_qa.setOnClickListener(buttononclicklistener);
         logbutton.setOnClickListener(buttononclicklistener);
@@ -95,6 +100,9 @@ public class MainFragment extends AppCompatActivity {
                     if(mypageActivity!=null){
                         getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
                     }
+                    if(myCertActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(myCertActivity).commit();
+                    }
                     if(boardActivity!=null){
                         getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
                     }
@@ -116,6 +124,9 @@ public class MainFragment extends AppCompatActivity {
                     if(mypageActivity!=null){
                         getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
                     }
+                    if(myCertActivity!=null){
+                        getSupportFragmentManager().beginTransaction().hide(myCertActivity).commit();
+                    }
                     if(qaActivity!=null){
                         getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
                     }
@@ -134,6 +145,9 @@ public class MainFragment extends AppCompatActivity {
                         }
                         if(mypageActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                        }
+                        if(myCertActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(myCertActivity).commit();
                         }
                         if(boardActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
@@ -156,6 +170,35 @@ public class MainFragment extends AppCompatActivity {
                         if(homeActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
                         }
+                        if(myCertActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(myCertActivity).commit();
+                        }
+                        if(boardActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                        }
+                        if(qaActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
+                        }
+                    }
+                    else {
+                        changetologinpage();
+                    }
+                    return;
+                case R.id.menu_mycert:
+                    if(firebaseAuth.getCurrentUser()!=null){
+                        if(myCertActivity==null){
+                            myCertActivity=new MyCertActivity();
+                            getSupportFragmentManager().beginTransaction().add(R.id.container, myCertActivity).commit();
+                        }
+                        else{
+                            getSupportFragmentManager().beginTransaction().show(myCertActivity).commit();
+                        }
+                        if(homeActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
+                        }
+                        if(mypageActivity!=null){
+                            getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                        }
                         if(boardActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
                         }
@@ -166,8 +209,6 @@ public class MainFragment extends AppCompatActivity {
                     else{
                         changetologinpage();
                     }
-
-                    return;
                 default:
                     return;
             }
