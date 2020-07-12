@@ -75,6 +75,10 @@
                 android:clickable="true"
                 android:textSize="15sp"/>
         </LinearLayout>
-
+        <Button
+            android:id="@+id/store_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="명함 저장하기"/>
     </LinearLayout>
 </ScrollView>

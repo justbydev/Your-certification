@@ -147,11 +147,16 @@ public class MyscheduleFragment extends Fragment {
 
     public String getDday(String date) throws ParseException {
         final int ONE_DAY=24*60*60*1000;
-        long now=System.currentTimeMillis()/ONE_DAY;
+        System.out.println(System.currentTimeMillis());
+        long now=(System.currentTimeMillis()-ONE_DAY)/ONE_DAY;
+        System.out.println(now);
         Date mDate=new SimpleDateFormat("yyyy.MM.dd").parse(date);
         Calendar cal=Calendar.getInstance();
         cal.setTime(mDate);
+        System.out.println(cal.getTimeInMillis());
         long want=cal.getTimeInMillis()/ONE_DAY;
+        System.out.println(want);
+        System.out.println("This is callender schedule");
         long result=want-now;
         String strFormat;
         if(result>0){

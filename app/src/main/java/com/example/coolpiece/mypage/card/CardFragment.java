@@ -6,15 +6,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -22,6 +27,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,12 +55,20 @@ import com.google.firebase.database.ValueEventListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CardFragment extends Fragment{
 
     RelativeLayout image_layout;
     ImageView certi_view;
+    Button store_button;
     public TextView card_explain;
     public TextView certi_list;
     public TextView size_list;
@@ -82,6 +96,7 @@ public class CardFragment extends Fragment{
         size_list=(TextView)v.findViewById(R.id.size_list);
         background_list=(TextView)v.findViewById(R.id.background_list);
         add_text=(TextView)v.findViewById(R.id.add_text);
+        store_button=v.findViewById(R.id.store_button);
 
         mycert=new TextView(context);
 
@@ -90,7 +105,7 @@ public class CardFragment extends Fragment{
         String temp=firebaseUser.getEmail().toString();
         String name=temp.replace('.', '-');
         mList=new ArrayList<>();
-        databaseReference= FirebaseDatabase.getInstance().getReference("certificate/data").child(name);
+        databaseReference= FirebaseDatabase.getInstance().getReference("certificate").child(name);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -136,6 +151,7 @@ public class CardFragment extends Fragment{
         size_list.setOnClickListener(buttononclicklistener);
         background_list.setOnClickListener(buttononclicklistener);
         add_text.setOnClickListener(buttononclicklistener);
+        store_button.setOnClickListener(buttononclicklistener);
 
         return v;
     }
@@ -467,6 +483,87 @@ public class CardFragment extends Fragment{
                             });
                     a.show();
                     break;
+                case R.id.store_button:
+                    if(choose==0){
+                        Toast.makeText(context, "목록에서 자격증 종류를 선택해주세요", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(choose==1){
+                        Bitmap bitmap=Bitmap.createBitmap(image_layout.getWidth(), image_layout.getHeight(), Bitmap.Config.ARGB_8888);
+                        Canvas canvas=new Canvas(bitmap);
+                        image_layout.draw(canvas);
+                        if(Build.VERSION.SDK_INT>=23){//갤러리에 접근해서 생성한 이미지 저장을 위한 권한 접근, WRITE_EXTERNAL_STORAGE 사용을 위해
+                            int permissionReadStorage= ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
+                            int permissionWriteStorage=ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                            if(permissionReadStorage== PackageManager.PERMISSION_DENIED||permissionWriteStorage==PackageManager.PERMISSION_DENIED){
+                                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_IMAGE_CODE);
+                            }
+                            else{//Scoped Storage 적용
+
+                                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.Q){
+                                    SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss");
+                                    Date date = new Date();
+                                    ContentValues values=new ContentValues();
+                                    String relativelocation=Environment.DIRECTORY_PICTURES+File.separator+"Coolpiece";
+                                    //values.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
+                                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+                                    //values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
+                                    values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
+                                    values.put(MediaStore.Images.Media.TITLE, day.format(date));
+                                    values.put(MediaStore.Images.Media.IS_PENDING, 1);
+                                    values.put(MediaStore.MediaColumns.RELATIVE_PATH, relativelocation);
+                                    ContentResolver contentResolver=context.getContentResolver();
+                                    Uri item=contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                                    try {
+                                        ParcelFileDescriptor pdf=contentResolver.openFileDescriptor(item, "w", null);
+                                        if(pdf!=null){
+                                            ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                            byte[] byteArray=stream.toByteArray();
+                                            FileOutputStream fos=new FileOutputStream(pdf.getFileDescriptor());
+                                            fos.write(byteArray);
+                                            fos.close();
+                                            Toast.makeText(context, "명함이 갤러리에 저장되었습니다", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                else{
+                                    String path=Environment.getExternalStorageDirectory().getAbsolutePath()+"/DCIM/Coolpiece";
+                                    File file=new File(path);
+                                    if(!file.exists()){
+                                        file.mkdirs();
+                                    }
+                                    SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss");
+                                    Date date = new Date();
+                                    image_layout.buildDrawingCache();
+                                    Bitmap captureview = image_layout.getDrawingCache();
+
+                                    FileOutputStream fos = null;
+                                    try{
+                                        fos = new FileOutputStream(path+"/"+day.format(date)+".jpg");
+                                        captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                                        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/" + day.format(date) + ".JPG")));
+                                        Toast.makeText(context, "명함이 갤러리에 저장되었습니다", Toast.LENGTH_SHORT).show();
+                                        fos.flush();
+                                        fos.close();
+                                        image_layout.destroyDrawingCache();
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+
+
+                                }
+
+                            }
+                        }
+                    }
                 default:break;
             }
         }
@@ -495,7 +592,7 @@ public class CardFragment extends Fragment{
                     }
                 }
                 if(cnt==2){
-                    Toast.makeText(context, "앨범 접근 권한이 설정되었습니다\n다시 사진 추가를 눌러주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "앨범 접근 권한이 설정되었습니다\n다시 눌러주세요", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     AlertDialog.Builder builder=new AlertDialog.Builder(context);
