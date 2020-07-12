@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4">
+    <TextView
+        android:id="@+id/back_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:textSize="20sp"
+        android:textColor="#FF0040"
+        android:clickable="true"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

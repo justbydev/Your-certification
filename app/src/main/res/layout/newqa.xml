@@ -16,7 +16,8 @@
             android:id="@+id/qatitle"
             android:layout_width="330sp"
             android:layout_height="50sp"
-            android:textSize="23sp"/>
+            android:textSize="23sp"
+            android:inputType="text"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

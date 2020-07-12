@@ -7,8 +7,9 @@
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="뒤로가기"
+        android:text="@string/back"
         android:textSize="20sp"
+        android:textColor="#FF0040"
         android:clickable="true"/>
     <TextView
         android:id="@+id/academy_name"

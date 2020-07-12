@@ -19,9 +19,11 @@ public class AnswerAdapter extends RecyclerView.Adapter {
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView answeritem;
+        TextView answer_user;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             answeritem=(TextView)itemView.findViewById(R.id.answer_item);
+            answer_user=itemView.findViewById(R.id.answer_user);
         }
     }
     @NonNull
@@ -37,6 +39,7 @@ public class AnswerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
         myViewHolder.answeritem.setText(answer.get(position));
+        myViewHolder.answer_user.setText("익명"+position);
     }
 
     @Override

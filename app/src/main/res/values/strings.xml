@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Coolpiece</string>
+    <string name="back"><![CDATA[<뒤로]]></string>
 </resources>

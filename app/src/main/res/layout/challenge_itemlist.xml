@@ -6,10 +6,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="5sp"
         android:layout_margin="5sp"
-        app:cardBackgroundColor="#D8D8D8"
-        app:cardElevation="10dp">
+        app:cardElevation="10sp"
+        app:cardBackgroundColor="#FAFAFA">
         <TextView
             android:id="@+id/challenge_item"
             android:layout_width="match_parent"

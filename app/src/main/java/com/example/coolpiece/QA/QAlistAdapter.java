@@ -2,6 +2,7 @@ package com.example.coolpiece.QA;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,12 @@ public class QAlistAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
-        myViewHolder.question_item.setText("제목: "+list.get(position).getTitle());
+        String text=" 제목: "+list.get(position).getTitle();
+        if(text.length()>23){
+            text=text.substring(0, 21);
+            text=text+"...";
+        }
+        myViewHolder.question_item.setText(text);
         final int pos=position;
         myViewHolder.question_item.setOnClickListener(new View.OnClickListener() {
             @Override

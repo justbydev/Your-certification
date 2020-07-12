@@ -46,7 +46,12 @@ public class AcademyGridAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
-        myViewHolder.home_academy_name.setText(academy_name.get(position));
+        String text=academy_name.get(position);
+        if(text.length()>=12){
+            text=text.substring(0, 10);
+            text=text+"...";
+        }
+        myViewHolder.home_academy_name.setText(text);
         final int pos=position;
         myViewHolder.home_academy_name.setOnClickListener(new View.OnClickListener() {
             @Override

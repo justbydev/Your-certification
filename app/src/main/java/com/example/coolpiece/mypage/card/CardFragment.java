@@ -510,7 +510,7 @@ public class CardFragment extends Fragment{
                                     values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
                                     values.put(MediaStore.Images.Media.TITLE, day.format(date));
                                     values.put(MediaStore.Images.Media.IS_PENDING, 1);
-                                    values.put(MediaStore.MediaColumns.RELATIVE_PATH, relativelocation);
+                                    //values.put(MediaStore.MediaColumns.RELATIVE_PATH, relativelocation);
                                     ContentResolver contentResolver=context.getContentResolver();
                                     Uri item=contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                                     try {

@@ -35,6 +35,7 @@ public class Challengedetail extends AppCompatActivity {
     String point;
     String attend;
     String startdate;
+    TextView back_button;
     ArrayList<String> day_check;
     int okday=0;
     int percentage=0;
@@ -56,6 +57,7 @@ public class Challengedetail extends AppCompatActivity {
         success_percent=(TextView)findViewById(R.id.success_percent);
         check_recyclerview=(RecyclerView)findViewById(R.id.check_recyclerview);
         authen_button=(Button)findViewById(R.id.authen_button);
+        back_button=findViewById(R.id.back_button);
 
         intent=getIntent();
         certification=intent.getStringExtra("certification");
@@ -136,7 +138,19 @@ public class Challengedetail extends AppCompatActivity {
 
             }
         });
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     @Override

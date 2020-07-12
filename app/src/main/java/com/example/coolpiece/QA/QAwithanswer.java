@@ -40,6 +40,7 @@ public class QAwithanswer extends AppCompatActivity {
     String email;
     String number;
     String answer;
+    TextView back_button;
     RecyclerView answer_recyclerview;
     DatabaseReference databaseReference;
 
@@ -57,6 +58,7 @@ public class QAwithanswer extends AppCompatActivity {
         answerbutton=(Button)findViewById(R.id.answerbutton);
         answertext=(EditText)findViewById(R.id.answertext);
         answer_recyclerview=(RecyclerView)findViewById(R.id.answer_recyclerview);
+        back_button=findViewById(R.id.back_button);
 
         intent=getIntent();
         title=intent.getStringExtra("title");
@@ -83,6 +85,12 @@ public class QAwithanswer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 register_answer();
+            }
+        });
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -147,5 +155,11 @@ public class QAwithanswer extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

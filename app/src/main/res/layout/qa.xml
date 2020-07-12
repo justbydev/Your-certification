@@ -3,6 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:text="※자격증 관련 질문을 올려주세요.\n  그 이외의 질문은 삭제될 수 있습니다"/>
     <Button
         android:id="@+id/questionbutton"
         android:layout_width="wrap_content"

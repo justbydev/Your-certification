@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,17 +57,18 @@ import java.util.List;
 import java.util.Locale;
 
 public class HomeActivity extends Fragment {
-    Button gineong;
-    Button gisa;
-    Button gisulsa;
-    Button sanup;
-    Button guitar;
+    TextView gineong;
+    TextView gisa;
+    TextView gisulsa;
+    TextView sanup;
+    TextView guitar;
     TextView mylocation;
     TextView melocate;
     EditText searchedittext;
     RecyclerView search_recycler;
     Button searchbutton;
     RecyclerView grid_recyclerview;
+    ViewFlipper text_flipper;
     private Intent intent;
     public static HomeActivity homecontext;
     String arg1=null, arg2=null, arg3=null;
@@ -107,12 +109,13 @@ public class HomeActivity extends Fragment {
         melocate=(TextView)v.findViewById(R.id.melocate);
         search_recycler=(RecyclerView)v.findViewById(R.id.search_recycler);
         searchbutton=(Button)v.findViewById(R.id.searchbutton);
+        text_flipper=v.findViewById(R.id.text_slide);
 
-        gineong=(Button)v.findViewById(R.id.gineong);
-        gisa=(Button)v.findViewById(R.id.gisa);
-        gisulsa=(Button)v.findViewById(R.id.gisulsa);
-        sanup=(Button)v.findViewById(R.id.sanup);
-        guitar=(Button)v.findViewById(R.id.guitar);
+        gineong=v.findViewById(R.id.gineong);
+        gisa=v.findViewById(R.id.gisa);
+        gisulsa=v.findViewById(R.id.gisulsa);
+        sanup=v.findViewById(R.id.sanup);
+        guitar=v.findViewById(R.id.guitar);
 
         searchedittext=(EditText)v.findViewById(R.id.searchedittext);
 
@@ -127,6 +130,11 @@ public class HomeActivity extends Fragment {
         gisulsa.setOnClickListener(buttonClickListener);
         sanup.setOnClickListener(buttonClickListener);
         guitar.setOnClickListener(buttonClickListener);
+
+        text_flipper.setFlipInterval(4000);
+        text_flipper.setAutoStart(true);
+        text_flipper.setInAnimation(getContext(), android.R.anim.slide_in_left);
+        text_flipper.setOutAnimation(getContext(), android.R.anim.slide_out_right);
 
         search_recycler.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(getContext());
