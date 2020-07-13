@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="선택된 날짜"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp"/>
         <ImageView
             android:id="@+id/add_schedule"

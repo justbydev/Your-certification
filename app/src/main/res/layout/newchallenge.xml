@@ -2,23 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="10sp">
     <TextView
         android:id="@+id/challenge_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="도전 과제 이름"
+        android:layout_marginLeft="20sp"
         android:textSize="25sp"/>
     <Spinner
         android:id="@+id/day_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
         android:entries="@array/day"/>
     <RadioGroup
         android:id="@+id/category_radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp">
         <RadioButton
             android:id="@+id/radio_gineong"
             android:layout_width="0dp"
@@ -59,7 +64,8 @@
     <Spinner
         android:id="@+id/certificate_spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="20sp"/>
@@ -67,14 +73,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="포인트 선택"
-        android:layout_marginLeft="25sp"
-        android:layout_marginRight="25sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
         android:textSize="25sp"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="270sp"
-        android:layout_margin="20sp">
+        android:layout_height="200sp"
+        android:layout_margin="20sp"
+        android:background="@drawable/button_design">
 
         <RadioGroup
             android:id="@+id/point_radiogroup"
@@ -114,11 +121,15 @@
             android:id="@+id/challenge_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_design"
             android:text="등록"/>
         <Button
             android:id="@+id/challenge_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_design"
+            android:layout_marginLeft="3sp"
+            android:layout_marginRight="20sp"
             android:text="취소"/>
     </LinearLayout>
 </LinearLayout>

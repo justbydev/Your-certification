@@ -2,6 +2,7 @@ package com.example.coolpiece;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -36,6 +37,8 @@ public class MainFragment extends AppCompatActivity {
     TextView logbutton;
     FirebaseAuth firebaseAuth;
 
+    int which_board=0;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +54,12 @@ public class MainFragment extends AppCompatActivity {
         menu_board=(TextView)findViewById(R.id.menu_board);
         menu_qa=(TextView)findViewById(R.id.menu_QA);
         logbutton=(TextView)findViewById(R.id.logbutton);
+
+        menu_home.setTextColor(Color.parseColor("#2EFEF7"));
+        menu_mypage.setTextColor(Color.BLACK);
+        menu_mycert.setTextColor(Color.BLACK);
+        menu_board.setTextColor(Color.BLACK);
+        menu_qa.setTextColor(Color.BLACK);
 
         menu_home.setOnClickListener(buttononclicklistener);
         menu_mypage.setOnClickListener(buttononclicklistener);
@@ -90,6 +99,12 @@ public class MainFragment extends AppCompatActivity {
                     }
                     return;
                 case R.id.menu_home:
+                    menu_home.setTextColor(Color.parseColor("#01DFD7"));
+                    menu_mypage.setTextColor(Color.BLACK);
+                    menu_mycert.setTextColor(Color.BLACK);
+                    menu_board.setTextColor(Color.BLACK);
+                    menu_qa.setTextColor(Color.BLACK);
+                    which_board=0;
                     if(homeActivity==null){
                         homeActivity=new HomeActivity();
                         getSupportFragmentManager().beginTransaction().add(R.id.container, homeActivity).commit();
@@ -111,6 +126,12 @@ public class MainFragment extends AppCompatActivity {
                     }
                     return;
                 case R.id.menu_board:
+                    menu_home.setTextColor(Color.BLACK);
+                    menu_mypage.setTextColor(Color.BLACK);
+                    menu_mycert.setTextColor(Color.BLACK);
+                    menu_board.setTextColor(Color.parseColor("#01DFD7"));
+                    menu_qa.setTextColor(Color.BLACK);
+                    which_board=1;
                     if(boardActivity==null){
                         boardActivity=new BoardActivity();
                         getSupportFragmentManager().beginTransaction().add(R.id.container, boardActivity).commit();
@@ -132,6 +153,11 @@ public class MainFragment extends AppCompatActivity {
                     }
                     return;
                 case R.id.menu_QA:
+                    menu_home.setTextColor(Color.BLACK);
+                    menu_mypage.setTextColor(Color.BLACK);
+                    menu_mycert.setTextColor(Color.BLACK);
+                    menu_board.setTextColor(Color.BLACK);
+                    menu_qa.setTextColor(Color.parseColor("#01DFD7"));
                     if(firebaseAuth.getCurrentUser()!=null){
                         if(qaActivity==null){
                             qaActivity=new QAActivity();
@@ -152,6 +178,7 @@ public class MainFragment extends AppCompatActivity {
                         if(boardActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
                         }
+                        which_board=0;
                     }
                     else{
                         changetologinpage();
@@ -159,6 +186,11 @@ public class MainFragment extends AppCompatActivity {
 
                     return;
                 case R.id.menu_mypage:
+                    menu_home.setTextColor(Color.BLACK);
+                    menu_mypage.setTextColor(Color.parseColor("#01DFD7"));
+                    menu_mycert.setTextColor(Color.BLACK);
+                    menu_board.setTextColor(Color.BLACK);
+                    menu_qa.setTextColor(Color.BLACK);
                     if(firebaseAuth.getCurrentUser()!=null){
                         if(mypageActivity==null){
                             mypageActivity=new MypageActivity();
@@ -179,12 +211,18 @@ public class MainFragment extends AppCompatActivity {
                         if(qaActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
                         }
+                        which_board=0;
                     }
                     else {
                         changetologinpage();
                     }
                     return;
                 case R.id.menu_mycert:
+                    menu_home.setTextColor(Color.BLACK);
+                    menu_mypage.setTextColor(Color.BLACK);
+                    menu_mycert.setTextColor(Color.parseColor("#01DFD7"));
+                    menu_board.setTextColor(Color.BLACK);
+                    menu_qa.setTextColor(Color.BLACK);
                     if(firebaseAuth.getCurrentUser()!=null){
                         if(myCertActivity==null){
                             myCertActivity=new MyCertActivity();
@@ -205,6 +243,7 @@ public class MainFragment extends AppCompatActivity {
                         if(qaActivity!=null){
                             getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
                         }
+                        which_board=0;
                     }
                     else{
                         changetologinpage();
@@ -221,6 +260,12 @@ public class MainFragment extends AppCompatActivity {
                 .setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        menu_home.setTextColor(Color.parseColor("#01DFD7"));
+                        menu_mypage.setTextColor(Color.BLACK);
+                        menu_mycert.setTextColor(Color.BLACK);
+                        menu_board.setTextColor(Color.BLACK);
+                        menu_qa.setTextColor(Color.BLACK);
+                        which_board=0;
                         Intent intent=new Intent(MainFragment.this, LoginActivity.class);
                         startActivity(intent);
                     }
@@ -228,22 +273,60 @@ public class MainFragment extends AppCompatActivity {
                 .setNegativeButton("아니요", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(homeActivity==null){
-                            homeActivity=new HomeActivity();
-                            getSupportFragmentManager().beginTransaction().add(R.id.container, homeActivity).commit();
+                        if(which_board==1){
+                            menu_home.setTextColor(Color.BLACK);
+                            menu_mypage.setTextColor(Color.BLACK);
+                            menu_mycert.setTextColor(Color.BLACK);
+                            menu_board.setTextColor(Color.parseColor("#01DFD7"));
+                            menu_qa.setTextColor(Color.BLACK);
+                            if(boardActivity==null){
+                                boardActivity=new BoardActivity();
+                                getSupportFragmentManager().beginTransaction().add(R.id.container, boardActivity).commit();
+                            }
+                            else{
+                                getSupportFragmentManager().beginTransaction().show(homeActivity).commit();
+                            }
+                            if(mypageActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                            }
+                            if(homeActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(homeActivity).commit();
+                            }
+                            if(qaActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
+                            }
+                            if(myCertActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(myCertActivity).commit();
+                            }
                         }
                         else{
-                            getSupportFragmentManager().beginTransaction().show(homeActivity).commit();
+                            menu_home.setTextColor(Color.parseColor("#01DFD7"));
+                            menu_mypage.setTextColor(Color.BLACK);
+                            menu_mycert.setTextColor(Color.BLACK);
+                            menu_board.setTextColor(Color.BLACK);
+                            menu_qa.setTextColor(Color.BLACK);
+                            if(homeActivity==null){
+                                homeActivity=new HomeActivity();
+                                getSupportFragmentManager().beginTransaction().add(R.id.container, homeActivity).commit();
+                            }
+                            else{
+                                getSupportFragmentManager().beginTransaction().show(homeActivity).commit();
+                            }
+                            if(mypageActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
+                            }
+                            if(boardActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
+                            }
+                            if(qaActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
+                            }
+                            if(myCertActivity!=null){
+                                getSupportFragmentManager().beginTransaction().hide(myCertActivity).commit();
+                            }
                         }
-                        if(mypageActivity!=null){
-                            getSupportFragmentManager().beginTransaction().hide(mypageActivity).commit();
-                        }
-                        if(boardActivity!=null){
-                            getSupportFragmentManager().beginTransaction().hide(boardActivity).commit();
-                        }
-                        if(qaActivity!=null){
-                            getSupportFragmentManager().beginTransaction().hide(qaActivity).commit();
-                        }
+
+
                         dialog.cancel();
                     }
                 });

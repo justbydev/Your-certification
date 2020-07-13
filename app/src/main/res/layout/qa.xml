@@ -13,7 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="질문하기"
-        android:textSize="20sp"/>
+        android:textSize="17sp"
+        android:layout_marginLeft="3sp"
+        android:background="@drawable/button_design"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/questionlist"
         android:layout_width="match_parent"

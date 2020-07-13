@@ -104,6 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15sp"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_design"
         android:text="인증" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="명함 사용법"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:gravity="center_horizontal"
             android:clickable="true"/>
@@ -79,6 +80,9 @@
             android:id="@+id/store_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_design"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
             android:text="명함 저장하기"/>
     </LinearLayout>
 </ScrollView>
