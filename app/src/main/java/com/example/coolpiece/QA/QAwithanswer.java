@@ -67,7 +67,7 @@ public class QAwithanswer extends AppCompatActivity {
         number=intent.getStringExtra("number");
 
 
-        anstitle.setText("제목: "+title);
+        anstitle.setText(title);
         anscontent.setText(content);
 
         databaseReference=FirebaseDatabase.getInstance().getReference(number);

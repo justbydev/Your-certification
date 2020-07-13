@@ -9,4 +9,9 @@
     <stroke
         android:width="2dp"
         android:color="#3ADF00"/>
+    <padding
+        android:left="3sp"
+        android:right="3sp"
+        android:top="3sp"
+        android:bottom="3sp"/>
 </shape>
