@@ -149,7 +149,6 @@ public class Challengedetail extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finish();
     }
 

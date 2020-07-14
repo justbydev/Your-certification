@@ -243,7 +243,6 @@ public class Challengeauthen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent giveintent=new Intent(Challengeauthen.this, Challengedetail.class);
         giveintent.putExtra("certification", certification);
         giveintent.putExtra("day", day);

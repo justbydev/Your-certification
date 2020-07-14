@@ -82,7 +82,6 @@ public class Bigcategory_guitar extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         finish();
     }
 }
