@@ -40,7 +40,8 @@
         android:id="@+id/answertext"
         android:layout_width="match_parent"
         android:layout_height="40sp"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:hint="답글을 적어주세요"/>
     <Button
         android:id="@+id/answerbutton"
         android:layout_gravity="end"

@@ -18,7 +18,8 @@
             android:layout_width="300dp"
             android:layout_height="50sp"
             android:textSize="23sp"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:hint="질문하실 제목을 적어주세요"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
@@ -35,7 +36,8 @@
         android:layout_margin="5sp"
         android:background="@drawable/edittext_design"
         android:inputType="textMultiLine"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:hint="질문 내용을 적어주세요"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

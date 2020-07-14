@@ -337,7 +337,7 @@ public class MainFragment extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setTitle("쿨피스")
+                .setTitle("너의자격")
                 .setMessage("앱을 종료하시겠습니까?")
                 .setPositiveButton("네", new DialogInterface.OnClickListener() {
                     @Override

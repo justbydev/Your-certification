@@ -4,11 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.coolpiece.MainFragment;
+import com.example.coolpiece.R;
 import com.example.coolpiece.splash.manageclass.ManageAcaCertData;
 import com.example.coolpiece.splash.manageclass.ManageAcademyData;
 import com.example.coolpiece.splash.manageclass.ManageGineongData;
@@ -38,9 +43,18 @@ public class SplashActivity extends AppCompatActivity {
     "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Facademydata.json?alt=media&token=80842c5f-98d7-4e1a-af33-0fe790587b46",
     "https://firebasestorage.googleapis.com/v0/b/pusan-4628a.appspot.com/o/Data%2Facacertidata.json?alt=media&token=8d73d659-7da6-43c7-a8e1-98c80b898282"};
     public static Context context;
+    ImageView app_name;
+    TextView loading;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash);
+        app_name=findViewById(R.id.app_name);
+        loading=findViewById(R.id.loading);
+        Animation slowappear= AnimationUtils.loadAnimation(this, R.anim.fadein);
+        Animation blink=AnimationUtils.loadAnimation(this, R.anim.blink);
+        app_name.setAnimation(slowappear);
+        loading.setAnimation(blink);
         context=this;
         new getData().execute(url);
     }
@@ -137,7 +151,7 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-
-
-
+    @Override
+    public void onBackPressed() {
+    }
 }
