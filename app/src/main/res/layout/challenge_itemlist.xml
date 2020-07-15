@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="5sp"
-        android:layout_margin="5sp"
+        android:layout_margin="10sp"
         app:cardElevation="10sp"
         app:cardBackgroundColor="#FAFAFA">
         <TextView
@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="제목"
-            android:textSize="20sp"/>
+            android:textSize="25sp"
+            android:layout_marginLeft="3sp"/>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

@@ -89,6 +89,7 @@ public class MainFragment extends AppCompatActivity {
                 case R.id.logbutton:
                     if(logbutton.getText().equals("로그인")){
                         Intent intent=new Intent(MainFragment.this, LoginActivity.class);
+                        finish();
                         startActivity(intent);
                     }
                     else if(logbutton.getText().equals("로그아웃")){

@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="4">
+    android:weightSum="4"
+    android:layout_margin="5sp">
     <TextView
         android:id="@+id/back_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/back"
-        android:textSize="20sp"
+        android:textSize="28sp"
         android:textColor="#FF0040"
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="5sp"
         android:clickable="true"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,19 +25,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="도전 제목"
-            android:textSize="25sp"/>
+            android:textSize="30sp"/>
         <TextView
             android:id="@+id/successday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이룬 일수"
-            android:textSize="20sp"/>
+            android:textSize="25sp"/>
         <TextView
             android:id="@+id/success_percent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이룬 퍼센트"
-            android:textSize="20sp"/>
+            android:textSize="25sp"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

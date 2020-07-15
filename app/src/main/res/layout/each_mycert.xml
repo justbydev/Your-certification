@@ -8,8 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
-        android:textSize="20sp"
+        android:textSize="28sp"
         android:textColor="#FF0040"
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="5sp"
         android:clickable="true"/>
     <ScrollView android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="자격증 이름"
                 android:textColor="#0000ff"
-                android:textSize="30sp"/>
+                android:textSize="35sp"/>
             <ImageView
                 android:id="@+id/mycert_image"
                 android:layout_width="match_parent"
@@ -37,49 +39,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="※자격증 번호※"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textColor="#642EFE"/>
             <TextView
                 android:id="@+id/cert_serial_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textColor="#000000"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="※생년월일※"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textColor="#642EFE"/>
             <TextView
                 android:id="@+id/birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textColor="#000000"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="※발급날짜※"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textColor="#642EFE"/>
             <TextView
                 android:id="@+id/cert_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textColor="#000000"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="※발급기관※"
-                android:textSize="20sp"
+                android:textSize="23sp"
                 android:textColor="#642EFE"/>
             <TextView
                 android:id="@+id/cert_institution"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:textColor="#000000"/>
         </LinearLayout>
     </ScrollView>

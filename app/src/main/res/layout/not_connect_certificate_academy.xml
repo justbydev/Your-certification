@@ -8,8 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
-        android:textSize="20sp"
+        android:textSize="28sp"
         android:textColor="#FF0040"
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="5sp"
         android:clickable="true"/>
     <TextView
         android:id="@+id/academy_name"
@@ -17,30 +19,30 @@
         android:layout_height="wrap_content"
         android:text="학원 이름"
         android:textColor="#0000ff"
-        android:textSize="30sp"/>
+        android:textSize="35sp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="※학원 주소※"
-        android:textSize="20sp"
+        android:textSize="23sp"
         android:textColor="#642EFE"/>
     <TextView
         android:id="@+id/academy_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="학원 주소"
-        android:textSize="17sp"/>
+        android:textSize="20sp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="※학원 번호※"
-        android:textSize="20sp"
+        android:textSize="23sp"
         android:textColor="#642EFE"/>
     <TextView
         android:id="@+id/academy_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="학원 번호"
-        android:textSize="17sp"/>
+        android:textSize="20sp"/>
 
 </LinearLayout>

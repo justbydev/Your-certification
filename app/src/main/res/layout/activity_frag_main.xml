@@ -14,6 +14,7 @@
             android:layout_height="wrap_content"
             android:text="너의자격"
             android:textSize="30sp"
+            android:layout_marginLeft="5sp"
             android:textColor="#000000">
         </TextView>
         <View
@@ -50,6 +51,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="#F6CED8"
+            android:textSize="17sp"
             android:clickable="true"/>
         <TextView
             android:id="@+id/menu_mypage"
@@ -59,6 +61,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="#F6CED8"
+            android:textSize="17sp"
             android:clickable="true"/>
         <TextView
             android:id="@+id/menu_mycert"
@@ -68,6 +71,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="#F6CED8"
+            android:textSize="17sp"
             android:clickable="true"/>
         <TextView
             android:id="@+id/menu_board"
@@ -77,6 +81,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="#F6CED8"
+            android:textSize="17sp"
             android:clickable="true"/>
         <TextView
             android:id="@+id/menu_QA"
@@ -86,6 +91,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:background="#F6CED8"
+            android:textSize="17sp"
             android:clickable="true"/>
     </LinearLayout>
 

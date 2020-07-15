@@ -12,12 +12,14 @@
             android:id="@+id/answer_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5sp"
             android:text="사용자이름"/>
         <TextView
             android:id="@+id/answer_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="답글"
+            android:layout_marginLeft="5sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     </LinearLayout>
 

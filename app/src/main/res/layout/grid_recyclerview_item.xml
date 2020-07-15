@@ -16,5 +16,5 @@
         android:text="학원 이름"
         android:background="#5882FA"
         android:textColor="#F2F2F2"
-        android:textSize="10sp"/>
+        android:textSize="13sp"/>
 </RelativeLayout>

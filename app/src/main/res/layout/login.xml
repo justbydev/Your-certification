@@ -51,13 +51,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"/>
 
-        <TextView
-            android:text="패스워드가 기억나지 않습니까?"
-            android:textColor="@color/colorAccent"
-            android:layout_marginLeft="16sp"
-            android:id="@+id/textViewFindpassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
     <View

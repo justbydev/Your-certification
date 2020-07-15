@@ -56,6 +56,8 @@ public class CertificateDetail extends AppCompatActivity {
     int test_height;
     int method_height;
     int cutline_height;
+
+    int test;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +152,7 @@ public class CertificateDetail extends AppCompatActivity {
         }
 
 
+        test=intro.getHeight();
         intro.measure(0, 0);
         intro_height=intro.getMeasuredHeight();
         intro.setVisibility(View.INVISIBLE);
@@ -205,7 +208,7 @@ public class CertificateDetail extends AppCompatActivity {
                     }
                     else{
                         intro.setHeight(0);
-                        intro.setVisibility(View.INVISIBLE);
+                        intro.setVisibility(View.GONE);
                         intro_visib=0;
                         intro_button.setText("자격증 개요   "+"+");
                     }

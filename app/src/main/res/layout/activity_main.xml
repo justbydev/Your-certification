@@ -44,7 +44,7 @@
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="8.5"
-                        android:textSize="13sp"
+                        android:textSize="17sp"
                         android:text="내 위치를 눌러주세요"/>
                     <TextView
                         android:id="@+id/melocate"
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.5"
                         android:text="내위치 "
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:textColor="#ff0000"
                         android:layout_alignParentRight="true"
                         android:clickable="true"/>
@@ -68,24 +68,28 @@
                         android:layout_height="match_parent"
                         android:textColor="#000000"
                         android:text="여러분의 숨겨진 재능을 찾으세요"
+                        android:textSize="22sp"
                         android:gravity="center"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="#000000"
                         android:text="여러 자격증 정보를 제공합니다"
+                        android:textSize="22sp"
                         android:gravity="center"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="#000000"
                         android:text="여러분의 자격증을 인증하세요"
+                        android:textSize="22sp"
                         android:gravity="center"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="#000000"
                         android:text="다양한 자격증에 도전하세요"
+                        android:textSize="22sp"
                         android:gravity="center"/>
                 </ViewFlipper>
                 <LinearLayout
@@ -103,6 +107,7 @@
                         android:gravity="center"
                         android:background="#E6E6E6"
                         android:layout_marginLeft="10sp"
+                        android:textSize="20sp"
                         android:clickable="true"/>
                     <TextView
                         android:id="@+id/gineong"
@@ -114,6 +119,7 @@
                         android:background="#E6E6E6"
                         android:gravity="center"
                         android:layout_marginLeft="3sp"
+                        android:textSize="20sp"
                         android:clickable="true"/>
                     <TextView
                         android:id="@+id/gisa"
@@ -126,6 +132,7 @@
                         android:layout_marginRight="10sp"
                         android:textColor="#000000"
                         android:background="#E6E6E6"
+                        android:textSize="20sp"
                         android:clickable="true"/>
                 </LinearLayout>
                 <LinearLayout
@@ -144,6 +151,7 @@
                         android:layout_marginTop="3sp"
                         android:textColor="#000000"
                         android:background="#E6E6E6"
+                        android:textSize="20sp"
                         android:clickable="true"/>
                     <TextView
                         android:id="@+id/sanup"
@@ -157,6 +165,7 @@
                         android:layout_marginRight="10sp"
                         android:textColor="#000000"
                         android:background="#E6E6E6"
+                        android:textSize="20sp"
                         android:clickable="true"/>
 
                 </LinearLayout>

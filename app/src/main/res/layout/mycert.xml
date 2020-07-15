@@ -13,14 +13,14 @@
             android:layout_marginTop="25sp"
             android:text="나의 자격증"
             android:textColor="@color/colorAccent"
-            android:textSize="23sp" />
+            android:textSize="28sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="※자격증 인증을 통해 등록된 내 자격증만 보여집니다"
             android:textColor="#ff0000"
-            android:textSize="10sp"/>
+            android:textSize="13sp"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mycert_recyclerview"
             android:layout_width="match_parent"

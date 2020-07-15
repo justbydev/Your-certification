@@ -6,5 +6,7 @@
         android:id="@+id/my"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="내 자격증 이름"/>
+        android:text="내 자격증 이름"
+        android:layout_marginLeft="3sp"
+        android:textSize="20sp"/>
 </LinearLayout>

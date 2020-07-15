@@ -8,12 +8,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
-        android:textSize="20sp"
+        android:textSize="28sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginBottom="5sp"
         android:textColor="#FF0040"
         android:clickable="true"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="13sp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,14 +26,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="자격증 이름"
-                android:textColor="#000000"
-                android:textSize="30sp"/>
+                android:textColor="#0000ff"
+                android:textSize="40sp"
+                android:layout_marginBottom="15sp"/>
             <TextView
                 android:id="@+id/intro_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="자격증 개요"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
                 android:clickable="true"/>
             <TextView
@@ -38,13 +42,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="자격증 개요"
-                android:textSize="20sp"/>
+                android:textSize="23sp"/>
             <TextView
                 android:id="@+id/exam_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="시험방식"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
                 android:clickable="true"/>
             <TextView
@@ -52,13 +56,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="시험방식"
-                android:textSize="20sp"/>
+                android:textSize="23sp"/>
             <TextView
                 android:id="@+id/cutline_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="합격기준"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
                 android:clickable="true"/>
             <TextView
@@ -66,13 +70,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="합격기준"
-                android:textSize="20sp"/>
+                android:textSize="23sp"/>
             <TextView
                 android:id="@+id/enrollment_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="등록기관"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
                 android:clickable="true"/>
             <TextView
@@ -80,13 +84,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="등록기관"
-                android:textSize="20sp"/>
+                android:textSize="23sp"/>
             <TextView
                 android:id="@+id/association_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="실시기관"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
                 android:clickable="true"/>
             <TextView
@@ -94,13 +98,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="실시기관"
-                android:textSize="20sp"/>
+                android:textSize="23sp"/>
             <TextView
                 android:id="@+id/train_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="훈련기관"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textColor="#000000"
                 android:clickable="true"/>
             <TextView
@@ -108,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="훈련기관"
-                android:textSize="20sp"/>
+                android:textSize="23sp"/>
 
 
         </LinearLayout>
